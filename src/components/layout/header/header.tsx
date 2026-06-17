@@ -55,6 +55,9 @@ export default function Header() {
             >
               {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
             </button>
+
+
+
             <Link
               href="/signin"
               className="lg:inline-flex items-center px-5 py-3 gradient-btn hidden text-sm text-white rounded-full button-bg h-11"
