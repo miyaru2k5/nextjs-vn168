@@ -1,40 +1,35 @@
-# VN168 – Next.js AI Website Templates and SaaS Starter Kit
-#### Preview
+# VN168 – AI Website & SaaS Starter Kit (Next.js)
 
- - [Demo](https://themewagon.github.io/aistarterkit/)
+VN168 là một bộ template website hiện đại được xây dựng bằng **Next.js**, phù hợp cho các hệ thống SaaS, nền tảng AI, landing page sản phẩm và dashboard quản trị.
 
-#### Download
- - [Download from ThemeWagon](https://themewagon.com/themes/aistarterkit/)
+---
 
-## Getting Started
+## 🚀 Demo
 
-1. Clone Repository
-```
-git clone https://github.com/themewagon/aistarterkit.git
-```
-2. Install Dependencies
-```
-npm i
-```
-3. Run the development server:
+👉 Live Preview:  
+https://nextjs-vn168.vercel.app/
+
+---
+
+## ⚙️ Công nghệ sử dụng
+
+- Next.js (App Router / Pages Router)
+- React
+- TypeScript
+- Tailwind CSS
+- Responsive Design (Desktop / Tablet / Mobile)
+- SEO Friendly Structure
+- Component-based Architecture
+
+---
+
+## 📁 Cài đặt & chạy dự án
+
+### 1. Clone repository
 
 ```bash
+git clone https://github.com/miyaru2k5/nextjs-vn168.git
+cd aistarterkit-1.0.0
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-## Author 
-```
-Design and code is completely written by nextjstemplates and development team. 
-```
-
-## License
-
- - Design and Code is Copyright &copy; <a href="https://nextjstemplates.com/" target="_blank">nextjstemplates</a>
- - Licensed cover under [MIT]
- - Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+http://localhost:3000
