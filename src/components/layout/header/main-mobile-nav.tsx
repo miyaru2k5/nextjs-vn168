@@ -98,15 +98,10 @@ export default function MainMobileNav({ isOpen }: MobileMenuProps) {
         </div>
 
         <div className="flex flex-col pt-2 pb-3 space-y-3 px-8">
-          <Link
-            href="/signin"
-            className="text-sm block w-full border h-11 border-gray-200 px-5 py-3 rounded-full text-center font-medium text-gray-700 dark:text-gray-400 hover:text-primary-500"
-          >
-            Đăng nhập
-          </Link>
+
 
           <Link
-            href="/signup"
+            href="/signin"
             className="flex items-center px-5 py-3 gradient-btn  justify-center text-sm text-white rounded-full button-bg h-11"
           >
             Bắt đầu miễn phí

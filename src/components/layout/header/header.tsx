@@ -55,16 +55,8 @@ export default function Header() {
             >
               {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
             </button>
-
             <Link
               href="/signin"
-              className="text-sm hidden lg:block font-medium text-gray-700 dark:text-gray-400 hover:text-primary-500"
-            >
-              Đăng nhập
-            </Link>
-
-            <Link
-              href="/signup"
               className="lg:inline-flex items-center px-5 py-3 gradient-btn hidden text-sm text-white rounded-full button-bg h-11"
             >
               Bắt đầu miễn phí
