@@ -10,7 +10,7 @@ import { useState } from 'react';
       company: 'Big Kahuna Burger Ltd',
       image: '/images/users/user-1.png',
       testimonial:
-        'As a Senior Software Developer I found TailAdmin perfect write code that easy can be used in my projects, which some are production already.',
+        'Là một lập trình viên cao cấp, tôi thấy AiStarterKit rất phù hợp — mã nguồn dễ tích hợp vào dự án, một số dự án của tôi đã đưa vào sản xuất.',
     },
     {
       id: 2,
@@ -18,7 +18,7 @@ import { useState } from 'react';
       company: 'Biffco Enterprises Ltd.',
       image: '/images/users/user-2.png',
       testimonial:
-        'As a Senior Software Developer I found TailAdmin perfect write code that easy can be used in my projects, which some are production already.',
+        'Là một lập trình viên cao cấp, tôi thấy AiStarterKit rất phù hợp — mã nguồn dễ tích hợp vào dự án, một số dự án của tôi đã đưa vào sản xuất.',
     },
     {
       id: 3,
@@ -26,7 +26,7 @@ import { useState } from 'react';
       company: 'Acme Co.',
       image: '/images/users/user-3.png',
       testimonial:
-        'As a Senior Software Developer I found TailAdmin perfect write code that easy can be used in my projects, which some are production already.',
+        'Là một lập trình viên cao cấp, tôi thấy AiStarterKit rất phù hợp — mã nguồn dễ tích hợp vào dự án, một số dự án của tôi đã đưa vào sản xuất.',
     },
     {
       id: 4,
@@ -34,7 +34,7 @@ import { useState } from 'react';
       company: 'Barone LLC.',
       image: '/images/users/user-4.png',
       testimonial:
-        'As a Senior Software Developer I found TailAdmin perfect write code that easy can be used in my projects, which some are production already.',
+        'Là một lập trình viên cao cấp, tôi thấy AiStarterKit rất phù hợp — mã nguồn dễ tích hợp vào dự án, một số dự án của tôi đã đưa vào sản xuất.',
     },
     {
       id: 5,
@@ -42,7 +42,7 @@ import { useState } from 'react';
       company: 'Abstergo Ltd.',
       image: '/images/users/user-1.png',
       testimonial:
-        'As a Senior Software Developer I found TailAdmin perfect write code that easy can be used in my projects, which some are production already.',
+        'Là một lập trình viên cao cấp, tôi thấy AiStarterKit rất phù hợp — mã nguồn dễ tích hợp vào dự án, một số dự án của tôi đã đưa vào sản xuất.',
     },
     {
       id: 6,
@@ -50,7 +50,7 @@ import { useState } from 'react';
       company: 'Binford Ltd.',
       image: '/images/users/user-2.png',
       testimonial:
-        'As a Senior Software Developer I found TailAdmin perfect write code that easy can be used in my projects, which some are production already.',
+        'Là một lập trình viên cao cấp, tôi thấy AiStarterKit rất phù hợp — mã nguồn dễ tích hợp vào dự án, một số dự án của tôi đã đưa vào sản xuất.',
     },
     {
       id: 7,
@@ -58,7 +58,7 @@ import { useState } from 'react';
       company: 'Big Kahuna Burger Ltd',
       image: '/images/users/user-1.png',
       testimonial:
-        'As a Senior Software Developer I found TailAdmin perfect write code that easy can be used in my projects, which some are production already.',
+        'Là một lập trình viên cao cấp, tôi thấy AiStarterKit rất phù hợp — mã nguồn dễ tích hợp vào dự án, một số dự án của tôi đã đưa vào sản xuất.',
     },
     {
       id: 8,
@@ -66,7 +66,7 @@ import { useState } from 'react';
       company: 'Abstergo Ltd.',
       image: '/images/users/user-2.png',
       testimonial:
-        'As a Senior Software Developer I found TailAdmin perfect write code that easy can be used in my projects, which some are production already.',
+        'Là một lập trình viên cao cấp, tôi thấy AiStarterKit rất phù hợp — mã nguồn dễ tích hợp vào dự án, một số dự án của tôi đã đưa vào sản xuất.',
     },
     {
       id: 9,
@@ -74,7 +74,7 @@ import { useState } from 'react';
       company: 'Binford Ltd.',
       image: '/images/users/user-3.png',
       testimonial:
-        'As a Senior Software Developer I found TailAdmin perfect write code that easy can be used in my projects, which some are production already.',
+        'Là một lập trình viên cao cấp, tôi thấy AiStarterKit rất phù hợp — mã nguồn dễ tích hợp vào dự án, một số dự án của tôi đã đưa vào sản xuất.',
     },
   ];
 
@@ -92,12 +92,11 @@ import { useState } from 'react';
           <div>
             <div className="max-w-2xl mx-auto mb-12 text-center">
               <h2 className="mb-3 font-bold text-center text-gray-800 text-3xl dark:text-white/90 md:text-title-lg">
-                What our users say
+                Người dùng nói gì về chúng tôi
               </h2>
               <p className="max-w-xl mx-auto leading-6 text-gray-500 dark:text-gray-400">
-                Unlock the Potential of Innovation. Discover the Advanced AI
-                Tools Transforming Your Ideas into Reality with Unmatched
-                Precision and Intelligence.
+                Khai phá tiềm năng đổi mới. Khám phá các công cụ AI tiên tiến
+                biến ý tưởng của bạn thành hiện thực với độ chính xác và trí tuệ vượt trội.
               </p>
             </div>
 
@@ -117,7 +116,7 @@ import { useState } from 'react';
                 onClick={() => setShowAll(!showAll)}
                 className="inline-flex items-center dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 px-6 py-3.5 text-sm font-medium text-gray-800 bg-white border border-gray-200 dark:hover:bg-gray-900 rounded-full shadow-theme-xs hover:bg-gray-50 focus:outline-none"
               >
-                <span>{showAll ? 'Show less...' : 'Show more...'}</span>
+                <span>{showAll ? 'Thu gọn...' : 'Xem thêm...'}</span>
               </button>
             </div>
           </div>

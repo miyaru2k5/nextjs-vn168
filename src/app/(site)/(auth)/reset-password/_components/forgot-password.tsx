@@ -29,7 +29,7 @@ export default function ForgotPasswordForm({ invalidToken }: PropsType) {
     setIsLoading(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 2000)); // Mô phỏng gọi API
 
       toast.success(
         <pre>
@@ -47,7 +47,9 @@ export default function ForgotPasswordForm({ invalidToken }: PropsType) {
 
   useEffect(() => {
     if (invalidToken) {
-      toast.error('Invalid or expired reset link. Please request a new one.');
+      toast.error(
+        'Liên kết đặt lại mật khẩu không hợp lệ hoặc đã hết hạn. Vui lòng yêu cầu một liên kết mới.'
+      );
     }
   }, [invalidToken]);
 
@@ -55,11 +57,12 @@ export default function ForgotPasswordForm({ invalidToken }: PropsType) {
     <>
       <div className="text-center mb-8">
         <h3 className="text-gray-800 font-bold text-3xl mb-2 dark:text-white/90">
-          Forgot Your Password?
+          Quên mật khẩu?
         </h3>
+
         <p className="text-gray-500 dark:text-gray-400">
-          Enter the email address linked to your account, and we’ll send you a
-          link to reset your password.
+          Nhập địa chỉ email đã liên kết với tài khoản của bạn, chúng tôi sẽ gửi
+          cho bạn một liên kết để đặt lại mật khẩu.
         </p>
       </div>
 
@@ -72,7 +75,7 @@ export default function ForgotPasswordForm({ invalidToken }: PropsType) {
               <InputGroup
                 label="Email"
                 type="email"
-                placeholder="Enter your email address"
+                placeholder="Nhập địa chỉ email của bạn"
                 required
                 error={fieldState.error?.message}
                 disabled={isLoading}
@@ -85,15 +88,17 @@ export default function ForgotPasswordForm({ invalidToken }: PropsType) {
             className="bg-primary-500 hover:bg-primary-600 transition py-3 px-6 w-full font-medium text-white text-sm rounded-full"
             disabled={isLoading}
           >
-            {isLoading ? 'Sending...' : 'Send Reset Link'}
+            {isLoading
+              ? 'Đang gửi...'
+              : 'Gửi liên kết đặt lại mật khẩu'}
           </button>
         </div>
       </form>
 
       <p className="text-gray-700 dark:text-gray-400 font-normal text-sm mt-5">
-        Remembered password?{' '}
+        Đã nhớ mật khẩu?{' '}
         <Link href="/signin" className="text-sm font-semibold text-primary-500">
-          Sign In
+          Đăng nhập
         </Link>
       </p>
     </>

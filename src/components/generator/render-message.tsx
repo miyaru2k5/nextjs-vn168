@@ -26,8 +26,8 @@ export function RenderMessage({ useChat, isThinking }: PropsType) {
 
   useEffect(() => {
     if (error?.message.includes('Incorrect API')) {
-      toast.error('Incorrect API key provided', {
-        description: 'Please check your API key and try again.',
+      toast.error('API Key không hợp lệ', {
+        description: 'Vui lòng kiểm tra lại API Key và thử lại.',
       });
     }
   }, [error]);
@@ -52,9 +52,9 @@ export function RenderMessage({ useChat, isThinking }: PropsType) {
                         key={`${message.id}-${i}`}
                         message={part.text}
                         showActions={
-                          // showActions is true only for the last user message
+                          // Chỉ hiển thị hành động cho tin nhắn người dùng cuối cùng
                           messages.length - 1 === messageIdx ||
-                          // if ai responded it should be second to last
+                          // Nếu AI đã phản hồi thì hiển thị ở tin nhắn trước đó
                           messages.length - 2 === messageIdx
                         }
                         onEdit={async (newMessage) => {
@@ -85,6 +85,8 @@ export function RenderMessage({ useChat, isThinking }: PropsType) {
                     />
                   );
                 }
+
+                return null;
               })}
             </div>
           );
@@ -92,7 +94,7 @@ export function RenderMessage({ useChat, isThinking }: PropsType) {
 
         {isThinking && (
           <div className="text-gray-500 font-medium">
-            💭 Model is thinking...
+            💭 AI đang suy nghĩ...
           </div>
         )}
       </div>

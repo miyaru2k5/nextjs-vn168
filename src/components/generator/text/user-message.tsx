@@ -34,7 +34,7 @@ export default function UserMessage({
     try {
       await onEdit(value, { isSubmitting });
     } catch (error) {
-      console.error('Error while editing message:', error);
+      console.error('Lỗi khi chỉnh sửa tin nhắn:', error);
     } finally {
       setIsSubmitting(false);
       setShowEditInput(false);
@@ -56,6 +56,7 @@ export default function UserMessage({
             onChange={(value) => setValue(value)}
             value={value}
             onKeyDown={(e) => {
+              // Nhấn phím Esc để hủy chỉnh sửa
               if (e.key === 'Escape') {
                 handleCancel();
               }
@@ -68,13 +69,15 @@ export default function UserMessage({
       {showActions && !showEditInput && (
         <div className="mt-2 ml-auto max-w-fit">
           <button
-            title="Edit message"
+            title="Chỉnh sửa tin nhắn"
             onClick={() => setShowEditInput(true)}
             className="flex gap-1 items-center text-gray-400 hover:text-gray-800 dark:hover:text-white/90 dark:text-gray-400 dark:border-white/5 bg-white dark:bg-white/3 h-8 rounded-full px-3 py-1.5 border font-medium border-gray-100 text-xs"
           >
             <PencilIcon className="size-4.5" />
 
-            <span className="sr-only">Edit message</span>
+            <span className="sr-only">
+              Chỉnh sửa tin nhắn
+            </span>
           </button>
         </div>
       )}
@@ -86,7 +89,7 @@ export default function UserMessage({
             onClick={handleCancel}
             disabled={isSubmitting}
           >
-            Cancel
+            Hủy
           </button>
 
           <button
@@ -94,7 +97,7 @@ export default function UserMessage({
             className="bg-primary-500 rounded-full px-4.5 py-2 font-medium text-white hover:opacity-90 text-sm disabled:pointer-events-none disabled:opacity-70"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Saving...' : 'Save'}
+            {isSubmitting ? 'Đang lưu...' : 'Lưu thay đổi'}
           </button>
         </div>
       )}

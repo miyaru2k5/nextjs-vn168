@@ -102,14 +102,14 @@ export default function MainMobileNav({ isOpen }: MobileMenuProps) {
             href="/signin"
             className="text-sm block w-full border h-11 border-gray-200 px-5 py-3 rounded-full text-center font-medium text-gray-700 dark:text-gray-400 hover:text-primary-500"
           >
-            Sign In
+            Đăng nhập
           </Link>
 
           <Link
             href="/signup"
             className="flex items-center px-5 py-3 gradient-btn  justify-center text-sm text-white rounded-full button-bg h-11"
           >
-            Get Started Free
+            Bắt đầu miễn phí
           </Link>
         </div>
       </div>

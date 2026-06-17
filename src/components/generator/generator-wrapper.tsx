@@ -13,11 +13,15 @@ export default function GeneratorWrapper({
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [rightSidebarOpen, setRightSidebarOpen] = useState(false);
 
+  // Bật/tắt thanh menu bên trái
   const toggleSidebar = () => {
     setSidebarOpen((prev) => !prev);
   };
 
-  const toggleRightSidebar = () => setRightSidebarOpen((prev) => !prev);
+  // Bật/tắt lịch sử trò chuyện bên phải
+  const toggleRightSidebar = () => {
+    setRightSidebarOpen((prev) => !prev);
+  };
 
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
@@ -28,16 +32,19 @@ export default function GeneratorWrapper({
       />
 
       <div className="isolate relative grid lg:grid-cols-[auto_1fr_auto] dark:bg-dark-secondary flex-[1_1_0]">
+        {/* Thanh điều hướng bên trái */}
         <GeneratorSidebar sidebarOpen={sidebarOpen} />
 
+        {/* Nội dung chính */}
         {children}
 
+        {/* Thanh lịch sử trò chuyện bên phải */}
         <RightSidebar
           isOpen={rightSidebarOpen}
           toggleIsOpen={toggleRightSidebar}
         />
 
-        {/* Overlays */}
+        {/* Lớp nền mờ khi mở menu bên trái */}
         {sidebarOpen && (
           <div
             className="fixed inset-0 z-30 bg-gray-800/80 backdrop-blur-lg transition-opacity"
@@ -46,6 +53,7 @@ export default function GeneratorWrapper({
           />
         )}
 
+        {/* Lớp nền mờ khi mở lịch sử trò chuyện trên thiết bị nhỏ */}
         {rightSidebarOpen && (
           <div
             className="fixed inset-0 z-40 bg-gray-800/80 backdrop-blur-lg transition-opacity xl:hidden"

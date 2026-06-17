@@ -37,10 +37,11 @@ export default function GeneratorInput({
         <div className="p-5 pb-0 pr-[calc((var(--spacing)*5)-10px)]">
           <textarea
             ref={textareaRef}
-            placeholder="Type your message"
+            placeholder="Nhập nội dung bạn muốn AI hỗ trợ..."
             value={value}
             onChange={onChange}
             onKeyDown={(e) => {
+              // Nhấn Enter để gửi, Shift + Enter để xuống dòng
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
                 submitButtonRef.current?.click();
@@ -51,6 +52,7 @@ export default function GeneratorInput({
             rows={1}
           />
         </div>
+
         <div className="flex justify-between items-center gap-2 p-3 pt-0">
           <label htmlFor="attach-file" className="flex items-center gap-1.5">
             <input
@@ -60,9 +62,12 @@ export default function GeneratorInput({
               id="attach-file"
               className="sr-only"
             />
+
             <AttachmentIcon />
 
-            <span className="text-[#98A2B3] text-sm">Attach file</span>
+            <span className="text-[#98A2B3] text-sm">
+              Đính kèm tệp
+            </span>
           </label>
 
           <button
@@ -71,7 +76,10 @@ export default function GeneratorInput({
             className="size-10 flex bg-[#1D2939] dark:bg-primary-500 dark:disabled:bg-white/20 transition items-center justify-center rounded-full text-white"
             disabled={!value?.trim()}
           >
-            <span className="sr-only">Submit</span>
+            <span className="sr-only">
+              Gửi tin nhắn
+            </span>
+
             <LongArrowUpIcon />
           </button>
         </div>

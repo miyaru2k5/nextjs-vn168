@@ -19,17 +19,18 @@ export default function PricingSection() {
       <div className="wrapper">
         <div className="max-w-2xl mx-auto mb-12 text-center">
           <h2 className="mb-3 font-bold text-center text-gray-800 text-3xl dark:text-white/90 md:text-title-lg">
-            Start Your Content Creation Journey with AI
+            Bắt đầu hành trình sáng tạo nội dung cùng AI
           </h2>
+
           <p className="max-w-xl mx-auto leading-6 text-gray-500 dark:text-gray-400">
-            Collaborate with AI to generate content that resonates with your
-            audience, drives and delivers meaningful results across all
-            platforms.
+            Kết hợp cùng trí tuệ nhân tạo để tạo ra những nội dung chất lượng,
+            phù hợp với khách hàng mục tiêu, tăng khả năng tiếp cận và mang lại
+            hiệu quả trên mọi nền tảng.
           </p>
         </div>
 
         <div>
-          {/* Billing Toggle */}
+          {/* Chuyển đổi chu kỳ thanh toán */}
           <div className="flex justify-center relative z-30 mt-12">
             <div className="relative flex p-1 bg-white dark:bg-[#1D2939] rounded-full shadow-theme-xs">
               {BILLING_PERIODS.map((period) => (
@@ -37,9 +38,7 @@ export default function PricingSection() {
                   key={period.key}
                   onClick={() => setActiveBillingPeriodKey(period.key)}
                   className={cn(
-                    'relative flex items-center gap-2 px-6 py-2 text-sm font-medium transition-colors duration-200' +
-                      ' rounded-full' +
-                      ' text-gray-700 dark:text-gray-400',
+                    'relative flex items-center gap-2 px-6 py-2 text-sm font-medium transition-colors duration-200 rounded-full text-gray-700 dark:text-gray-400',
                     {
                       'bg-gray-800 dark:bg-white/[0.05] text-white dark:text-white':
                         period.key === activeBillingPeriodKey,
@@ -51,7 +50,7 @@ export default function PricingSection() {
 
                   {period.saving && (
                     <span className="bg-orange-400 text-white text-xs px-2 py-0.5 rounded-full">
-                      Save {period.saving}
+                      Tiết kiệm {period.saving}
                     </span>
                   )}
                 </button>

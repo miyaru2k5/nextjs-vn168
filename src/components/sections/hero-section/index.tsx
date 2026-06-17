@@ -11,14 +11,14 @@ export default function HeroSection() {
         <div className="wrapper">
           <div className="max-w-[800px] mx-auto">
             <div className="text-center pb-16">
-              <Subheading text="Most Powerful AI Tools at One Place" />
+              <Subheading text="Bộ công cụ AI mạnh mẽ nhất tại một nơi" />
 
               <h1 className="text-gray-700 mx-auto font-bold mb-4 text-4xl sm:text-[50px] dark:text-white/90 sm:leading-[64px] max-w-[700px]">
-                Transform Ideas into Reality with Intelligent AI Tools
+                Biến ý tưởng thành hiện thực với công cụ AI thông minh
               </h1>
               <p className="max-w-[537px] text-center mx-auto dark:text-gray-400 text-gray-500 text-base">
-                Unleash the Power of Artificial Intelligence to Streamline Your
-                Workflow, Boost Productivity, and Redefine Success.
+                Khai phá sức mạnh trí tuệ nhân tạo để tối ưu quy trình làm việc,
+                tăng năng suất và đạt được thành công vượt trội.
               </p>
 
               <div className="mt-9 flex sm:flex-row flex-col gap-3 relative z-30 items-center justify-center">
@@ -26,7 +26,7 @@ export default function HeroSection() {
                   href="/text-generator"
                   className="bg-primary-500 transition h-12 inline-flex items-center justify-center hover:bg-primary-600 px-6 py-3 rounded-full text-white text-sm"
                 >
-                  Explore app
+                  Khám phá ứng dụng
                 </Link>
 
                 <IntroVideo />

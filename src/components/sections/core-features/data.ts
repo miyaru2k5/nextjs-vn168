@@ -2,39 +2,39 @@ import * as icons from "@/assets/homepage/core-features";
 
 export const CORE_FEATURES = [
   {
-    title: "Seamless Content Creation AI",
+    title: "Tạo nội dung liền mạch với AI",
     description:
-      "Let our AI-powered service simplify your content creation process. Start using AI today!",
+      "Để dịch vụ AI của chúng tôi đơn giản hóa quy trình tạo nội dung. Bắt đầu sử dụng AI ngay hôm nay!",
     iconUrl: icons.pencil,
   },
   {
-    title: "Your Ideas, Powered by Our Technology",
+    title: "Ý tưởng của bạn, sức mạnh từ công nghệ của chúng tôi",
     description:
-      "Discover how AI can transform your ideas into captivating content with our high-quality service.",
+      "Khám phá cách AI biến ý tưởng của bạn thành nội dung hấp dẫn với dịch vụ chất lượng cao.",
     iconUrl: icons.bulb,
   },
   {
-    title: "Intelligent Writing by Powerful AI",
+    title: "Viết thông minh bằng AI mạnh mẽ",
     description:
-      "Effortlessly access AI-generated content for your blogs, websites, and more with our high-quality, convenient service.",
+      "Dễ dàng truy cập nội dung do AI tạo cho blog, website và nhiều hơn nữa với dịch vụ tiện lợi, chất lượng cao.",
     iconUrl: icons.robot,
   },
   {
-    title: "AI Generation Made Life Easier",
+    title: "AI giúp cuộc sống dễ dàng hơn",
     description:
-      "Experience effortless content creation with our AI service. Write less, accomplish more.",
+      "Trải nghiệm tạo nội dung không cần nỗ lực với dịch vụ AI của chúng tôi. Viết ít hơn, hoàn thành nhiều hơn.",
     iconUrl: icons.chat,
   },
   {
-    title: "Premium AI-Generated Content",
+    title: "Nội dung cao cấp do AI tạo",
     description:
-      "Get expertly crafted content in no time with our AI service. Where quality meets speed.",
+      "Nhận nội dung được chế tác chuyên nghiệp trong thời gian ngắn với dịch vụ AI. Nơi chất lượng gặp gỡ tốc độ.",
     iconUrl: icons.crown,
   },
   {
-    title: "Super Fast AI Writing Companion",
+    title: "Trợ lý viết siêu nhanh với AI",
     description:
-      "Partner with AI to create content that connects with your audience. Give it a try now.",
+      "Đồng hành cùng AI để tạo nội dung kết nối với khán giả của bạn. Hãy thử ngay.",
     iconUrl: icons.lightningBolt,
   },
 ];

@@ -384,3 +384,41 @@
 .floating-4 {
   animation: float-rev 6s ease-in-out infinite;
 }
+
+/* Blog module */
+.blog-prose .highlight-box {
+  @apply my-6 p-5 rounded-2xl bg-primary-50 dark:bg-primary-500/10 border border-primary-200 dark:border-primary-500/30;
+}
+
+.blog-prose .highlight-box p {
+  @apply mb-0 text-gray-700 dark:text-gray-200;
+}
+
+.blog-prose figure {
+  @apply my-8;
+}
+
+.blog-prose figure img {
+  @apply w-full;
+}
+
+.blog-prose table {
+  @apply w-full text-sm;
+}
+
+@media (max-width: 640px) {
+  .blog-prose table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

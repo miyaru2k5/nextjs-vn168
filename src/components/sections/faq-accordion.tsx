@@ -3,7 +3,7 @@
 import { MinusIcon, PlusIcon } from "@/icons/icons";
 import { useState } from "react";
 
-// Define the FAQ item type
+// Định nghĩa kiểu dữ liệu câu hỏi FAQ
 interface FAQItem {
   id: number;
   question: string;
@@ -13,37 +13,37 @@ interface FAQItem {
 export default function FaqAccordion() {
   const [activeItem, setActiveItem] = useState<number | null>(1);
 
-  // FAQ data
+  // Danh sách câu hỏi thường gặp
   const faqItems: FAQItem[] = [
     {
       id: 1,
-      question: "Do I get free updates?",
+      question: "Tôi có nhận được các bản cập nhật miễn phí không?",
       answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean luctus magna quis tellus euismod, eget pharetra leo mollis. Donec eget lacus non elit blandit pharetra vitae volutpat libero.",
+        "Có. Bạn sẽ nhận được các bản cập nhật tính năng, cải tiến hiệu suất và các bản sửa lỗi hoàn toàn miễn phí trong suốt thời gian sử dụng gói dịch vụ của mình.",
     },
     {
       id: 2,
-      question: 'What does the number of "Projects" refer to?',
+      question: 'Số lượng "Dự án" được tính như thế nào?',
       answer:
-        'The number of "Projects" refers to the total number of separate workspaces you can create and manage within your account. Each project can have its own settings, team members, and resources.',
+        'Số lượng "Dự án" là tổng số không gian làm việc riêng biệt mà bạn có thể tạo và quản lý trong tài khoản của mình. Mỗi dự án có thể có cài đặt, thành viên và tài nguyên riêng.',
     },
     {
       id: 3,
-      question: "Can I upgrade to a higher plan?",
+      question: "Tôi có thể nâng cấp lên gói cao hơn không?",
       answer:
-        "Yes, you can upgrade to a higher plan at any time. When you upgrade, you'll be charged the prorated difference for the remainder of your current billing cycle. Your new features will be available immediately after upgrading.",
+        "Có. Bạn có thể nâng cấp lên gói dịch vụ cao hơn bất kỳ lúc nào. Chi phí nâng cấp sẽ được tính theo phần chênh lệch còn lại của chu kỳ thanh toán hiện tại và các tính năng mới sẽ được kích hoạt ngay sau khi nâng cấp.",
     },
     {
       id: 4,
-      question: 'What does "Unlimited Projects" mean?',
+      question: '“Dự án không giới hạn” có nghĩa là gì?',
       answer:
-        '"Unlimited Projects" means you can create as many projects as you need without any restrictions. This allows you to organize your work efficiently without worrying about hitting a project limit.',
+        "Điều này có nghĩa là bạn có thể tạo bao nhiêu dự án tùy ý mà không bị giới hạn. Điều này giúp bạn quản lý công việc và nội dung một cách hiệu quả hơn mà không phải lo về giới hạn số lượng dự án.",
     },
     {
       id: 5,
-      question: "How can I add Open AI Key?",
+      question: "Làm thế nào để thêm OpenAI API Key?",
       answer:
-        'To add your OpenAI API key, go to your account settings and navigate to the "API Keys" section. Click on "Add New Key", paste your OpenAI API key, and save your changes. The key will be securely stored and used for all AI-powered features.',
+        'Để thêm OpenAI API Key, hãy truy cập phần Cài đặt tài khoản và chọn mục "API Key". Nhấn "Thêm API Key mới", dán khóa API OpenAI của bạn và lưu lại thay đổi. Khóa API sẽ được bảo mật và sử dụng cho tất cả các tính năng AI trong hệ thống.',
     },
   ];
 
@@ -56,17 +56,18 @@ export default function FaqAccordion() {
       <div className="wrapper">
         <div className="max-w-2xl mx-auto mb-12 text-center">
           <h2 className="mb-3 font-bold text-center text-gray-800 text-3xl dark:text-white/90 md:text-title-lg">
-            Frequently Asked Questions
+            Câu hỏi thường gặp
           </h2>
+
           <p className="max-w-md mx-auto leading-6 text-gray-500 dark:text-gray-400">
-            Answered all frequently asked questions, Still confused? feel free
-            contact with us
+            Chúng tôi đã giải đáp các câu hỏi phổ biến nhất. Nếu bạn vẫn còn thắc mắc, vui lòng liên hệ với đội ngũ hỗ trợ của chúng tôi.
           </p>
         </div>
+
         <div className="max-w-[600px] mx-auto">
           <div className="space-y-4">
             {faqItems.map((item) => (
-              <FAQItem
+              <FAQItemComponent
                 key={item.id}
                 item={item}
                 isActive={activeItem === item.id}
@@ -80,8 +81,8 @@ export default function FaqAccordion() {
   );
 }
 
-// FAQ Item Component
-function FAQItem({
+// Thành phần hiển thị từng câu hỏi FAQ
+function FAQItemComponent({
   item,
   isActive,
   onToggle,
@@ -101,10 +102,12 @@ function FAQItem({
         <span className="text-lg font-medium text-gray-800 dark:text-white/90">
           {item.question}
         </span>
+
         <span className="flex-shrink-0 ml-6">
           {isActive ? <MinusIcon /> : <PlusIcon />}
         </span>
       </button>
+
       {isActive && (
         <div className="mt-5">
           <p className="text-base leading-7 text-gray-500 dark:text-gray-400">

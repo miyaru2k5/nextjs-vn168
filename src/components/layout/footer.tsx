@@ -1,4 +1,3 @@
-import { getCurrentYear } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -55,9 +54,9 @@ export default function Footer() {
                   />
                 </Link>
                 <p className="block text-sm text-gray-400 mb-9">
-                  A self-hosted AI starter kit built with Next.js, Tailwind CSS,
-                  and OpenAI integrations. Perfect for developers and startups
-                  to quickly build, deploy, and scale AI-powered SaaS products.
+                  Bộ khởi động AI tự lưu trữ được xây dựng với Next.js, Tailwind CSS
+                  và tích hợp OpenAI. Lý tưởng cho nhà phát triển và startup
+                  để nhanh chóng xây dựng, triển khai và mở rộng sản phẩm SaaS AI.
                 </p>
                 <div className="flex">
                   <a
@@ -206,106 +205,112 @@ export default function Footer() {
               <div className="grid sm:grid-cols-3 gap-7">
                 <div>
                   <span className="block mb-6 text-sm text-gray-400">
-                    Services
+                    Dịch vụ
                   </span>
                   <nav className="flex flex-col space-y-3">
                     <Link
                       href="/"
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      Status
+                      Trạng thái
+                    </Link>
+                    <Link
+                      href="/tin-tuc"
+                      className="text-sm font-normal text-gray-400 transition hover:text-white"
+                    >
+                      Tin tức
                     </Link>
                     <Link
                       href="/pricing"
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      Pricing
+                      Bảng giá
                     </Link>
                     <Link
                       href="/pricing#faq"
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      FAQ
+                      Câu hỏi thường gặp
                     </Link>
                     <Link
                       href="/contact"
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      Help Docs
+                      Tài liệu hỗ trợ
                     </Link>
                     <Link
                       href="/privacy"
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      Privacy Policy
+                      Chính sách bảo mật
                     </Link>
                   </nav>
                 </div>
                 <div>
                   <span className="block mb-6 text-sm text-gray-400">
-                    Features
+                    Tính năng
                   </span>
                   <nav className="flex flex-col space-y-3">
                     <Link
                       href="/"
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      HTML File Upload
+                      Tải lên tệp HTML
                     </Link>
                     <Link
                       href="/"
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      HTML website hosting
+                      Lưu trữ website HTML
                     </Link>
                     <Link
                       href="/"
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      Free Image Hosting
+                      Lưu trữ hình ảnh miễn phí
                     </Link>
                     <Link
                       href="/"
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      Upload PDF Online
+                      Tải PDF trực tuyến
                     </Link>
                     <Link
                       href="/"
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      Free Zip file hosting
+                      Lưu trữ tệp Zip miễn phí
                     </Link>
                   </nav>
                 </div>
                 <div>
                   <span className="relative block mb-6 text-sm text-gray-400">
-                    Account
+                    Tài khoản
                   </span>
                   <nav className="flex flex-col space-y-3">
                     <Link
                       href="/signin"
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      Login
+                      Đăng nhập
                     </Link>
                     <Link
                       href="/signup"
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      Sign Up
+                      Đăng ký
                     </Link>
                     <Link
                       href="/reset-password"
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      Reset Password
+                      Đặt lại mật khẩu
                     </Link>
                     <Link
                       href="/contact"
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      Support
+                      Hỗ trợ
                     </Link>
                   </nav>
                 </div>
@@ -314,38 +319,26 @@ export default function Footer() {
             <div className="lg:col-span-3">
               <div>
                 <span className="block mb-6 text-sm text-gray-400">
-                  Stay In Touch
+                  Kết nối với chúng tôi
                 </span>
                 <p className="block mb-5 text-sm text-gray-400">
-                  Subscribe now for exclusive insights and offers!
+                  Đăng ký ngay để nhận thông tin và ưu đãi độc quyền!
                 </p>
                 <form>
                   <div className="flex flex-col items-center gap-2 w-full sm:max-w-64">
                     <input
                       type="email"
-                      placeholder="Enter your email"
+                      placeholder="Nhập email của bạn"
                       className="w-full h-12 p-4 text-sm text-white border border-gray-700 rounded-full placeholder:text-center placeholder:text-gray-400 placeholder:text-sm text-center placeholder:font-normal focus:outline-0"
                       required
                     />
                     <button className="w-full px-6 py-3 text-sm font-medium text-white transition rounded-full cursor-pointer bg-primary-500 hover:bg-primary-600">
-                      Subscribe Now
+                      Đăng ký ngay
                     </button>
                   </div>
                 </form>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div className="border-t border-gray-800">
-        <div className="container relative z-10 px-5 mx-auto sm:px-7">
-          <div className="py-5 text-center">
-            <p className="text-sm text-gray-500">
-              &copy; {getCurrentYear()} AiStarterKit - All Rights Reserved.
-            </p>
-            <p className="text-sm text-gray-500">
-              Developed by <a href="https://nextjstemplates.com/" className='text-blue-500 hover:underline font-semibold' target="_blank">nextjstemplates</a> • Distributed by <a href="https://themewagon.com/" className='text-blue-500 hover:underline font-semibold' target="_blank">ThemeWagon</a>
-            </p>
           </div>
         </div>
       </div>

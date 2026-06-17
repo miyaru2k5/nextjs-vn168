@@ -15,7 +15,7 @@ export function PricingCard({ plan, billingPeriod }: Props) {
     <div className="relative">
       <div
         className={`bg-white dark:bg-dark-primary rounded-[20px] shadow-one relative z-10 h-full ${
-          plan.popular ? 'relative border-2 border-primary-500' : ''
+          plan.popular ? 'border-2 border-primary-500' : ''
         }`}
       >
         <div className="p-8">
@@ -23,12 +23,14 @@ export function PricingCard({ plan, billingPeriod }: Props) {
             <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-400">
               {plan.name}
             </h2>
+
             {plan.popular && (
-              <span className="px-2 py-1 text-xs font-medium dark:text-pir rounded-full dark:bg-primary-500/15 bg-primary-50 text-primary-500">
-                Popular
+              <span className="px-2 py-1 text-xs font-medium rounded-full dark:bg-primary-500/15 bg-primary-50 text-primary-500">
+                Phổ biến
               </span>
             )}
           </div>
+
           <p className="flex items-baseline mt-4">
             <span className="text-4xl font-semibold text-gray-800 dark:text-white/90">
               {plan.pricing[billingPeriod].formattedPrice}
@@ -36,15 +38,18 @@ export function PricingCard({ plan, billingPeriod }: Props) {
 
             {!!plan.pricing[billingPeriod].amount && (
               <span className="ml-1 text-sm text-gray-500 dark:text-gray-400">
-                {billingPeriod === 'yearly' ? 'Per year' : 'Per month'}
+                {billingPeriod === 'yearly'
+                  ? 'Mỗi năm'
+                  : 'Mỗi tháng'}
               </span>
             )}
           </p>
+
           <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
             {plan.description}
           </p>
 
-          {plan.name.includes('Enterprise') ? (
+          {plan.name.includes('Doanh nghiệp') ? (
             <ContactSalesLink>{plan.cta}</ContactSalesLink>
           ) : (
             <button
@@ -52,17 +57,22 @@ export function PricingCard({ plan, billingPeriod }: Props) {
                 'block w-full px-8 py-3.5 mt-7 text-sm font-medium text-center rounded-full transition',
                 {
                   'dark:bg-dark-primary dark:text-white/90 dark:hover:bg-gray-800 dark:border-gray-800 text-gray-800 bg-white border border-gray-200 hover:bg-gray-50':
-                    plan.name.includes('Free'),
-                  'gradient-btn text-white': plan.popular,
+                    plan.name.includes('Miễn phí'),
+
+                  'gradient-btn text-white':
+                    plan.popular,
+
                   'dark:hover:bg-primary-500 dark:bg-white/[0.03] hover:bg-gray-900 text-white bg-gray-700':
-                    !plan.popular && !plan.name.includes('Free'),
+                    !plan.popular &&
+                    !plan.name.includes('Miễn phí'),
                 }
               )}
             >
-              {plan.cta}``
+              {plan.cta}
             </button>
           )}
         </div>
+
         <div className="px-8 pb-7">
           <ul className="space-y-3">
             {plan.features.map((feature) => (

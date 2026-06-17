@@ -29,7 +29,7 @@ export default function ResetPasswordForm({ resetToken }: PropsType) {
     setIsLoading(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 2000)); // Mô phỏng gọi API
 
       toast.success(
         <pre>
@@ -49,10 +49,10 @@ export default function ResetPasswordForm({ resetToken }: PropsType) {
     <>
       <div className="text-center mb-8">
         <h3 className="text-gray-800 font-bold text-3xl mb-2 dark:text-white/90">
-          Change Password
+          Đặt lại mật khẩu
         </h3>
         <p className="text-gray-500 dark:text-gray-400">
-          Make sure to create a strong password to mark your projects.
+          Hãy tạo một mật khẩu mạnh để bảo vệ tài khoản của bạn.
         </p>
       </div>
 
@@ -63,8 +63,8 @@ export default function ResetPasswordForm({ resetToken }: PropsType) {
             name="newPassword"
             render={({ field, fieldState }) => (
               <PasswordInput
-                label="New Password"
-                placeholder="Enter your new password"
+                label="Mật khẩu mới"
+                placeholder="Nhập mật khẩu mới"
                 required
                 error={fieldState.error?.message}
                 disabled={isLoading}
@@ -78,8 +78,8 @@ export default function ResetPasswordForm({ resetToken }: PropsType) {
             name="confirmNewPassword"
             render={({ field, fieldState }) => (
               <PasswordInput
-                label="Confirm New Password"
-                placeholder="Confirm your new password"
+                label="Xác nhận mật khẩu mới"
+                placeholder="Nhập lại mật khẩu mới"
                 required
                 error={fieldState.error?.message}
                 disabled={isLoading}
@@ -92,7 +92,7 @@ export default function ResetPasswordForm({ resetToken }: PropsType) {
             className="bg-primary-500 hover:bg-primary-600 transition py-3 px-6 w-full font-medium text-white text-sm rounded-full"
             disabled={isLoading}
           >
-            {isLoading ? 'Submitting...' : 'Reset Password'}
+            {isLoading ? 'Đang xử lý...' : 'Đặt lại mật khẩu'}
           </button>
         </div>
       </form>

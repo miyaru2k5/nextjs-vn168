@@ -1,11 +1,11 @@
 export const BILLING_PERIODS = [
   {
-    label: 'Monthly',
+    label: 'Hàng tháng',
     key: 'monthly',
     saving: null,
   },
   {
-    label: 'Annually',
+    label: 'Hàng năm',
     key: 'yearly',
     saving: '20%',
   },
@@ -31,11 +31,12 @@ const AMOUNTS = {
 };
 
 export type TBILLING_PLAN = (typeof BILLING_PLANS)[number];
+
 export const BILLING_PLANS = [
   {
-    name: 'Free',
+    name: 'Miễn phí',
     description:
-      'For hobbyists exploring AI—get started with essential features and a small token allowance.',
+      'Dành cho người dùng cá nhân muốn khám phá AI với các tính năng cơ bản và giới hạn số lượng token hàng tháng.',
     pricing: {
       monthly: {
         amount: AMOUNTS['free']['monthly'],
@@ -49,19 +50,19 @@ export const BILLING_PLANS = [
       },
     },
     features: [
-      'Basic AI model access',
-      'Up to 25,000 tokens / month',
-      'Limited to 3 projects',
-      'No API key support',
-      'Community support only',
+      'Truy cập các mô hình AI cơ bản',
+      'Tối đa 25.000 token mỗi tháng',
+      'Giới hạn 3 dự án',
+      'Không hỗ trợ API Key',
+      'Chỉ hỗ trợ qua cộng đồng',
     ],
-    cta: 'Try it for free',
+    cta: 'Dùng thử miễn phí',
     popular: false,
   },
   {
-    name: 'Plus plan',
+    name: 'Gói Plus',
     description:
-      'For developers building real products—higher limits and more flexible usage.',
+      'Dành cho nhà phát triển xây dựng sản phẩm thực tế với giới hạn cao hơn và khả năng sử dụng linh hoạt hơn.',
     pricing: {
       monthly: {
         amount: AMOUNTS['plus']['monthly'],
@@ -75,20 +76,20 @@ export const BILLING_PLANS = [
       },
     },
     features: [
-      'Everything in Free',
-      'Up to 250,000 tokens / month',
-      'Unlimited projects',
-      'Bring your own OpenAI API key',
-      'Basic analytics dashboard',
-      'Email support',
+      'Bao gồm toàn bộ tính năng của gói Miễn phí',
+      'Tối đa 250.000 token mỗi tháng',
+      'Không giới hạn số lượng dự án',
+      'Sử dụng API Key OpenAI của riêng bạn',
+      'Bảng thống kê và phân tích cơ bản',
+      'Hỗ trợ qua email',
     ],
-    cta: 'Subscribe Now',
+    cta: 'Đăng ký ngay',
     popular: true,
   },
   {
-    name: 'Pro plan',
+    name: 'Gói Pro',
     description:
-      'For teams and power users who need generous token limits and advanced tooling.',
+      'Dành cho đội nhóm và người dùng chuyên nghiệp cần giới hạn token lớn cùng các công cụ AI nâng cao.',
     pricing: {
       monthly: {
         amount: AMOUNTS['pro']['monthly'],
@@ -102,40 +103,40 @@ export const BILLING_PLANS = [
       },
     },
     features: [
-      'Everything in Plus',
-      'Up to 1 million tokens / month',
-      'Advanced model selection (GPT-4, Claude 3)',
-      'Priority support',
-      'Team collaboration tools',
-      'Exportable usage reports',
+      'Bao gồm toàn bộ tính năng của gói Plus',
+      'Tối đa 1 triệu token mỗi tháng',
+      'Lựa chọn mô hình AI nâng cao (GPT-4, Claude 3)',
+      'Ưu tiên hỗ trợ',
+      'Công cụ cộng tác nhóm',
+      'Xuất báo cáo sử dụng',
     ],
-    cta: 'Subscribe Now',
+    cta: 'Đăng ký ngay',
     popular: false,
   },
   {
-    name: 'Enterprise',
+    name: 'Doanh nghiệp',
     description:
-      'Tailored for companies with high-volume needs and advanced security.',
+      'Giải pháp tùy chỉnh dành cho doanh nghiệp có nhu cầu sử dụng AI quy mô lớn và yêu cầu bảo mật cao.',
     pricing: {
       monthly: {
         amount: AMOUNTS['enterprise']['monthly'],
-        formattedPrice: "Let's talk",
+        formattedPrice: 'Liên hệ tư vấn',
         stripeId: null,
       },
       yearly: {
         amount: AMOUNTS['enterprise']['yearly'],
-        formattedPrice: "Let's talk",
+        formattedPrice: 'Liên hệ tư vấn',
         stripeId: null,
       },
     },
     features: [
-      'Everything in Pro',
-      'Unlimited tokens',
-      'Dedicated AI instance (optional)',
-      'SLA-backed support (24/7)',
-      'SSO & audit logging',
+      'Bao gồm toàn bộ tính năng của gói Pro',
+      'Token không giới hạn',
+      'Hệ thống AI riêng biệt (tùy chọn)',
+      'Hỗ trợ cam kết SLA 24/7',
+      'Đăng nhập một lần (SSO) và nhật ký kiểm toán',
     ],
-    cta: 'Contact sales',
+    cta: 'Liên hệ kinh doanh',
     popular: false,
   },
 ];

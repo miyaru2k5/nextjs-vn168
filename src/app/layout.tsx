@@ -10,11 +10,11 @@ const onest = Onest({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Demo AIStarterKit OSS - Next.js AI Starter Kit Demo',
+    default: 'Demo AIStarterKit OSS - Bộ khởi động AI Next.js',
     template: '%s | AIStarterKit OSS Demo',
   },
   description:
-    'Demo website of AIStarterKit OSS boilerplate. Built using Next.js, Tailwind CSS, Drizzle ORM, and PostgreSQL.',
+    'Trang demo của bộ khởi động AIStarterKit OSS. Xây dựng bằng Next.js, Tailwind CSS, Drizzle ORM và PostgreSQL.',
 };
 
 export default function RootLayout({
@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="vi" suppressHydrationWarning>
       <body
         className={`bg-gray-50 dark:bg-dark-secondary min-h-screen flex flex-col ${onest.className}`}
       >

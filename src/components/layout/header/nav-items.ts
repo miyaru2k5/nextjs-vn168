@@ -2,31 +2,41 @@ export const navItems = [
   {
     type: 'link',
     href: '/',
-    label: 'Home',
+    label: 'Trang chủ',
   },
   {
     type: 'link',
-    label: 'Chat',
+    label: 'Trò chuyện',
     href: '/text-generator',
   },
   {
     type: 'link',
-    label: 'Pricing',
+    label: 'Tin tức',
+    href: '/tin-tuc',
+  },
+  {
+    type: 'link',
+    label: 'Tuyển dụng',
+    href: '/tuyen-dung',
+  },
+  {
+    type: 'link',
+    label: 'Bảng giá',
     href: '/pricing',
   },
   {
     type: 'link',
-    label: 'Contact',
+    label: 'Liên hệ',
     href: '/contact',
   },
   {
     type: 'dropdown',
-    label: 'Pages',
+    label: 'Trang',
     items: [
-      { href: '/signin', label: 'Sign In' },
-      { href: '/signup', label: 'Sign Up' },
-      { href: '/reset-password', label: 'Reset Password' },
-      { href: '/not-found', label: '404 Error' },
+      { href: '/signin', label: 'Đăng nhập' },
+      { href: '/signup', label: 'Đăng ký' },
+      { href: '/reset-password', label: 'Đặt lại mật khẩu' },
+      { href: '/not-found', label: 'Lỗi 404' },
     ],
   },
 ] satisfies NavItem[];

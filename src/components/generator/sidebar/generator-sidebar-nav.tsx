@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation';
 const navItems = [
   {
     href: '/text-generator',
-    label: 'Text Generator',
+    label: 'Trình tạo văn bản AI',
     icon: <TextGeneratorIcon className="size-8" />,
   },
 ];
@@ -18,9 +18,10 @@ export default function GeneratorSidebarNav() {
 
   return (
     <div className="px-5 py-6">
-      <h2 className="text-xs font-medium text-gray-400 dark:text-gray-400 capitalize tracking-wider">
-        Products
+      <h2 className="text-xs font-medium text-gray-400 dark:text-gray-400 uppercase tracking-wider">
+        Sản phẩm AI
       </h2>
+
       <nav className="mt-3 space-y-1">
         {navItems.map((item) => {
           const isActive = pathname.includes(item.href);

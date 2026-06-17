@@ -7,13 +7,12 @@ export function CoreFeatures() {
       <div className="max-w-[72rem] mx-auto">
         <div className="mb-12 text-center">
           <h2 className="mb-3 font-bold text-gray-800 text-3xl dark:text-white/90 md:text-title-lg max-w-xl mx-auto">
-            Core Features of our Tools
+            Tính năng cốt lõi của công cụ
           </h2>
 
           <p className="max-w-xl mx-auto leading-6 text-gray-500 dark:text-gray-400">
-            Unlock the Potential of Innovation. Discover the Advanced AI Tools
-            Transforming Your Ideas into Reality with Unmatched Precision and
-            Intelligence.
+            Khai phá tiềm năng đổi mới. Khám phá các công cụ AI tiên tiến
+            biến ý tưởng của bạn thành hiện thực với độ chính xác và trí tuệ vượt trội.
           </p>
         </div>
 

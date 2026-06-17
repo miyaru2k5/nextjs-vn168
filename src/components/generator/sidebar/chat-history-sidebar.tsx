@@ -17,12 +17,14 @@ export default function RightSidebar({ isOpen, toggleIsOpen }: PropsType) {
     >
       <div className="p-6 flex flex-col gap-6 h-full">
         <div className="space-y-4">
+          {/* Nút tạo cuộc trò chuyện mới */}
           <NewChat toggleSidebar={toggleIsOpen} />
 
+          {/* Ô tìm kiếm lịch sử trò chuyện */}
           <div className="relative">
             <input
               type="search"
-              placeholder="Search"
+              placeholder="Tìm kiếm cuộc trò chuyện..."
               className="w-full py-2.5 px-4 pr-12 dark:text-white dark:focus:border-gray-600 border border-gray-200 rounded-full dark:bg-dark-primary bg-white focus:outline-none focus:border focus:border-gray-300 text-sm placeholder:text-sm placeholder:text-gray-500 dark:border-gray-700 dark:placeholder:text-white/30 shadow-xs"
             />
 

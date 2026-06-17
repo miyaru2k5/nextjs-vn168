@@ -34,7 +34,7 @@ export function IntroVideo() {
             />
           </svg>
         </span>
-        Watch Intro Video
+        Xem video giới thiệu
       </button>
 
       {isMounted &&

@@ -31,53 +31,53 @@ export default function AIToolsTabs() {
   const tabs: Tab[] = [
     {
       id: 'text',
-      label: 'Text Generator',
+      label: 'Tạo văn bản',
       icon: <TextGeneratorIcon className="w-8 h-8" />,
       lightImage: '/images/tab-image/tab-image-1.jpg',
       darkImage: '/images/tab-image/tab-image-1-dark.jpg',
-      title: 'Easiest way to generate text',
+      title: 'Cách dễ nhất để tạo văn bản',
       description:
-        'Unlock the Potential of Innovation. Discover the Advanced AI Tools Transforming Your Ideas into Reality with Unmatched Precision and Intelligence.',
+        'Khai phá tiềm năng đổi mới. Khám phá các công cụ AI tiên tiến biến ý tưởng của bạn thành hiện thực với độ chính xác và trí tuệ vượt trội.',
     },
     {
       id: 'image',
-      label: 'Image Generator',
+      label: 'Tạo hình ảnh',
       icon: <ImageGeneratorIcon className="w-8 h-8" />,
       lightImage: '/images/tab-image/tab-image-2.jpg',
       darkImage: '/images/tab-image/tab-image-2-dark.jpg',
-      title: 'Create stunning images with AI',
+      title: 'Tạo hình ảnh ấn tượng với AI',
       description:
-        'Unlock the Potential of Innovation. Discover the Advanced AI Tools Transforming Your Ideas into Reality with Unmatched Precision and Intelligence.',
+        'Khai phá tiềm năng đổi mới. Khám phá các công cụ AI tiên tiến biến ý tưởng của bạn thành hiện thực với độ chính xác và trí tuệ vượt trội.',
     },
     {
       id: 'code',
-      label: 'Code Generator',
+      label: 'Tạo mã nguồn',
       icon: <CodeGeneratorIcon className="w-8 h-8" />,
       lightImage: '/images/tab-image/tab-image-3.jpg',
       darkImage: '/images/tab-image/tab-image-3-dark.jpg',
-      title: 'Generate code in any language',
+      title: 'Tạo mã nguồn bằng mọi ngôn ngữ',
       description:
-        'Unlock the Potential of Innovation. Discover the Advanced AI Tools Transforming Your Ideas into Reality with Unmatched Precision and Intelligence.',
+        'Khai phá tiềm năng đổi mới. Khám phá các công cụ AI tiên tiến biến ý tưởng của bạn thành hiện thực với độ chính xác và trí tuệ vượt trội.',
     },
     {
       id: 'video',
-      label: 'Video Generator',
+      label: 'Tạo video',
       icon: <VideoGeneratorIcon className="w-8 h-8" />,
       lightImage: '/images/tab-image/tab-image-4.jpg',
       darkImage: '/images/tab-image/tab-image-4-dark.jpg',
-      title: 'Create engaging videos with AI',
+      title: 'Tạo video hấp dẫn với AI',
       description:
-        'Unlock the Potential of Innovation. Discover the Advanced AI Tools Transforming Your Ideas into Reality with Unmatched Precision and Intelligence.',
+        'Khai phá tiềm năng đổi mới. Khám phá các công cụ AI tiên tiến biến ý tưởng của bạn thành hiện thực với độ chính xác và trí tuệ vượt trội.',
     },
     {
       id: 'email',
-      label: 'Email Generator',
+      label: 'Tạo email',
       icon: <EmailGeneratorIcon className="w-8 h-8" />,
       lightImage: '/images/tab-image/tab-image-5.jpg',
       darkImage: '/images/tab-image/tab-image-5-dark.jpg',
-      title: 'Write professional emails instantly',
+      title: 'Viết email chuyên nghiệp tức thì',
       description:
-        'Unlock the Potential of Innovation. Discover the Advanced AI Tools Transforming Your Ideas into Reality with Unmatched Precision and Intelligence.',
+        'Khai phá tiềm năng đổi mới. Khám phá các công cụ AI tiên tiến biến ý tưởng của bạn thành hiện thực với độ chính xác và trí tuệ vượt trội.',
     },
   ];
 
@@ -89,12 +89,11 @@ export default function AIToolsTabs() {
       <div className="wrapper">
         <div className="max-w-2xl mx-auto mb-12 text-center">
           <h2 className="mb-3 font-bold text-center text-gray-800 dark:text-white/90 text-3xl md:text-title-lg">
-            All the AI tools you need, at your Fingertips.
+            Mọi công cụ AI bạn cần, ngay trong tầm tay.
           </h2>
           <p className="max-w-2xl mx-auto leading-6 text-gray-500 dark:text-gray-400">
-            Unlock the Potential of Innovation, Discover the Advanced AI Tools
-            Transforming Your Ideas into Reality with Unmatched Precision and
-            Intelligence.
+            Khai phá tiềm năng đổi mới, khám phá các công cụ AI tiên tiến
+            biến ý tưởng của bạn thành hiện thực với độ chính xác và trí tuệ vượt trội.
           </p>
         </div>
 
@@ -165,7 +164,7 @@ export default function AIToolsTabs() {
                 {currentTab.description}
               </p>
               <button className="px-6 py-3 text-sm font-medium text-white transition-colors rounded-full bg-primary-500 hover:bg-primary-600">
-                Try it now for free
+                Dùng thử miễn phí ngay
               </button>
             </div>
           </div>

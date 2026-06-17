@@ -19,9 +19,10 @@ export default function GeneratorHeader({
         <div className="grid grid-cols-2 items-center lg:grid-cols-[1fr_auto_1fr]">
           <div className="flex">
             <div className="flex-shrink-0 flex items-center gap-3">
-              {/* <!-- Mobile menu button --> */}
+
+              {/* Nút mở menu trên thiết bị di động */}
               <button
-                aria-label="Toggle left sidebar"
+                aria-label="Mở hoặc đóng thanh điều hướng bên trái"
                 onClick={toggleSidebar}
                 className="rounded-md text-gray-400 lg:hidden"
               >
@@ -32,6 +33,7 @@ export default function GeneratorHeader({
                 )}
               </button>
 
+              {/* Logo hệ thống */}
               <div className="flex items-center">
                 <Link href="/">
                   <Image
@@ -39,31 +41,39 @@ export default function GeneratorHeader({
                     className="block dark:hidden"
                     width={180}
                     height={30}
-                    alt="AiStarterKit Logo"
+                    alt="Logo AiStarterKit"
                   />
+
                   <Image
                     src="/images/logo-white.svg"
                     className="hidden dark:block"
                     width={180}
                     height={30}
-                    alt="AiStarterKit Logo"
+                    alt="Logo AiStarterKit"
                   />
                 </Link>
               </div>
             </div>
           </div>
 
+          {/* Menu điều hướng trên máy tính */}
           <DesktopNav />
 
           <div className="flex items-center gap-3 justify-self-end">
+
+            {/* Chuyển đổi giao diện sáng/tối */}
             <ThemeToggle />
 
+            {/* Nút mở lịch sử trò chuyện trên thiết bị nhỏ */}
             <button
               onClick={toggleRightSidebar}
               type="button"
               className="inline-flex xl:hidden items-center dark:hover:bg-white/5 dark:hover:text-white/90 hover:bg-gray-100 hover:text-gray-800 text-gray-500 dark:text-gray-400 justify-center border border-gray-200 dark:border-gray-700 rounded-full size-11"
             >
-              <span className="sr-only">Open right sidebar</span>
+              <span className="sr-only">
+                Mở thanh lịch sử trò chuyện
+              </span>
+
               <svg
                 className="size-7"
                 width="32"
@@ -87,6 +97,7 @@ export default function GeneratorHeader({
                 />
               </svg>
             </button>
+
           </div>
         </div>
       </div>
