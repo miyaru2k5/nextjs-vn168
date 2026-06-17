@@ -1,13 +1,8 @@
-export const navItems: NavItem[] = [
+export const navItems = [
   {
     type: 'link',
     href: '/',
     label: 'Trang chủ',
-  },
-  {
-    type: 'link',
-    label: 'Trò chuyện',
-    href: '/text-generator',
   },
   {
     type: 'link',
@@ -29,4 +24,25 @@ export const navItems: NavItem[] = [
     label: 'Liên hệ',
     href: '/contact',
   },
-];
+  {
+    type: 'dropdown',
+    label: 'Trang',
+    items: [
+      { href: '/text-generator', label: 'Chat AI' },
+      { href: '/signin', label: 'Đăng nhập' },
+      { href: '/signup', label: 'Đăng ký' },
+      { href: '/reset-password', label: 'Đặt lại mật khẩu' },
+    ],
+  },
+] satisfies NavItem[];
+
+type NavItem = Record<string, string | unknown> &
+  (
+    | {
+        type: 'link';
+        href: string;
+      }
+    | {
+        type: 'dropdown';
+      }
+  );
