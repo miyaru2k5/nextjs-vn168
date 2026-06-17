@@ -1,4 +1,4 @@
-export const navItems = [
+export const navItems: NavItem[] = [
   {
     type: 'link',
     href: '/',
@@ -29,25 +29,4 @@ export const navItems = [
     label: 'Liên hệ',
     href: '/contact',
   },
-  {
-    type: 'dropdown',
-    label: 'Trang',
-    items: [
-      { href: '/signin', label: 'Đăng nhập' },
-      { href: '/signup', label: 'Đăng ký' },
-      { href: '/reset-password', label: 'Đặt lại mật khẩu' },
-      { href: '/not-found', label: 'Lỗi 404' },
-    ],
-  },
-] satisfies NavItem[];
-
-type NavItem = Record<string, string | unknown> &
-  (
-    | {
-        type: 'link';
-        href: string;
-      }
-    | {
-        type: 'dropdown';
-      }
-  );
+];
