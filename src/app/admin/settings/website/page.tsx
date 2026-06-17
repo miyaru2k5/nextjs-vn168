@@ -10,7 +10,7 @@ export default function WebsiteSettingsPage() {
       <AdminPageHeader title="Cài đặt Website" description="Cấu hình thông tin website" />
       <AdminForm onSubmit={() => toast.success('Đã lưu cài đặt website')}>
         <AdminFormSection title="Thông tin chung">
-          <InputGroup label="Tên website" name="siteName" defaultValue="AI Starter Kit" />
+          <InputGroup label="Tên website" name="siteName" defaultValue="VN168" />
           <InputGroup label="URL" name="siteUrl" defaultValue="https://aistarterkit.com" />
           <InputGroup label="Email liên hệ" name="contactEmail" defaultValue="contact@aistarterkit.com" />
           <InputGroup label="Số điện thoại" name="phone" defaultValue="1900 1234" />

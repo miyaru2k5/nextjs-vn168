@@ -8,7 +8,7 @@ import { dashboardStats, recentActivities } from '@/lib/admin/mock-data';
 
 export const metadata: Metadata = {
   title: 'Dashboard | Admin',
-  description: 'Tổng quan hệ thống quản trị AI Starter Kit',
+  description: 'Tổng quan hệ thống quản trị VN168',
 };
 
 const activityIcons: Record<string, string> = {

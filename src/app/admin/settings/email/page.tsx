@@ -19,7 +19,7 @@ export default function EmailSettingsPage() {
             { value: 'ssl', label: 'SSL' },
             { value: 'none', label: 'None' },
           ]} />
-          <InputGroup label="From Name" name="fromName" defaultValue="AI Starter Kit" />
+          <InputGroup label="From Name" name="fromName" defaultValue="VN168" />
         </AdminFormSection>
         <AdminFormActions cancelHref="/admin" submitLabel="Lưu cài đặt" />
       </AdminForm>

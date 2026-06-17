@@ -208,7 +208,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: '7',
     slug: 'ai-trong-marketing-so-sanh',
-    title: 'So sánh các gói dịch vụ AI Starter Kit',
+    title: 'So sánh các gói dịch vụ VN168',
     excerpt:
       'Phân tích chi tiết các gói Starter, Pro và Enterprise — giúp bạn chọn giải pháp phù hợp nhất với nhu cầu và ngân sách của doanh nghiệp.',
     content: SAMPLE_CONTENT,
@@ -298,7 +298,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: '12',
     slug: 'roadmap-ai-starter-kit-2025',
-    title: 'Roadmap AI Starter Kit H2 2025',
+    title: 'Roadmap VN168 H2 2025',
     excerpt:
       'Lộ trình phát triển sản phẩm nửa cuối năm 2025: Image Generator, Video AI, API marketplace và tích hợp enterprise SSO.',
     content: SAMPLE_CONTENT,

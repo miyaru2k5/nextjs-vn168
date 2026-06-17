@@ -1,4 +1,4 @@
-# AI Starter Kit – Next.js AI Website Templates and SaaS Starter Kit
+# VN168 – Next.js AI Website Templates and SaaS Starter Kit
 #### Preview
 
  - [Demo](https://themewagon.github.io/aistarterkit/)

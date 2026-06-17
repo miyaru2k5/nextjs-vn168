@@ -162,7 +162,7 @@ export type ArticleRecord = {
 export const mockArticles: ArticleRecord[] = [
   { id: '1', title: 'Hướng dẫn sử dụng AI Text Generator', category: 'Hướng dẫn', author: 'Admin', status: 'published', views: 2840, createdAt: '2025-06-15' },
   { id: '2', title: '10 mẹo viết content hiệu quả với AI', category: 'Marketing', author: 'Nguyễn Lan', status: 'published', views: 1920, createdAt: '2025-06-14' },
-  { id: '3', title: 'So sánh các gói dịch vụ AI Starter Kit', category: 'Sản phẩm', author: 'Admin', status: 'draft', views: 0, createdAt: '2025-06-13' },
+  { id: '3', title: 'So sánh các gói dịch vụ VN168', category: 'Sản phẩm', author: 'Admin', status: 'draft', views: 0, createdAt: '2025-06-13' },
   { id: '4', title: 'Cập nhật tính năng mới tháng 6', category: 'Tin tức', author: 'Trần Minh', status: 'scheduled', views: 0, createdAt: '2025-06-12' },
   { id: '5', title: 'Bảo mật dữ liệu người dùng', category: 'Bảo mật', author: 'Admin', status: 'published', views: 980, createdAt: '2025-06-11' },
 ];
