@@ -48,3 +48,4 @@ next-env.d.ts
 
 # Generated seed data (use SEED_TO_JSON to regenerate)
 seed-data/
+package-lock.json

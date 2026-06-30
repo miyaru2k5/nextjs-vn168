@@ -36,7 +36,7 @@ async function main() {
   if (dataSource === 'json' || dataSource === 'auto') {
     if (!hasJsonSeed) {
       console.log('  → No JSON seed data found. Running seed to generate JSON...');
-      execSync('npm run db:seed', { 
+      execSync('npx tsx scripts/seed.ts', { 
         stdio: 'inherit',
         env: { ...process.env, SEED_TO_JSON: 'true', SEED_TO_DB: 'false' }
       });
@@ -49,7 +49,7 @@ async function main() {
     // For DB mode, we always let the seed script decide (it checks counts)
     // But to make sure dev has data, we can trigger it
     console.log('  → Ensuring database seed (idempotent)...');
-    execSync('npm run db:seed', { 
+    execSync('npx tsx scripts/seed.ts', { 
       stdio: 'inherit',
       env: { ...process.env, SEED_TO_DB: 'true' }
     });

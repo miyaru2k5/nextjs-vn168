@@ -78,25 +78,50 @@ async function fetchFromApi<T>(type: string): Promise<T[] | null> {
   return null;
 }
 
-async function getFromDb<T>(entity: string, serverFn: () => Promise<T[]>): Promise<T[]> {
-  if (typeof window === 'undefined') {
-    try {
-      return await serverFn();
-    } catch (e) {
-      console.error('[seed-loader] DB query failed for', entity, e);
-      return [];
-    }
-  } else {
+async function getDbFunction(entity: string) {
+  // Only called on server
+  const db = await import('./db-queries');
+  // Map entity name to the FromDb function
+  const map: Record<string, string> = {
+    users: 'getUsersFromDb',
+    articles: 'getArticlesFromDb',
+    categories: 'getCategoriesFromDb',
+    orders: 'getOrdersFromDb',
+    comments: 'getCommentsFromDb',
+    banners: 'getBannersFromDb',
+    invoices: 'getInvoicesFromDb',
+    'api-keys': 'getApiKeysFromDb',
+    'ai-tools': 'getAiToolsFromDb',
+    'ai-history': 'getAiHistoryFromDb',
+  };
+  const fnName = map[entity];
+  if (!fnName) return null;
+  return (db as any)[fnName] as (() => Promise<any[]>) | null;
+}
+
+async function getFromDb<T>(entity: string): Promise<T[]> {
+  if (typeof window !== 'undefined') {
     const data = await fetchFromApi<T>(entity);
     return data ?? [];
+  }
+
+  try {
+    const fn = await getDbFunction(entity);
+    if (fn) {
+      const data = await fn();
+      return data || [];
+    }
+    return [];
+  } catch (e) {
+    console.error('[seed-loader] DB query failed for', entity, e);
+    return [];
   }
 }
 
 async function resolve<T>(
   jsonFile: string,
   mockData: T[],
-  dbEntity: string,
-  dbFn: () => Promise<T[]>
+  dbEntity: string
 ): Promise<T[]> {
   const mode = getResolvedDataSource();
 
@@ -110,46 +135,46 @@ async function resolve<T>(
   }
 
   if (mode === 'db') {
-    const dbData = await getFromDb<T>(dbEntity, dbFn);
-    return dbData.length > 0 ? dbData : mockData;
+    const dbData = await getFromDb<T>(dbEntity);
+    return (dbData && dbData.length > 0) ? dbData : mockData;
   }
 
   // auto
   const json = await tryLoadJson<T>(jsonFile);
-  if (json?.length) return json;
+  if (json && (Array.isArray(json) ? json.length > 0 : true)) return json;
 
-  const dbData = await getFromDb<T>(dbEntity, dbFn);
-  if (dbData.length) return dbData;
+  const dbData = await getFromDb<T>(dbEntity);
+  if (dbData && dbData.length > 0) return dbData;
 
   return mockData;
 }
 
 export async function getUsers(): Promise<UserRecord[]> {
-  return resolve('users.json', mockUsers, 'users', dbQueries.getUsersFromDb);
+  return resolve('users.json', mockUsers, 'users');
 }
 
 export async function getArticles(): Promise<ArticleRecord[]> {
-  return resolve('articles.json', mockArticles, 'articles', dbQueries.getArticlesFromDb);
+  return resolve('articles.json', mockArticles, 'articles');
 }
 
 export async function getOrders(): Promise<OrderRecord[]> {
-  return resolve('orders.json', mockOrders, 'orders', dbQueries.getOrdersFromDb);
+  return resolve('orders.json', mockOrders, 'orders');
 }
 
 export async function getCategories(): Promise<CategoryRecord[]> {
-  return resolve('categories.json', mockCategories, 'categories', dbQueries.getCategoriesFromDb);
+  return resolve('categories.json', mockCategories, 'categories');
 }
 
 export async function getComments(): Promise<CommentRecord[]> {
-  return resolve('comments.json', mockComments, 'comments', dbQueries.getCommentsFromDb);
+  return resolve('comments.json', mockComments, 'comments');
 }
 
 export async function getBanners(): Promise<BannerRecord[]> {
-  return resolve('banners.json', mockBanners, 'banners', dbQueries.getBannersFromDb);
+  return resolve('banners.json', mockBanners, 'banners');
 }
 
 export async function getCustomers(): Promise<CustomerRecord[]> {
-  return resolve('customers.json', mockCustomers, 'customers', async () => []);
+  return resolve('customers.json', mockCustomers, 'customers');
 }
 
 export async function getRoles(): Promise<RoleRecord[]> {
@@ -158,22 +183,23 @@ export async function getRoles(): Promise<RoleRecord[]> {
 }
 
 export async function getInvoices(): Promise<InvoiceRecord[]> {
-  return resolve('invoices.json', mockInvoices, 'invoices', dbQueries.getInvoicesFromDb);
+  return resolve('invoices.json', mockInvoices, 'invoices');
 }
 
 export async function getApiKeys(): Promise<ApiKeyRecord[]> {
-  return resolve('api-keys.json', mockApiKeys, 'api-keys', dbQueries.getApiKeysFromDb);
+  return resolve('api-keys.json', mockApiKeys, 'api-keys');
 }
 
 export async function getAiTools(): Promise<AiToolRecord[]> {
-  return resolve('ai-tools.json', mockAiTools, 'ai-tools', dbQueries.getAiToolsFromDb);
+  return resolve('ai-tools.json', mockAiTools, 'ai-tools');
 }
 
 export async function getAiHistory(): Promise<AiHistoryRecord[]> {
-  return resolve('ai-history.json', mockAiHistory, 'ai-history', dbQueries.getAiHistoryFromDb);
+  return resolve('ai-history.json', mockAiHistory, 'ai-history');
 }
 
-// Reports
+// Reports - always prefer the generated reports.json (seed data), fallback mock.
+// Reports are not live DB entities yet.
 export async function getRevenueReport() {
   const data = await tryLoadJson<any>('reports.json');
   return data?.revenue ?? mockRevenueReport;

@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: ['pg', 'drizzle-orm', 'pg-connection-string'],
   images: {
     remotePatterns: [
       {

@@ -29,7 +29,7 @@ export async function ensureDevSeedOnStart() {
         console.log('🌱 [runtime] No seed data detected. Triggering seed...');
         // Gọi script đảm bảo (chạy ngầm)
         const { exec } = await import('child_process');
-        exec('npm run seed:ensure', (err) => {
+        exec('npx tsx scripts/ensure-dev-seed.ts', (err) => {
           if (err) console.error('[seed] Runtime seed failed:', err);
         });
       }

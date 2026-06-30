@@ -44,5 +44,13 @@ export async function GET(
     }
   } catch {}
 
+  // Special for reports (object in json)
+  if (type === 'reports') {
+    try {
+      const data = await (seedLoader as any).getRevenueReport(); // or any
+      return NextResponse.json({ revenue: data, /* etc */ });
+    } catch {}
+  }
+
   return NextResponse.json([], { status: 404 });
 }

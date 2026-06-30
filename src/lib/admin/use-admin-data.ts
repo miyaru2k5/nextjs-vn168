@@ -52,7 +52,7 @@ import {
   getPerformanceReport,
   getTrafficReport,
   getUsersReport,
-} from './seed-loader';
+} from './seed-client';
 
 /**
  * React hooks that prefer generated seed-data JSON (when SEED_TO_JSON was used)
