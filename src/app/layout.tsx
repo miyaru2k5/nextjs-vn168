@@ -3,6 +3,14 @@ import { ThemeProvider } from 'next-themes';
 import { Onest } from 'next/font/google';
 import './globals.css';
 import { ToasterProvider } from './providers/toaster';
+import { ensureDevSeedOnStart } from '@/lib/ensure-dev-seed';
+
+// Tự động xử lý seed khi chạy dev
+// Hỗ trợ DATA_SOURCE=json | db | auto
+if (process.env.NODE_ENV === 'development') {
+  // fire-and-forget để không block render
+  ensureDevSeedOnStart();
+}
 
 const onest = Onest({
   subsets: ['latin'],

@@ -78,6 +78,22 @@ Script chuyên dụng tạo dữ liệu mẫu:
 npm run db:seed
 ```
 
+### Tích hợp với `npm run dev`
+
+Bây giờ `npm run dev` sẽ **tự động xử lý seed**:
+
+```bash
+npm run dev
+```
+
+Hành vi:
+- Chạy `seed:ensure` trước khi start Next.js
+- Nếu `DATA_SOURCE=json` hoặc `auto` và chưa có file JSON → tự động tạo
+- Nếu `DATA_SOURCE=db` → đảm bảo dữ liệu trong PostgreSQL (idempotent)
+- Có thể gọi thủ công: `npm run seed:ensure`
+
+Ngoài ra, app còn có **runtime ensure** ở root layout (chỉ dev) để seed ngay cả khi start Next trực tiếp.
+
 ### Tạo file JSON (mới)
 
 Thêm thông số môi trường để khi chạy ở local sẽ xuất dữ liệu ra file JSON:

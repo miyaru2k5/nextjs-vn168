@@ -84,7 +84,7 @@ function ensureDir(dir: string) {
   }
 }
 
-function writeSeedJson(data: Record<string, any[]>) {
+function writeSeedJson(data: Record<string, any[] | Record<string, any>>) {
   // 1. Private seed-data (for server / gitignored)
   const privateDir = path.join(process.cwd(), 'seed-data');
   ensureDir(privateDir);
@@ -95,11 +95,12 @@ function writeSeedJson(data: Record<string, any[]>) {
 
   Object.entries(data).forEach(([name, records]) => {
     const json = JSON.stringify(records, null, 2);
+    const count = Array.isArray(records) ? records.length : (records && typeof records === 'object' ? Object.keys(records).length : 1);
 
     // Write to private
     const privatePath = path.join(privateDir, `${name}.json`);
     fs.writeFileSync(privatePath, json, 'utf-8');
-    console.log(`  📄 Written ${records.length} records → ${privatePath}`);
+    console.log(`  📄 Written ${count} item(s) → ${privatePath}`);
 
     // Also write to public/ for client-side fetch (very useful for local)
     const publicPath = path.join(publicDir, `${name}.json`);
