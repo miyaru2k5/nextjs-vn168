@@ -4,6 +4,7 @@
  * These are server-only functions.
  * Used when DATA_SOURCE = 'db' or auto resolves to db.
  */
+import 'server-only';
 
 import { db } from '@/db';
 import { 
@@ -13,18 +14,20 @@ import {
   comments, 
   orders, 
   banners, 
+  invoices,
 } from '@/db/schema';
 import { desc } from 'drizzle-orm';
 
-// Types are re-exported from mock-data for consistency
+// Types centralized in types.ts
 import type { 
   UserRecord, 
   ArticleRecord, 
   CategoryRecord, 
   CommentRecord, 
   OrderRecord, 
-  BannerRecord 
-} from './mock-data';
+  BannerRecord,
+  InvoiceRecord,
+} from './types';
 
 type DbRow = Record<string, unknown>;
 
@@ -102,6 +105,16 @@ function mapBanner(row: DbRow): BannerRecord {
   };
 }
 
+function mapInvoice(row: DbRow): InvoiceRecord {
+  return {
+    id: row.invoiceNumber ? String(row.invoiceNumber) : `INV-${row.id}`,
+    customer: String(row.customerName ?? ''),
+    amount: (row.amount as number) ?? 0,
+    status: (row.status as InvoiceRecord['status']) ?? 'pending',
+    date: row.date ? new Date(String(row.date)).toISOString().split('T')[0] : '',
+  };
+}
+
 export async function getUsersFromDb(): Promise<UserRecord[]> {
   try {
     const rows = await db.select().from(users).orderBy(desc(users.createdAt)).limit(100);
@@ -162,9 +175,14 @@ export async function getBannersFromDb(): Promise<BannerRecord[]> {
   }
 }
 
-export async function getInvoicesFromDb() {
-  console.warn('[db-queries] Invoices table not in schema yet. Returning empty.');
-  return [];
+export async function getInvoicesFromDb(): Promise<InvoiceRecord[]> {
+  try {
+    const rows = await db.select().from(invoices).orderBy(desc(invoices.createdAt)).limit(100);
+    return rows.map(mapInvoice);
+  } catch (err) {
+    console.error('[db-queries] getInvoicesFromDb failed', err);
+    return [];
+  }
 }
 
 export async function getApiKeysFromDb() {

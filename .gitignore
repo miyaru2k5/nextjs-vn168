@@ -50,3 +50,4 @@ next-env.d.ts
 seed-data/
 package-lock.json
 pnpm-lock.yaml
+.opencode/

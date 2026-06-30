@@ -2,18 +2,6 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import {
-  type UserRecord,
-  type ArticleRecord,
-  type OrderRecord,
-  type CategoryRecord,
-  type CommentRecord,
-  type BannerRecord,
-  type CustomerRecord,
-  type RoleRecord,
-  type InvoiceRecord,
-  type ApiKeyRecord,
-  type AiToolRecord,
-  type AiHistoryRecord,
   mockUsers,
   mockArticles,
   mockOrders,
@@ -26,16 +14,19 @@ import {
   mockApiKeys,
   mockAiTools,
   mockAiHistory,
-  type RevenueReportData,
-  type PerformanceReportData,
-  type TrafficReportData,
-  type UsersReportData,
   mockRevenueReport,
   mockPerformanceReport,
   mockTrafficReport,
   mockUsersReport,
-} from './mock-data';
-import {
+  mockNotifications,
+  mockMessages,
+  dashboardStats,
+  recentActivities,
+  revenueChartData,
+  userGrowthData,
+  trafficSourceData,
+  deviceData,
+  conversionData,
   getUsers,
   getArticles,
   getOrders,
@@ -52,7 +43,37 @@ import {
   getPerformanceReport,
   getTrafficReport,
   getUsersReport,
-} from './seed-client';
+  getNotifications,
+  getMessages,
+  getDashboardStats,
+  getRevenueChartData,
+  getUserGrowthData,
+  getTrafficSourceData,
+  getDeviceData,
+  getConversionData,
+  getRecentActivities,
+} from '@/lib/seed';
+
+import type {
+  UserRecord,
+  ArticleRecord,
+  OrderRecord,
+  CategoryRecord,
+  CommentRecord,
+  BannerRecord,
+  CustomerRecord,
+  RoleRecord,
+  InvoiceRecord,
+  ApiKeyRecord,
+  AiToolRecord,
+  AiHistoryRecord,
+  RevenueReportData,
+  PerformanceReportData,
+  TrafficReportData,
+  UsersReportData,
+  NotificationItem,
+  MessageItem,
+} from './types';
 
 type UseDataResult<T> = {
   data: T;
@@ -99,8 +120,8 @@ function useData<T>(fetcher: () => Promise<T>, fallback: T): UseDataResult<T> {
 }
 
 /**
- * React hooks that prefer generated seed-data JSON (when SEED_TO_JSON was used)
- * over the static mock arrays.
+ * React hooks backed by the unified data-loader.
+ * Prefer generated seed-data JSON → API/DB → static mock.
  *
  * Usage:
  *   const { data: users, loading, error, refresh } = useUsers();
@@ -168,4 +189,38 @@ export function useTrafficReport(): UseDataResult<TrafficReportData> {
 
 export function useUsersReport(): UseDataResult<UsersReportData> {
   return useData(() => getUsersReport(), mockUsersReport);
+}
+
+export function useNotifications(): UseDataResult<NotificationItem[]> {
+  return useData(() => getNotifications(), mockNotifications);
+}
+
+export function useMessages(): UseDataResult<MessageItem[]> {
+  return useData(() => getMessages(), mockMessages);
+}
+
+// Dashboard specific data — now prefers generated JSON from seeder (richer + consistent)
+export function useDashboardStats() {
+  return useData(() => getDashboardStats(), dashboardStats);
+}
+
+export function useRecentActivities() {
+  return useData(() => getRecentActivities(), recentActivities);
+}
+
+// Chart data hooks (prefer JSON)
+export function useRevenueChartData() {
+  return useData(() => getRevenueChartData(), revenueChartData);
+}
+export function useUserGrowthData() {
+  return useData(() => getUserGrowthData(), userGrowthData);
+}
+export function useTrafficSourceData() {
+  return useData(() => getTrafficSourceData(), trafficSourceData);
+}
+export function useDeviceData() {
+  return useData(() => getDeviceData(), deviceData);
+}
+export function useConversionData() {
+  return useData(() => getConversionData(), conversionData);
 }

@@ -4,7 +4,7 @@ import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import DataTable, { StatusBadge } from '@/components/admin/DataTable';
 import { useCategories } from '@/lib/admin/use-admin-data';
 import { handleRowAction } from '@/lib/admin/status-maps';
-import type { CategoryRecord } from '@/lib/admin/mock-data';
+import type { CategoryRecord } from '@/lib/admin/types';
 
 const categoryStatusMap = {
   active: { label: 'Hoạt động', className: 'bg-success-50 text-success-600 dark:bg-success-600/10' },

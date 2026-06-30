@@ -4,7 +4,7 @@ import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import DataTable, { StatusBadge } from '@/components/admin/DataTable';
 import { useComments } from '@/lib/admin/use-admin-data';
 import { commentStatusMap, handleRowAction } from '@/lib/admin/status-maps';
-import type { CommentRecord } from '@/lib/admin/mock-data';
+import type { CommentRecord } from '@/lib/admin/types';
 
 export default function CommentsPage() {
   const { data: comments } = useComments();

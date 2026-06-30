@@ -1,7 +1,9 @@
 /**
  * Vietnamese localized data pools + generators
- * Inspired by RandomData_DB.cs pattern: static curated lists + helpers
- * Use with @faker-js/faker for variety.
+ * CENTRALIZED in src/lib/seed/generators.ts (one of the specific main files)
+ * 
+ * All seed/mock/test data generation logic is concentrated here.
+ * Original vn-data.ts is legacy bridge.
  */
 
 import { faker } from '@faker-js/faker/locale/vi';

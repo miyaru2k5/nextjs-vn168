@@ -25,6 +25,7 @@ import {
   orders,
   banners,
   jobs,
+  invoices,
 } from '../src/db/schema';
 import {
   VN_SURNAMES,
@@ -49,7 +50,7 @@ import {
   generatePerformanceReport,
   generateTrafficReport,
   generateUsersReport,
-} from '../src/lib/seed/vn-data';
+} from '../src/lib/seed/generators';
 import { count } from 'drizzle-orm';
 import fs from 'fs';
 import path from 'path';
@@ -404,6 +405,176 @@ function generateReportData() {
   };
 }
 
+function generateNotificationsData() {
+  return [
+    { id: '1', title: 'Đơn hàng mới', message: 'ORD-2847 vừa được thanh toán', time: '5 phút trước', read: false },
+    { id: '2', title: 'Người dùng mới', message: 'Nguyễn Thị Lan đã đăng ký', time: '12 phút trước', read: false },
+    { id: '3', title: 'Bình luận chờ duyệt', message: '3 bình luận cần xem xét', time: '30 phút trước', read: false },
+    { id: '4', title: 'Cập nhật hệ thống', message: 'Phiên bản 1.2.0 đã sẵn sàng', time: '2 giờ trước', read: true },
+    { id: '5', title: 'Báo cáo tuần', message: 'Báo cáo doanh thu tuần 24', time: '1 ngày trước', read: true },
+  ];
+}
+
+function generateMessagesData() {
+  return [
+    { id: '1', from: 'Trần Văn Minh', message: 'Xin hỏi về gói Enterprise...', time: '10 phút trước', read: false },
+    { id: '2', from: 'Nguyễn Thị Lan', message: 'Cần hỗ trợ reset API key', time: '25 phút trước', read: false },
+    { id: '3', from: 'Lê Hoàng An', message: 'Cảm ơn đội ngũ hỗ trợ!', time: '1 giờ trước', read: true },
+  ];
+}
+
+function generateRolesData() {
+  return [
+    { id: '1', name: 'Super Admin', description: 'Toàn quyền hệ thống', users: 2, permissions: 48, createdAt: '2025-01-01' },
+    { id: '2', name: 'Admin', description: 'Quản trị nội dung và người dùng', users: 5, permissions: 32, createdAt: '2025-01-01' },
+    { id: '3', name: 'Editor', description: 'Quản lý bài viết và danh mục', users: 8, permissions: 16, createdAt: '2025-01-01' },
+    { id: '4', name: 'Support', description: 'Hỗ trợ khách hàng', users: 12, permissions: 8, createdAt: '2025-01-01' },
+    { id: '5', name: 'User', description: 'Người dùng thông thường', users: 12820, permissions: 4, createdAt: '2025-01-01' },
+  ];
+}
+
+// ======================
+// Dashboard snapshot data (stats + charts + activities)
+// Generated so they are consistent with the rest of the seed and can be richer
+// ======================
+
+function generateDashboardStatsData(usrs: any[], reports: any) {
+  const totalUsers = usrs.length;
+  const newUsers = Math.floor(totalUsers * 0.03); // ~3%
+  const yearlyRevenue = reports?.revenue?.yearlyRevenue ?? 248500000;
+  const monthlyRevenue = reports?.revenue?.monthlyRevenue ?? Math.floor(yearlyRevenue / 12);
+
+  return [
+    {
+      title: 'Tổng người dùng',
+      value: totalUsers.toLocaleString('vi-VN'),
+      change: 12.5,
+      trend: [40, 55, 45, 60, 52, 68, 72],
+      icon: 'users' as const,
+    },
+    {
+      title: 'Người dùng mới',
+      value: newUsers.toLocaleString('vi-VN'),
+      change: 8.2,
+      trend: [20, 25, 30, 28, 35, 38, 42],
+      icon: 'user-plus' as const,
+    },
+    {
+      title: 'Tổng doanh thu',
+      value: `₫${(yearlyRevenue / 1_000_000).toFixed(1)}M`,
+      change: reports?.revenue?.changeYearly ?? 15.3,
+      trend: [30, 45, 40, 55, 50, 65, 70],
+      icon: 'revenue' as const,
+    },
+    {
+      title: 'Đơn hàng',
+      value: '1,284',
+      change: -2.4,
+      trend: [50, 48, 52, 45, 50, 47, 49],
+      icon: 'orders' as const,
+    },
+    {
+      title: 'Lượt truy cập',
+      value: (reports?.traffic?.visits ?? 89432).toLocaleString('vi-VN'),
+      change: reports?.traffic?.changeVisits ?? 22.1,
+      trend: [60, 65, 70, 75, 80, 85, 90],
+      icon: 'traffic' as const,
+    },
+    {
+      title: 'Bài viết',
+      value: '256',
+      change: 5.7,
+      trend: [10, 12, 15, 14, 18, 20, 22],
+      icon: 'articles' as const,
+    },
+  ];
+}
+
+function generateRevenueChartData() {
+  // 12 months, realistic growth
+  const base = 18000000;
+  return Array.from({ length: 12 }, (_, i) => ({
+    month: ['T1','T2','T3','T4','T5','T6','T7','T8','T9','T10','T11','T12'][i],
+    revenue: Math.floor(base * (1 + i * 0.018) + faker.number.int({ min: -2000000, max: 3000000 })),
+    orders: 120 + Math.floor(i * 14) + faker.number.int({ min: -5, max: 15 }),
+  }));
+}
+
+function generateUserGrowthData(totalUsers: number) {
+  const start = Math.floor(totalUsers * 0.64);
+  return Array.from({ length: 12 }, (_, i) => {
+    const users = Math.floor(start + (totalUsers - start) * (i / 11));
+    return {
+      month: ['T1','T2','T3','T4','T5','T6','T7','T8','T9','T10','T11','T12'][i],
+      users,
+      active: Math.floor(users * 0.75),
+    };
+  });
+}
+
+function generateTrafficSourceData() {
+  return [
+    { name: 'Organic', value: 35, color: '#7a5af8' },
+    { name: 'Direct', value: 25, color: '#6938ef' },
+    { name: 'Social', value: 20, color: '#9b8afb' },
+    { name: 'Referral', value: 12, color: '#bdb4fe' },
+    { name: 'Email', value: 8, color: '#d9d6fe' },
+  ];
+}
+
+function generateDeviceData() {
+  return [
+    { name: 'Desktop', value: 52, color: '#7a5af8' },
+    { name: 'Mobile', value: 38, color: '#6938ef' },
+    { name: 'Tablet', value: 10, color: '#9b8afb' },
+  ];
+}
+
+function generateConversionData(visits: number) {
+  return [
+    { stage: 'Truy cập', value: visits },
+    { stage: 'Đăng ký', value: Math.floor(visits * 0.043) },
+    { stage: 'Dùng thử', value: Math.floor(visits * 0.0215) },
+    { stage: 'Thanh toán', value: Math.floor(visits * 0.0086) },
+    { stage: 'Gia hạn', value: Math.floor(visits * 0.0057) },
+  ];
+}
+
+function generateRecentActivitiesData() {
+  return [
+    {
+      id: '1',
+      type: 'user',
+      message: 'Nguyễn Thị Lan đã đăng ký tài khoản mới',
+      time: '5 phút trước',
+    },
+    {
+      id: '2',
+      type: 'order',
+      message: 'Đơn hàng #ORD-2847 đã được thanh toán',
+      time: '12 phút trước',
+    },
+    {
+      id: '3',
+      type: 'comment',
+      message: 'Bình luận mới trên bài "Hướng dẫn AI"',
+      time: '25 phút trước',
+    },
+    {
+      id: '4',
+      type: 'admin',
+      message: 'Admin cập nhật cài đặt SEO website',
+      time: '1 giờ trước',
+    },
+    {
+      id: '5',
+      type: 'user',
+      message: 'Trần Văn Minh nâng cấp gói Pro',
+      time: '2 giờ trước',
+    },
+  ];
+}
+
 function generateAllJsonData() {
   const cats = generateCategoriesData();
   const usrs = generateUsersData();
@@ -418,6 +589,17 @@ function generateAllJsonData() {
   const aiTools = generateAiToolsData();
   const aiHistory = generateAiHistoryData(usrs);
   const reports = generateReportData();
+  const notifs = generateNotificationsData();
+  const msgs = generateMessagesData();
+  const roles = generateRolesData();
+
+  const dashboardStatsData = generateDashboardStatsData(usrs, reports);
+  const revenueChart = generateRevenueChartData();
+  const userGrowth = generateUserGrowthData(usrs.length);
+  const trafficSource = generateTrafficSourceData();
+  const device = generateDeviceData();
+  const conversion = generateConversionData(reports?.traffic?.visits ?? 89432);
+  const recentActivitiesData = generateRecentActivitiesData();
 
   return {
     categories: cats,
@@ -433,6 +615,16 @@ function generateAllJsonData() {
     'ai-tools': aiTools,
     'ai-history': aiHistory,
     reports,
+    notifications: notifs,
+    messages: msgs,
+    roles,
+    'dashboard-stats': dashboardStatsData,
+    'revenue-chart': revenueChart,
+    'user-growth': userGrowth,
+    'traffic-source': trafficSource,
+    'device-data': device,
+    'conversion-data': conversion,
+    'recent-activities': recentActivitiesData,
   };
 }
 
@@ -607,6 +799,27 @@ async function seedOrders() {
   console.log(`  ✓ Inserted ${data.length} orders`);
 }
 
+async function seedInvoices() {
+  console.log('\n💳 Seeding Invoices...');
+  if (await hasData(invoices, 'Invoices')) return;
+
+  const data = Array.from({ length: 18 }).map((_, i) => {
+    const statusPool: Array<'paid' | 'pending' | 'overdue'> = ['paid', 'paid', 'paid', 'pending', 'overdue'];
+    const name = generateVietnameseName();
+
+    return {
+      invoiceNumber: `INV-${String(100 + i).padStart(3, '0')}`,
+      customerName: name,
+      amount: generateInvoiceAmount(),
+      status: pickRandom(statusPool),
+      date: faker.date.recent({ days: 40 }),
+    };
+  });
+
+  await db.insert(invoices).values(data);
+  console.log(`  ✓ Inserted ${data.length} invoices`);
+}
+
 async function seedBanners() {
   console.log('\n🖼️  Seeding Banners...');
   if (await hasData(banners, 'Banners')) return;
@@ -699,6 +912,7 @@ export async function seedAll() {
     await seedArticles();
     await seedComments();
     await seedOrders();
+    await seedInvoices();
     await seedBanners();
     await seedJobs();
   } else {

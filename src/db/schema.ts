@@ -15,6 +15,7 @@ export const userStatusEnum = pgEnum('user_status', ['active', 'inactive', 'lock
 export const orderStatusEnum = pgEnum('order_status', ['completed', 'pending', 'cancelled', 'refunded']);
 export const articleStatusEnum = pgEnum('article_status', ['published', 'draft', 'scheduled']);
 export const bannerStatusEnum = pgEnum('banner_status', ['active', 'inactive', 'scheduled']);
+export const invoiceStatusEnum = pgEnum('invoice_status', ['paid', 'pending', 'overdue']);
 
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
@@ -74,6 +75,16 @@ export const orders = pgTable('orders', {
   packageName: varchar('package_name', { length: 50 }).notNull(), // Starter | Pro | Enterprise
   amount: integer('amount').notNull(), // in VND
   status: orderStatusEnum('status').notNull().default('pending'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
+export const invoices = pgTable('invoices', {
+  id: serial('id').primaryKey(),
+  invoiceNumber: varchar('invoice_number', { length: 50 }).notNull().unique(), // e.g. INV-001
+  customerName: varchar('customer_name', { length: 255 }).notNull(),
+  amount: integer('amount').notNull(),
+  status: invoiceStatusEnum('status').notNull().default('pending'),
+  date: timestamp('date'),
   createdAt: timestamp('created_at').notNull().defaultNow(),
 });
 

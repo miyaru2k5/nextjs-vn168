@@ -4,7 +4,7 @@ import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import DataTable from '@/components/admin/DataTable';
 import { useRoles } from '@/lib/admin/use-admin-data';
 import { handleRowAction } from '@/lib/admin/status-maps';
-import type { RoleRecord } from '@/lib/admin/mock-data';
+import type { RoleRecord } from '@/lib/admin/types';
 
 export default function RolesPage() {
   const { data: roles } = useRoles();

@@ -4,7 +4,7 @@ import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import DataTable, { StatusBadge } from '@/components/admin/DataTable';
 import { useCustomers } from '@/lib/admin/use-admin-data';
 import { handleRowAction } from '@/lib/admin/status-maps';
-import type { CustomerRecord } from '@/lib/admin/mock-data';
+import type { CustomerRecord } from '@/lib/admin/types';
 
 const customerStatusMap = {
   active: { label: 'Hoạt động', className: 'bg-success-50 text-success-600 dark:bg-success-600/10' },

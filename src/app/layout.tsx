@@ -3,7 +3,7 @@ import { ThemeProvider } from 'next-themes';
 import { Onest } from 'next/font/google';
 import './globals.css';
 import { ToasterProvider } from './providers/toaster';
-import { ensureDevSeedOnStart } from '@/lib/ensure-dev-seed';
+import { ensureDevSeedOnStart } from '@/lib/seed/ensure';
 
 // Tự động xử lý seed khi chạy dev
 // Hỗ trợ DATA_SOURCE=json | db | auto

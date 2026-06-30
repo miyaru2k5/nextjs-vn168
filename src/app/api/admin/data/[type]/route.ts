@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getResolvedDataSource } from '@/lib/admin/data-config';
+import { getResolvedDataSource } from '@/lib/seed';
 import * as dbQueries from '@/lib/admin/db-queries';
-import * as seedLoader from '@/lib/admin/seed-loader';
+import * as dataLoader from '@/lib/seed';
 
 // Map entity name to the right getter
 type GetterFn = () => Promise<unknown[]>;
@@ -46,7 +46,7 @@ export async function GET(
   // Fallback to the unified loader (which respects JSON / mock)
   const loaderFnName = `get${capitalizeEntity(type)}`;
   type SeedLoader = Record<string, (...args: unknown[]) => Promise<unknown>>;
-  const loaderFn = (seedLoader as SeedLoader)[loaderFnName];
+  const loaderFn = (dataLoader as unknown as SeedLoader)[loaderFnName];
   if (typeof loaderFn === 'function') {
     try {
       const data = await loaderFn();

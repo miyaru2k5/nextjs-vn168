@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useCallback, useState } from 'react';
 import type { BlogComment } from '@/lib/blog/types';
-import { blogComments } from '@/lib/blog/data';
+import { blogComments } from '@/lib/seed';
 import { formatRelativeTime } from '@/lib/blog/utils';
 import { Textarea } from '@/components/ui/inputs/textarea';
 import { cn } from '@/lib/utils';

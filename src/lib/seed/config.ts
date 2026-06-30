@@ -1,10 +1,12 @@
 /**
- * Centralized Data Source Configuration
+ * Centralized Data Source Configuration (now in src/lib/seed/)
  * 
- * Supports 3 modes as discussed:
- * - json: Use generated JSON seed files (ideal for pure local dev, no DB needed)
- * - db: Use real PostgreSQL via Drizzle (local with DB or production)
- * - mock: Always use static mocks (demo / fallback)
+ * This is one of the specific main files for all seed/mock/test data handling.
+ * 
+ * Supports modes:
+ * - json: Use generated JSON seed files
+ * - db: Use real PostgreSQL via Drizzle
+ * - mock: Static mocks (fallback)
  * - auto (default): Smart selection
  */
 
@@ -22,7 +24,7 @@ export const hasDatabaseUrl = !!process.env.DATABASE_URL;
 
 /**
  * Final resolved source after applying rules.
- * Production is strict: must be 'db'. We throw to prevent accidental use of mocks/JSON in prod.
+ * Production is strict: must be 'db'.
  */
 export function getResolvedDataSource(): Exclude<DataSourceMode, 'auto'> {
   if (isProduction) {
@@ -42,31 +44,20 @@ export function getResolvedDataSource(): Exclude<DataSourceMode, 'auto'> {
   if (DATA_SOURCE === 'db') return 'db';
 
   // auto mode
-  // Prefer JSON if the seed files were generated (common for fast local)
-  // Then real DB if DATABASE_URL present
-  // Else mock
   if (typeof window !== 'undefined') {
-    // On client we can't easily check fs, rely on whether JSON fetch works later
-    // Default heuristic for auto on client
     return hasDatabaseUrl ? 'db' : 'json';
   }
 
-  // Server
-  // We can check for presence of seed JSON or just prefer DB if configured
   return hasDatabaseUrl ? 'db' : 'json';
 }
 
-/**
- * Lazy resolved source — only computed when first accessed.
- * Avoids throwing at module level during production builds without DATABASE_URL.
- */
 let _resolvedSource: ReturnType<typeof getResolvedDataSource> | null = null;
 
 export function getResolvedSource(): ReturnType<typeof getResolvedDataSource> {
   if (!_resolvedSource) {
     _resolvedSource = getResolvedDataSource();
     if (process.env.NODE_ENV !== 'production') {
-      console.log(`[data-config] DATA_SOURCE=${DATA_SOURCE} → resolved=${_resolvedSource} (prod=${isProduction}, hasDB=${hasDatabaseUrl})`);
+      console.log(`[seed/config] DATA_SOURCE=${DATA_SOURCE} → resolved=${_resolvedSource} (prod=${isProduction}, hasDB=${hasDatabaseUrl})`);
     }
   }
   return _resolvedSource;

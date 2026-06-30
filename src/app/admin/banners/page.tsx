@@ -4,7 +4,7 @@ import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import DataTable, { StatusBadge } from '@/components/admin/DataTable';
 import { useBanners } from '@/lib/admin/use-admin-data';
 import { bannerStatusMap, handleRowAction } from '@/lib/admin/status-maps';
-import type { BannerRecord } from '@/lib/admin/mock-data';
+import type { BannerRecord } from '@/lib/admin/types';
 
 export default function BannersPage() {
   const { data: banners } = useBanners();

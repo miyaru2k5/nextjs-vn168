@@ -1,4 +1,4 @@
-import { jobPosts } from './data';
+import { jobPosts } from '@/lib/seed';
 import type { JobFilter, JobPost, JobSearchParams } from './types';
 import { JOB_DEPARTMENTS, JOB_LEVELS, JOB_TYPES } from './types';
 
