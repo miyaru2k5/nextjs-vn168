@@ -25,6 +25,10 @@ import {
   mockApiKeys,
   mockAiTools,
   mockAiHistory,
+  mockRevenueReport,
+  mockPerformanceReport,
+  mockTrafficReport,
+  mockUsersReport,
   type UserRecord,
   type ArticleRecord,
   type OrderRecord,
@@ -167,6 +171,27 @@ export async function getAiTools(): Promise<AiToolRecord[]> {
 
 export async function getAiHistory(): Promise<AiHistoryRecord[]> {
   return resolve('ai-history.json', mockAiHistory, 'ai-history', dbQueries.getAiHistoryFromDb);
+}
+
+// Reports
+export async function getRevenueReport() {
+  const data = await tryLoadJson<any>('reports.json');
+  return data?.revenue ?? mockRevenueReport;
+}
+
+export async function getPerformanceReport() {
+  const data = await tryLoadJson<any>('reports.json');
+  return data?.performance ?? mockPerformanceReport;
+}
+
+export async function getTrafficReport() {
+  const data = await tryLoadJson<any>('reports.json');
+  return data?.traffic ?? mockTrafficReport;
+}
+
+export async function getUsersReport() {
+  const data = await tryLoadJson<any>('reports.json');
+  return data?.users ?? mockUsersReport;
 }
 
 export async function loadAllSeedData() {

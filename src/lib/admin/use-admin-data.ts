@@ -26,6 +26,14 @@ import {
   mockApiKeys,
   mockAiTools,
   mockAiHistory,
+  type RevenueReportData,
+  type PerformanceReportData,
+  type TrafficReportData,
+  type UsersReportData,
+  mockRevenueReport,
+  mockPerformanceReport,
+  mockTrafficReport,
+  mockUsersReport,
 } from './mock-data';
 import {
   getUsers,
@@ -40,6 +48,10 @@ import {
   getApiKeys,
   getAiTools,
   getAiHistory,
+  getRevenueReport,
+  getPerformanceReport,
+  getTrafficReport,
+  getUsersReport,
 } from './seed-loader';
 
 /**
@@ -211,6 +223,62 @@ export function useAiHistory() {
   useEffect(() => {
     let mounted = true;
     getAiHistory().then((d) => {
+      if (mounted) setData(d);
+    });
+    return () => { mounted = false; };
+  }, []);
+
+  return data;
+}
+
+export function useRevenueReport() {
+  const [data, setData] = useState<RevenueReportData>(mockRevenueReport);
+
+  useEffect(() => {
+    let mounted = true;
+    getRevenueReport().then((d) => {
+      if (mounted) setData(d);
+    });
+    return () => { mounted = false; };
+  }, []);
+
+  return data;
+}
+
+export function usePerformanceReport() {
+  const [data, setData] = useState<PerformanceReportData>(mockPerformanceReport);
+
+  useEffect(() => {
+    let mounted = true;
+    getPerformanceReport().then((d) => {
+      if (mounted) setData(d);
+    });
+    return () => { mounted = false; };
+  }, []);
+
+  return data;
+}
+
+export function useTrafficReport() {
+  const [data, setData] = useState<TrafficReportData>(mockTrafficReport);
+
+  useEffect(() => {
+    let mounted = true;
+    getTrafficReport().then((d) => {
+      if (mounted) setData(d);
+    });
+    return () => { mounted = false; };
+  }, []);
+
+  return data;
+}
+
+export function useUsersReport() {
+  const [data, setData] = useState<UsersReportData>(mockUsersReport);
+
+  useEffect(() => {
+    let mounted = true;
+    getUsersReport().then((d) => {
       if (mounted) setData(d);
     });
     return () => { mounted = false; };

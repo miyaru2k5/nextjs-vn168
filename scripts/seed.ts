@@ -45,6 +45,10 @@ import {
   generateInvoiceAmount,
   generateApiKeyName,
   generateDuration,
+  generateRevenueReport,
+  generatePerformanceReport,
+  generateTrafficReport,
+  generateUsersReport,
 } from '../src/lib/seed/vn-data';
 import { count } from 'drizzle-orm';
 import fs from 'fs';
@@ -390,6 +394,15 @@ function generateAiHistoryData(users: any[]) {
   });
 }
 
+function generateReportData() {
+  return {
+    revenue: generateRevenueReport(),
+    performance: generatePerformanceReport(),
+    traffic: generateTrafficReport(),
+    users: generateUsersReport(),
+  };
+}
+
 function generateAllJsonData() {
   const cats = generateCategoriesData();
   const usrs = generateUsersData();
@@ -403,6 +416,7 @@ function generateAllJsonData() {
   const apiKeys = generateApiKeysData();
   const aiTools = generateAiToolsData();
   const aiHistory = generateAiHistoryData(usrs);
+  const reports = generateReportData();
 
   return {
     categories: cats,
@@ -417,6 +431,7 @@ function generateAllJsonData() {
     'api-keys': apiKeys,
     'ai-tools': aiTools,
     'ai-history': aiHistory,
+    reports,
   };
 }
 

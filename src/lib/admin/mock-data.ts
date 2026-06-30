@@ -353,17 +353,90 @@ export const mockAiHistory: AiHistoryRecord[] = [
   { id: '5', user: 'Hoàng Đức Bình', tool: 'Text Generator', tokens: 560, duration: '1.2s', createdAt: '2025-06-17 08:50' },
 ];
 
-// Additional report-related mocks (for future expansion)
-export const mockRevenueReport = {
-  monthly: 48200000,
-  yearly: 248500000,
-  arpu: 193000,
-  refundRate: 1.2,
+// ======================
+// Reports Data (for seed + dynamic loading)
+// ======================
+
+export type RevenueReportData = {
+  monthlyRevenue: number;
+  yearlyRevenue: number;
+  arpu: number;
+  refundRate: number;
+  changeMonthly: number;
+  changeYearly: number;
 };
 
-export const mockPerformanceReport = {
-  uptime: '99.98',
+export const mockRevenueReport: RevenueReportData = {
+  monthlyRevenue: 48200000,
+  yearlyRevenue: 248500000,
+  arpu: 193000,
+  refundRate: 1.2,
+  changeMonthly: 15.3,
+  changeYearly: 22.1,
+};
+
+export type PerformanceReportData = {
+  uptime: number; // percentage
+  responseTime: number; // ms
+  errorRate: number; // percentage
+  apiCallsPerHour: number;
+  changeUptime: number;
+  changeResponseTime: number;
+  changeErrorRate: number;
+  changeApiCalls: number;
+};
+
+export const mockPerformanceReport: PerformanceReportData = {
+  uptime: 99.98,
   responseTime: 124,
   errorRate: 0.12,
   apiCallsPerHour: 12400,
+  changeUptime: 0.02,
+  changeResponseTime: -8.5,
+  changeErrorRate: -0.05,
+  changeApiCalls: 15.3,
+};
+
+export type TrafficReportData = {
+  visits: number;
+  pageviews: number;
+  bounceRate: number;
+  avgTimeOnSite: number; // seconds
+  changeVisits: number;
+  changePageviews: number;
+  changeBounce: number;
+  changeAvgTime: number;
+};
+
+export const mockTrafficReport: TrafficReportData = {
+  visits: 89432,
+  pageviews: 245680,
+  bounceRate: 32.5,
+  avgTimeOnSite: 222, // 3m42s
+  changeVisits: 22.1,
+  changePageviews: 18.4,
+  changeBounce: -4.2,
+  changeAvgTime: 6.8,
+};
+
+export type UsersReportData = {
+  totalUsers: number;
+  dau: number;
+  mau: number;
+  retentionRate: number;
+  changeTotal: number;
+  changeDau: number;
+  changeMau: number;
+  changeRetention: number;
+};
+
+export const mockUsersReport: UsersReportData = {
+  totalUsers: 12847,
+  dau: 3240,
+  mau: 9600,
+  retentionRate: 78.5,
+  changeTotal: 12.5,
+  changeDau: 8.2,
+  changeMau: 10.5,
+  changeRetention: 2.1,
 };

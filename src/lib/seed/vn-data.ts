@@ -4,6 +4,8 @@
  * Use with @faker-js/faker for variety.
  */
 
+import { faker } from '@faker-js/faker/locale/vi';
+
 export const VN_SURNAMES = [
   'Nguyễn', 'Trần', 'Lê', 'Phạm', 'Hoàng', 'Vũ', 'Đặng', 'Bùi', 'Đỗ', 'Hồ',
   'Ngô', 'Dương', 'Lý', 'Phan', 'Trịnh', 'Đinh', 'Lâm', 'Phùng', 'Mai', 'Võ',
@@ -150,4 +152,55 @@ export function generateApiKeyName(): string {
 export function generateDuration(): string {
   const secs = (Math.random() * 10 + 0.8).toFixed(1);
   return `${secs}s`;
+}
+
+// Report generators (for seed data)
+export function generateRevenueReport() {
+  return {
+    monthlyRevenue: faker.number.int({ min: 35000000, max: 65000000 }),
+    yearlyRevenue: faker.number.int({ min: 180000000, max: 320000000 }),
+    arpu: faker.number.int({ min: 150000, max: 250000 }),
+    refundRate: parseFloat((Math.random() * 2 + 0.5).toFixed(1)),
+    changeMonthly: parseFloat((Math.random() * 25 + 5).toFixed(1)),
+    changeYearly: parseFloat((Math.random() * 30 + 10).toFixed(1)),
+  };
+}
+
+export function generatePerformanceReport() {
+  return {
+    uptime: parseFloat((99.5 + Math.random() * 0.48).toFixed(2)),
+    responseTime: faker.number.int({ min: 80, max: 180 }),
+    errorRate: parseFloat((Math.random() * 0.3 + 0.05).toFixed(2)),
+    apiCallsPerHour: faker.number.int({ min: 8000, max: 18000 }),
+    changeUptime: parseFloat((Math.random() * 0.1).toFixed(2)),
+    changeResponseTime: parseFloat((-10 + Math.random() * 5).toFixed(1)),
+    changeErrorRate: parseFloat((-0.1 + Math.random() * 0.08).toFixed(2)),
+    changeApiCalls: parseFloat((Math.random() * 20 + 5).toFixed(1)),
+  };
+}
+
+export function generateTrafficReport() {
+  return {
+    visits: faker.number.int({ min: 65000, max: 130000 }),
+    pageviews: faker.number.int({ min: 180000, max: 350000 }),
+    bounceRate: parseFloat((25 + Math.random() * 15).toFixed(1)),
+    avgTimeOnSite: faker.number.int({ min: 150, max: 280 }),
+    changeVisits: parseFloat((Math.random() * 30 + 5).toFixed(1)),
+    changePageviews: parseFloat((Math.random() * 25 + 5).toFixed(1)),
+    changeBounce: parseFloat((-8 + Math.random() * 5).toFixed(1)),
+    changeAvgTime: parseFloat((Math.random() * 15 - 2).toFixed(1)),
+  };
+}
+
+export function generateUsersReport() {
+  return {
+    totalUsers: faker.number.int({ min: 9000, max: 18000 }),
+    dau: faker.number.int({ min: 2000, max: 5000 }),
+    mau: faker.number.int({ min: 7000, max: 14000 }),
+    retentionRate: parseFloat((70 + Math.random() * 15).toFixed(1)),
+    changeTotal: parseFloat((Math.random() * 20 + 5).toFixed(1)),
+    changeDau: parseFloat((Math.random() * 15 + 3).toFixed(1)),
+    changeMau: parseFloat((Math.random() * 18 + 4).toFixed(1)),
+    changeRetention: parseFloat((Math.random() * 5 + 0.5).toFixed(1)),
+  };
 }
