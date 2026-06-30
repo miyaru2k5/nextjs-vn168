@@ -12,7 +12,7 @@ const keyStatusMap = {
 };
 
 export default function APIKeysPage() {
-  const apiKeys = useApiKeys();
+  const { data: apiKeys } = useApiKeys();
 
   return (
     <div>

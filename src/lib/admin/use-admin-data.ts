@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import {
   type UserRecord,
   type ArticleRecord,
@@ -54,235 +54,118 @@ import {
   getUsersReport,
 } from './seed-client';
 
+type UseDataResult<T> = {
+  data: T;
+  loading: boolean;
+  error: Error | null;
+  refresh: () => void;
+};
+
+function useData<T>(fetcher: () => Promise<T>, fallback: T): UseDataResult<T> {
+  const [data, setData] = useState<T>(fallback);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | null>(null);
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const refresh = useCallback(() => {
+    setRefreshKey((k) => k + 1);
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+    setLoading(true);
+    setError(null);
+
+    fetcher()
+      .then((d) => {
+        if (mounted) {
+          setData(d);
+          setLoading(false);
+        }
+      })
+      .catch((err: unknown) => {
+        if (mounted) {
+          const e = err instanceof Error ? err : new Error(String(err));
+          setError(e);
+          setLoading(false);
+        }
+      });
+
+    return () => { mounted = false; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refreshKey]);
+
+  return { data, loading, error, refresh };
+}
+
 /**
  * React hooks that prefer generated seed-data JSON (when SEED_TO_JSON was used)
  * over the static mock arrays.
  *
  * Usage:
- *   const users = useUsers();
- *   const articles = useArticles();
+ *   const { data: users, loading, error, refresh } = useUsers();
  */
 
-export function useUsers() {
-  const [data, setData] = useState<UserRecord[]>(mockUsers);
-
-  useEffect(() => {
-    let mounted = true;
-    getUsers().then((d) => {
-      if (mounted) setData(d);
-    });
-    return () => { mounted = false; };
-  }, []);
-
-  return data;
+export function useUsers(): UseDataResult<UserRecord[]> {
+  return useData(() => getUsers(), mockUsers);
 }
 
-export function useArticles() {
-  const [data, setData] = useState<ArticleRecord[]>(mockArticles);
-
-  useEffect(() => {
-    let mounted = true;
-    getArticles().then((d) => {
-      if (mounted) setData(d);
-    });
-    return () => { mounted = false; };
-  }, []);
-
-  return data;
+export function useArticles(): UseDataResult<ArticleRecord[]> {
+  return useData(() => getArticles(), mockArticles);
 }
 
-export function useOrders() {
-  const [data, setData] = useState<OrderRecord[]>(mockOrders);
-
-  useEffect(() => {
-    let mounted = true;
-    getOrders().then((d) => {
-      if (mounted) setData(d);
-    });
-    return () => { mounted = false; };
-  }, []);
-
-  return data;
+export function useOrders(): UseDataResult<OrderRecord[]> {
+  return useData(() => getOrders(), mockOrders);
 }
 
-export function useCategories() {
-  const [data, setData] = useState<CategoryRecord[]>(mockCategories);
-
-  useEffect(() => {
-    let mounted = true;
-    getCategories().then((d) => {
-      if (mounted) setData(d);
-    });
-    return () => { mounted = false; };
-  }, []);
-
-  return data;
+export function useCategories(): UseDataResult<CategoryRecord[]> {
+  return useData(() => getCategories(), mockCategories);
 }
 
-export function useComments() {
-  const [data, setData] = useState<CommentRecord[]>(mockComments);
-
-  useEffect(() => {
-    let mounted = true;
-    getComments().then((d) => {
-      if (mounted) setData(d);
-    });
-    return () => { mounted = false; };
-  }, []);
-
-  return data;
+export function useComments(): UseDataResult<CommentRecord[]> {
+  return useData(() => getComments(), mockComments);
 }
 
-export function useBanners() {
-  const [data, setData] = useState<BannerRecord[]>(mockBanners);
-
-  useEffect(() => {
-    let mounted = true;
-    getBanners().then((d) => {
-      if (mounted) setData(d);
-    });
-    return () => { mounted = false; };
-  }, []);
-
-  return data;
+export function useBanners(): UseDataResult<BannerRecord[]> {
+  return useData(() => getBanners(), mockBanners);
 }
 
-export function useCustomers() {
-  const [data, setData] = useState<CustomerRecord[]>(mockCustomers);
-
-  useEffect(() => {
-    let mounted = true;
-    getCustomers().then((d) => {
-      if (mounted) setData(d);
-    });
-    return () => { mounted = false; };
-  }, []);
-
-  return data;
+export function useCustomers(): UseDataResult<CustomerRecord[]> {
+  return useData(() => getCustomers(), mockCustomers);
 }
 
-export function useRoles() {
-  const [data, setData] = useState<RoleRecord[]>(mockRoles);
-
-  useEffect(() => {
-    let mounted = true;
-    getRoles().then((d) => {
-      if (mounted) setData(d);
-    });
-    return () => { mounted = false; };
-  }, []);
-
-  return data;
+export function useRoles(): UseDataResult<RoleRecord[]> {
+  return useData(() => getRoles(), mockRoles);
 }
 
-export function useInvoices() {
-  const [data, setData] = useState<InvoiceRecord[]>(mockInvoices);
-
-  useEffect(() => {
-    let mounted = true;
-    getInvoices().then((d) => {
-      if (mounted) setData(d);
-    });
-    return () => { mounted = false; };
-  }, []);
-
-  return data;
+export function useInvoices(): UseDataResult<InvoiceRecord[]> {
+  return useData(() => getInvoices(), mockInvoices);
 }
 
-export function useApiKeys() {
-  const [data, setData] = useState<ApiKeyRecord[]>(mockApiKeys);
-
-  useEffect(() => {
-    let mounted = true;
-    getApiKeys().then((d) => {
-      if (mounted) setData(d);
-    });
-    return () => { mounted = false; };
-  }, []);
-
-  return data;
+export function useApiKeys(): UseDataResult<ApiKeyRecord[]> {
+  return useData(() => getApiKeys(), mockApiKeys);
 }
 
-export function useAiTools() {
-  const [data, setData] = useState<AiToolRecord[]>(mockAiTools);
-
-  useEffect(() => {
-    let mounted = true;
-    getAiTools().then((d) => {
-      if (mounted) setData(d);
-    });
-    return () => { mounted = false; };
-  }, []);
-
-  return data;
+export function useAiTools(): UseDataResult<AiToolRecord[]> {
+  return useData(() => getAiTools(), mockAiTools);
 }
 
-export function useAiHistory() {
-  const [data, setData] = useState<AiHistoryRecord[]>(mockAiHistory);
-
-  useEffect(() => {
-    let mounted = true;
-    getAiHistory().then((d) => {
-      if (mounted) setData(d);
-    });
-    return () => { mounted = false; };
-  }, []);
-
-  return data;
+export function useAiHistory(): UseDataResult<AiHistoryRecord[]> {
+  return useData(() => getAiHistory(), mockAiHistory);
 }
 
-export function useRevenueReport() {
-  const [data, setData] = useState<RevenueReportData>(mockRevenueReport);
-
-  useEffect(() => {
-    let mounted = true;
-    getRevenueReport().then((d) => {
-      if (mounted) setData(d);
-    });
-    return () => { mounted = false; };
-  }, []);
-
-  return data;
+export function useRevenueReport(): UseDataResult<RevenueReportData> {
+  return useData(() => getRevenueReport(), mockRevenueReport);
 }
 
-export function usePerformanceReport() {
-  const [data, setData] = useState<PerformanceReportData>(mockPerformanceReport);
-
-  useEffect(() => {
-    let mounted = true;
-    getPerformanceReport().then((d) => {
-      if (mounted) setData(d);
-    });
-    return () => { mounted = false; };
-  }, []);
-
-  return data;
+export function usePerformanceReport(): UseDataResult<PerformanceReportData> {
+  return useData(() => getPerformanceReport(), mockPerformanceReport);
 }
 
-export function useTrafficReport() {
-  const [data, setData] = useState<TrafficReportData>(mockTrafficReport);
-
-  useEffect(() => {
-    let mounted = true;
-    getTrafficReport().then((d) => {
-      if (mounted) setData(d);
-    });
-    return () => { mounted = false; };
-  }, []);
-
-  return data;
+export function useTrafficReport(): UseDataResult<TrafficReportData> {
+  return useData(() => getTrafficReport(), mockTrafficReport);
 }
 
-export function useUsersReport() {
-  const [data, setData] = useState<UsersReportData>(mockUsersReport);
-
-  useEffect(() => {
-    let mounted = true;
-    getUsersReport().then((d) => {
-      if (mounted) setData(d);
-    });
-    return () => { mounted = false; };
-  }, []);
-
-  return data;
+export function useUsersReport(): UseDataResult<UsersReportData> {
+  return useData(() => getUsersReport(), mockUsersReport);
 }

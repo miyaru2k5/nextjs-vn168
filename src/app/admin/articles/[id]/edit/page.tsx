@@ -9,9 +9,10 @@ import { useArticles } from '@/lib/admin/use-admin-data';
 export default function EditArticlePage() {
   const params = useParams();
   const id = params.id as string;
-  const articles = useArticles();
+  const { data: articles } = useArticles();
   const article = articles.find((a) => a.id === id);
   if (articles.length > 0 && !article) notFound();
+  if (!article) return null;
 
   return (
     <div>

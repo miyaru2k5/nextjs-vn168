@@ -9,7 +9,7 @@ import type { UserRecord } from '@/lib/admin/mock-data';
 
 export default function UsersPage() {
   const router = useRouter();
-  const users = useUsers();
+  const { data: users } = useUsers();
 
   return (
     <div>

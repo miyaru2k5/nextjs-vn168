@@ -66,7 +66,7 @@ async function resolve<T>(
 ): Promise<T[]> {
   // Client always tries JSON files first, then mock fallback
   const json = await tryLoadJson<T>(jsonFile);
-  if (json && (Array.isArray(json) ? json.length > 0 : true)) return json;
+  if (json && json.length > 0) return json;
 
   // Fallback: try the API endpoint (which may read from DB server-side)
   const entity = jsonFile.replace('.json', '');
@@ -105,8 +105,7 @@ export async function getCustomers(): Promise<CustomerRecord[]> {
 }
 
 export async function getRoles(): Promise<RoleRecord[]> {
-  const json = await tryLoadJson<RoleRecord>('roles.json');
-  return json ?? mockRoles;
+  return resolve('roles.json', mockRoles);
 }
 
 export async function getInvoices(): Promise<InvoiceRecord[]> {
@@ -125,32 +124,39 @@ export async function getAiHistory(): Promise<AiHistoryRecord[]> {
   return resolve('ai-history.json', mockAiHistory);
 }
 
+type ReportsJson = {
+  revenue?: RevenueReportData;
+  performance?: PerformanceReportData;
+  traffic?: TrafficReportData;
+  users?: UsersReportData;
+};
+
 // Reports — only use JSON or mock on client
 // reports.json is an object, not an array, so we use a separate loader
-async function tryLoadReportJson(): Promise<Record<string, unknown> | null> {
+async function tryLoadReportJson(): Promise<ReportsJson | null> {
   try {
     const res = await fetch(`${SEED_BASE}/reports.json`, { cache: 'no-store' });
-    if (res.ok) return await res.json();
+    if (res.ok) return await res.json() as ReportsJson;
   } catch {}
   return null;
 }
 
-export async function getRevenueReport() {
+export async function getRevenueReport(): Promise<RevenueReportData> {
   const data = await tryLoadReportJson();
-  return (data as any)?.revenue ?? mockRevenueReport;
+  return data?.revenue ?? mockRevenueReport;
 }
 
-export async function getPerformanceReport() {
+export async function getPerformanceReport(): Promise<PerformanceReportData> {
   const data = await tryLoadReportJson();
-  return (data as any)?.performance ?? mockPerformanceReport;
+  return data?.performance ?? mockPerformanceReport;
 }
 
-export async function getTrafficReport() {
+export async function getTrafficReport(): Promise<TrafficReportData> {
   const data = await tryLoadReportJson();
-  return (data as any)?.traffic ?? mockTrafficReport;
+  return data?.traffic ?? mockTrafficReport;
 }
 
-export async function getUsersReport() {
+export async function getUsersReport(): Promise<UsersReportData> {
   const data = await tryLoadReportJson();
-  return (data as any)?.users ?? mockUsersReport;
+  return data?.users ?? mockUsersReport;
 }

@@ -9,7 +9,7 @@ import type { OrderRecord } from '@/lib/admin/mock-data';
 
 export default function OrdersPage() {
   const router = useRouter();
-  const orders = useOrders();
+  const { data: orders } = useOrders();
 
   return (
     <div>

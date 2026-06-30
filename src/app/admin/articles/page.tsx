@@ -9,7 +9,7 @@ import type { ArticleRecord } from '@/lib/admin/mock-data';
 
 export default function ArticlesPage() {
   const router = useRouter();
-  const articles = useArticles();
+  const { data: articles } = useArticles();
 
   return (
     <div>

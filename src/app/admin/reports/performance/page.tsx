@@ -5,7 +5,7 @@ import DashboardCard from '@/components/admin/DashboardCard';
 import { usePerformanceReport } from '@/lib/admin/use-admin-data';
 
 export default function PerformanceReportPage() {
-  const report = usePerformanceReport();
+  const { data: report } = usePerformanceReport();
 
   return (
     <div className="space-y-6">

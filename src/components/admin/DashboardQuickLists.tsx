@@ -6,7 +6,7 @@ import { useUsers, useOrders } from '@/lib/admin/use-admin-data';
 import { userStatusMap, orderStatusMap } from '@/lib/admin/status-maps';
 
 export function DashboardRecentUsers() {
-  const users = useUsers();
+  const { data: users } = useUsers();
 
   return (
     <div className="bg-white dark:bg-dark-primary rounded-2xl border border-gray-100 dark:border-gray-800 shadow-theme-xs p-5">
@@ -35,7 +35,7 @@ export function DashboardRecentUsers() {
 }
 
 export function DashboardRecentOrders() {
-  const orders = useOrders();
+  const { data: orders } = useOrders();
 
   return (
     <div className="bg-white dark:bg-dark-primary rounded-2xl border border-gray-100 dark:border-gray-800 shadow-theme-xs p-5">

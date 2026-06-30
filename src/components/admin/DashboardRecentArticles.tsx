@@ -6,7 +6,7 @@ import { useArticles } from '@/lib/admin/use-admin-data';
 import { articleStatusMap } from '@/lib/admin/status-maps';
 
 export default function DashboardRecentArticles() {
-  const articles = useArticles();
+  const { data: articles } = useArticles();
 
   return (
     <div>

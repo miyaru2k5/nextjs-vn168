@@ -6,7 +6,7 @@ import { DashboardCharts } from '@/components/admin/DashboardCharts';
 import { useRevenueReport } from '@/lib/admin/use-admin-data';
 
 export default function RevenueReportPage() {
-  const report = useRevenueReport();
+  const { data: report } = useRevenueReport();
 
   return (
     <div className="space-y-6">

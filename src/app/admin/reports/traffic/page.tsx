@@ -6,7 +6,7 @@ import { DashboardCharts } from '@/components/admin/DashboardCharts';
 import { useTrafficReport } from '@/lib/admin/use-admin-data';
 
 export default function TrafficReportPage() {
-  const report = useTrafficReport();
+  const { data: report } = useTrafficReport();
   const avgTime = `${Math.floor(report.avgTimeOnSite / 60)}m ${report.avgTimeOnSite % 60}s`;
 
   return (

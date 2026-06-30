@@ -5,7 +5,7 @@ import DataTable from '@/components/admin/DataTable';
 import { useAiHistory } from '@/lib/admin/use-admin-data';
 
 export default function AIHistoryPage() {
-  const history = useAiHistory();
+  const { data: history } = useAiHistory();
 
   return (
     <div>

@@ -7,7 +7,7 @@ import { handleRowAction } from '@/lib/admin/status-maps';
 import type { RoleRecord } from '@/lib/admin/mock-data';
 
 export default function RolesPage() {
-  const roles = useRoles();
+  const { data: roles } = useRoles();
 
   return (
     <div>

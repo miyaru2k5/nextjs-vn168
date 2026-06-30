@@ -9,9 +9,10 @@ import { useUsers } from '@/lib/admin/use-admin-data';
 export default function EditUserPage() {
   const params = useParams();
   const id = params.id as string;
-  const users = useUsers();
+  const { data: users } = useUsers();
   const user = users.find((u) => u.id === id);
   if (users.length > 0 && !user) notFound();
+  if (!user) return null;
 
   return (
     <div>

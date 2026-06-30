@@ -56,6 +56,18 @@ export function getResolvedDataSource(): Exclude<DataSourceMode, 'auto'> {
   return hasDatabaseUrl ? 'db' : 'json';
 }
 
-export const resolvedSource = getResolvedDataSource();
+/**
+ * Lazy resolved source — only computed when first accessed.
+ * Avoids throwing at module level during production builds without DATABASE_URL.
+ */
+let _resolvedSource: ReturnType<typeof getResolvedDataSource> | null = null;
 
-console.log(`[data-config] DATA_SOURCE=${DATA_SOURCE} → resolved=${resolvedSource} (prod=${isProduction}, hasDB=${hasDatabaseUrl})`);
+export function getResolvedSource(): ReturnType<typeof getResolvedDataSource> {
+  if (!_resolvedSource) {
+    _resolvedSource = getResolvedDataSource();
+    if (process.env.NODE_ENV !== 'production') {
+      console.log(`[data-config] DATA_SOURCE=${DATA_SOURCE} → resolved=${_resolvedSource} (prod=${isProduction}, hasDB=${hasDatabaseUrl})`);
+    }
+  }
+  return _resolvedSource;
+}

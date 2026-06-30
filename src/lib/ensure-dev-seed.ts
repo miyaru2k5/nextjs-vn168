@@ -19,7 +19,7 @@ export async function ensureDevSeedOnStart() {
   const source = getResolvedDataSource();
 
   // Chỉ tự động seed ở local khi chưa có dữ liệu
-  if (source === 'json' || source === 'auto') {
+  if (source === 'json') {
     try {
       // Kiểm tra nhanh bằng cách import loader
       const { getUsers } = await import('@/lib/admin/seed-loader');
@@ -33,7 +33,7 @@ export async function ensureDevSeedOnStart() {
           if (err) console.error('[seed] Runtime seed failed:', err);
         });
       }
-    } catch (e) {
+    } catch {
       // ignore
     }
   }

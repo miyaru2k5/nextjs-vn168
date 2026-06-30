@@ -133,6 +133,6 @@ export const commentsRelations = relations(comments, ({ one }) => ({
   }),
 }));
 
-export const usersRelations = relations(users, ({ many }) => ({
+export const usersRelations = relations(users, () => ({
   // extend later if you add orders to reference users
 }));

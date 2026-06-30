@@ -4,7 +4,9 @@ import * as dbQueries from '@/lib/admin/db-queries';
 import * as seedLoader from '@/lib/admin/seed-loader';
 
 // Map entity name to the right getter
-const getters: Record<string, () => Promise<any[]>> = {
+type GetterFn = () => Promise<unknown[]>;
+
+const getters: Record<string, GetterFn> = {
   users: dbQueries.getUsersFromDb,
   articles: dbQueries.getArticlesFromDb,
   categories: dbQueries.getCategoriesFromDb,
@@ -17,8 +19,16 @@ const getters: Record<string, () => Promise<any[]>> = {
   'ai-history': dbQueries.getAiHistoryFromDb,
 };
 
+function capitalizeEntity(type: string): string {
+  // Convert kebab-case to PascalCase, e.g. "api-keys" -> "ApiKeys"
+  return type
+    .split('-')
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join('');
+}
+
 export async function GET(
-  req: NextRequest,
+  _req: NextRequest,
   { params }: { params: Promise<{ type: string }> }
 ) {
   const { type } = await params;
@@ -34,22 +44,16 @@ export async function GET(
   }
 
   // Fallback to the unified loader (which respects JSON / mock)
-  // This keeps behavior consistent
-  try {
-    // @ts-ignore - dynamic
-    const loaderFn = (seedLoader as any)[`get${type.charAt(0).toUpperCase() + type.slice(1).replace(/-./g, (x) => x[1].toUpperCase())}`];
-    if (loaderFn) {
+  const loaderFnName = `get${capitalizeEntity(type)}`;
+  type SeedLoader = Record<string, (...args: unknown[]) => Promise<unknown>>;
+  const loaderFn = (seedLoader as SeedLoader)[loaderFnName];
+  if (typeof loaderFn === 'function') {
+    try {
       const data = await loaderFn();
       return NextResponse.json(data);
+    } catch {
+      // fall through
     }
-  } catch {}
-
-  // Special for reports (object in json)
-  if (type === 'reports') {
-    try {
-      const data = await (seedLoader as any).getRevenueReport(); // or any
-      return NextResponse.json({ revenue: data, /* etc */ });
-    } catch {}
   }
 
   return NextResponse.json([], { status: 404 });

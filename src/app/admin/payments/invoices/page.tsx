@@ -11,7 +11,7 @@ const invoiceStatusMap = {
 };
 
 export default function InvoicesPage() {
-  const invoices = useInvoices();
+  const { data: invoices } = useInvoices();
 
   return (
     <div>

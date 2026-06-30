@@ -11,7 +11,7 @@ const toolStatusMap = {
 };
 
 export default function AIToolsPage() {
-  const aiTools = useAiTools();
+  const { data: aiTools } = useAiTools();
 
   return (
     <div>

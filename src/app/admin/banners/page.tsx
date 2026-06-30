@@ -7,7 +7,7 @@ import { bannerStatusMap, handleRowAction } from '@/lib/admin/status-maps';
 import type { BannerRecord } from '@/lib/admin/mock-data';
 
 export default function BannersPage() {
-  const banners = useBanners();
+  const { data: banners } = useBanners();
 
   return (
     <div>

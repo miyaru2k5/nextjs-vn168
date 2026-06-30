@@ -7,7 +7,7 @@ import { commentStatusMap, handleRowAction } from '@/lib/admin/status-maps';
 import type { CommentRecord } from '@/lib/admin/mock-data';
 
 export default function CommentsPage() {
-  const comments = useComments();
+  const { data: comments } = useComments();
 
   return (
     <div>

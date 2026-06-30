@@ -12,7 +12,7 @@ const categoryStatusMap = {
 };
 
 export default function CategoriesPage() {
-  const categories = useCategories();
+  const { data: categories } = useCategories();
 
   return (
     <div>

@@ -41,10 +41,13 @@ import {
   type ApiKeyRecord,
   type AiToolRecord,
   type AiHistoryRecord,
+  type RevenueReportData,
+  type PerformanceReportData,
+  type TrafficReportData,
+  type UsersReportData,
 } from './mock-data';
 
 import { getResolvedDataSource } from './data-config';
-import * as dbQueries from './db-queries';
 
 const SEED_BASE = '/seed-data';
 const API_BASE = '/api/admin/data';
@@ -53,20 +56,24 @@ async function tryLoadJson<T>(filename: string): Promise<T[] | null> {
   if (typeof window === 'undefined') {
     try {
       const fs = await import('fs');
-      const path = await import('path');
-      const privatePath = path.join(process.cwd(), 'seed-data', filename);
+      const pathModule = await import('path');
+      const privatePath = pathModule.join(process.cwd(), 'seed-data', filename);
       if (fs.existsSync(privatePath)) {
         const content = fs.readFileSync(privatePath, 'utf-8');
         return JSON.parse(content);
       }
-    } catch {}
+    } catch {
+      // ignore
+    }
     return null;
   }
 
   try {
     const res = await fetch(`${SEED_BASE}/${filename}`, { cache: 'no-store' });
     if (res.ok) return await res.json();
-  } catch {}
+  } catch {
+    // ignore
+  }
   return null;
 }
 
@@ -74,14 +81,16 @@ async function fetchFromApi<T>(type: string): Promise<T[] | null> {
   try {
     const res = await fetch(`${API_BASE}/${type}`, { cache: 'no-store' });
     if (res.ok) return await res.json();
-  } catch {}
+  } catch {
+    // ignore
+  }
   return null;
 }
 
-async function getDbFunction(entity: string) {
-  // Only called on server
+type DbGetter = () => Promise<unknown[]>;
+
+async function getDbFunction(entity: string): Promise<DbGetter | null> {
   const db = await import('./db-queries');
-  // Map entity name to the FromDb function
   const map: Record<string, string> = {
     users: 'getUsersFromDb',
     articles: 'getArticlesFromDb',
@@ -96,7 +105,8 @@ async function getDbFunction(entity: string) {
   };
   const fnName = map[entity];
   if (!fnName) return null;
-  return (db as any)[fnName] as (() => Promise<any[]>) | null;
+  const fn = (db as Record<string, unknown>)[fnName];
+  return typeof fn === 'function' ? (fn as DbGetter) : null;
 }
 
 async function getFromDb<T>(entity: string): Promise<T[]> {
@@ -109,11 +119,11 @@ async function getFromDb<T>(entity: string): Promise<T[]> {
     const fn = await getDbFunction(entity);
     if (fn) {
       const data = await fn();
-      return data || [];
+      return (data as T[]) || [];
     }
     return [];
-  } catch (e) {
-    console.error('[seed-loader] DB query failed for', entity, e);
+  } catch (err) {
+    console.error('[seed-loader] DB query failed for', entity, err);
     return [];
   }
 }
@@ -141,12 +151,44 @@ async function resolve<T>(
 
   // auto
   const json = await tryLoadJson<T>(jsonFile);
-  if (json && (Array.isArray(json) ? json.length > 0 : true)) return json;
+  if (json && json.length > 0) return json;
 
   const dbData = await getFromDb<T>(dbEntity);
   if (dbData && dbData.length > 0) return dbData;
 
   return mockData;
+}
+
+type ReportsJson = {
+  revenue?: RevenueReportData;
+  performance?: PerformanceReportData;
+  traffic?: TrafficReportData;
+  users?: UsersReportData;
+};
+
+async function tryLoadReports(): Promise<ReportsJson | null> {
+  if (typeof window === 'undefined') {
+    try {
+      const fs = await import('fs');
+      const pathModule = await import('path');
+      const privatePath = pathModule.join(process.cwd(), 'seed-data', 'reports.json');
+      if (fs.existsSync(privatePath)) {
+        const content = fs.readFileSync(privatePath, 'utf-8');
+        return JSON.parse(content);
+      }
+    } catch {
+      // ignore
+    }
+    return null;
+  }
+
+  try {
+    const res = await fetch(`${SEED_BASE}/reports.json`, { cache: 'no-store' });
+    if (res.ok) return await res.json() as ReportsJson;
+  } catch {
+    // ignore
+  }
+  return null;
 }
 
 export async function getUsers(): Promise<UserRecord[]> {
@@ -198,25 +240,23 @@ export async function getAiHistory(): Promise<AiHistoryRecord[]> {
   return resolve('ai-history.json', mockAiHistory, 'ai-history');
 }
 
-// Reports - always prefer the generated reports.json (seed data), fallback mock.
-// Reports are not live DB entities yet.
-export async function getRevenueReport() {
-  const data = await tryLoadJson<any>('reports.json');
+export async function getRevenueReport(): Promise<RevenueReportData> {
+  const data = await tryLoadReports();
   return data?.revenue ?? mockRevenueReport;
 }
 
-export async function getPerformanceReport() {
-  const data = await tryLoadJson<any>('reports.json');
+export async function getPerformanceReport(): Promise<PerformanceReportData> {
+  const data = await tryLoadReports();
   return data?.performance ?? mockPerformanceReport;
 }
 
-export async function getTrafficReport() {
-  const data = await tryLoadJson<any>('reports.json');
+export async function getTrafficReport(): Promise<TrafficReportData> {
+  const data = await tryLoadReports();
   return data?.traffic ?? mockTrafficReport;
 }
 
-export async function getUsersReport() {
-  const data = await tryLoadJson<any>('reports.json');
+export async function getUsersReport(): Promise<UsersReportData> {
+  const data = await tryLoadReports();
   return data?.users ?? mockUsersReport;
 }
 

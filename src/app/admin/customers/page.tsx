@@ -12,7 +12,7 @@ const customerStatusMap = {
 };
 
 export default function CustomersPage() {
-  const customers = useCustomers();
+  const { data: customers } = useCustomers();
 
   return (
     <div>
