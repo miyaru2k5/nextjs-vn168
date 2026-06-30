@@ -2,16 +2,18 @@
 
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import DataTable, { StatusBadge } from '@/components/admin/DataTable';
-import { mockComments } from '@/lib/admin/mock-data';
+import { useComments } from '@/lib/admin/use-admin-data';
 import { commentStatusMap, handleRowAction } from '@/lib/admin/status-maps';
 import type { CommentRecord } from '@/lib/admin/mock-data';
 
 export default function CommentsPage() {
+  const comments = useComments();
+
   return (
     <div>
       <AdminPageHeader title="Bình luận" description="Duyệt, ẩn và quản lý bình luận" />
       <DataTable<CommentRecord>
-        data={mockComments}
+        data={comments}
         searchKeys={['author', 'content', 'article']}
         columns={[
           { key: 'author', label: 'Người gửi', sortable: true },

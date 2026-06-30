@@ -2,16 +2,18 @@
 
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import DataTable, { StatusBadge } from '@/components/admin/DataTable';
-import { mockBanners } from '@/lib/admin/mock-data';
+import { useBanners } from '@/lib/admin/use-admin-data';
 import { bannerStatusMap, handleRowAction } from '@/lib/admin/status-maps';
 import type { BannerRecord } from '@/lib/admin/mock-data';
 
 export default function BannersPage() {
+  const banners = useBanners();
+
   return (
     <div>
       <AdminPageHeader title="Banner" description="Quản lý banner quảng cáo" action={{ label: 'Thêm banner', href: '/admin/banners/new' }} />
       <DataTable<BannerRecord>
-        data={mockBanners}
+        data={banners}
         searchKeys={['title', 'position']}
         columns={[
           { key: 'title', label: 'Tiêu đề', sortable: true },

@@ -2,10 +2,12 @@
 
 import Link from 'next/link';
 import DataTable, { StatusBadge } from '@/components/admin/DataTable';
-import { mockArticles } from '@/lib/admin/mock-data';
+import { useArticles } from '@/lib/admin/use-admin-data';
 import { articleStatusMap } from '@/lib/admin/status-maps';
 
 export default function DashboardRecentArticles() {
+  const articles = useArticles();
+
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
@@ -15,7 +17,7 @@ export default function DashboardRecentArticles() {
         </Link>
       </div>
       <DataTable
-        data={mockArticles.slice(0, 5)}
+        data={articles.slice(0, 5)}
         columns={[
           { key: 'title', label: 'Tiêu đề', sortable: true },
           { key: 'category', label: 'Danh mục' },

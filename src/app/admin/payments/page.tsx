@@ -2,16 +2,12 @@
 
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import DataTable, { StatusBadge } from '@/components/admin/DataTable';
+import { useInvoices } from '@/lib/admin/use-admin-data';
 import { orderStatusMap } from '@/lib/admin/status-maps';
 
-const payments = [
-  { id: '1', orderId: 'ORD-2847', method: 'Stripe', amount: 499000, status: 'completed', date: '2025-06-17' },
-  { id: '2', orderId: 'ORD-2846', method: 'MoMo', amount: 199000, status: 'completed', date: '2025-06-17' },
-  { id: '3', orderId: 'ORD-2845', method: 'Bank Transfer', amount: 999000, status: 'pending', date: '2025-06-16' },
-  { id: '4', orderId: 'ORD-2844', method: 'Stripe', amount: 499000, status: 'completed', date: '2025-06-16' },
-];
-
 export default function PaymentsPage() {
+  const payments = useInvoices(); // Reusing invoices as payment transactions for now
+
   return (
     <div>
       <AdminPageHeader title="Thanh toán" description="Theo dõi giao dịch thanh toán" />

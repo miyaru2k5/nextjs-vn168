@@ -284,3 +284,86 @@ export const mockMessages = [
   { id: '2', from: 'Nguyễn Thị Lan', message: 'Cần hỗ trợ reset API key', time: '25 phút trước', read: false },
   { id: '3', from: 'Lê Hoàng An', message: 'Cảm ơn đội ngũ hỗ trợ!', time: '1 giờ trước', read: true },
 ];
+
+// ======================
+// Reports, Payments, AI Tools - New Records for Seeding
+// ======================
+
+export type InvoiceRecord = {
+  id: string;
+  customer: string;
+  amount: number;
+  status: 'paid' | 'pending' | 'overdue';
+  date: string;
+};
+
+export const mockInvoices: InvoiceRecord[] = [
+  { id: 'INV-001', customer: 'Trần Văn Minh', amount: 499000, status: 'paid', date: '2025-06-17' },
+  { id: 'INV-002', customer: 'Nguyễn Thị Lan', amount: 199000, status: 'paid', date: '2025-06-17' },
+  { id: 'INV-003', customer: 'Lê Hoàng An', amount: 999000, status: 'pending', date: '2025-06-16' },
+  { id: 'INV-004', customer: 'Phạm Thu Hà', amount: 499000, status: 'paid', date: '2025-06-15' },
+  { id: 'INV-005', customer: 'Hoàng Đức Bình', amount: 199000, status: 'overdue', date: '2025-06-10' },
+];
+
+export type ApiKeyRecord = {
+  id: string;
+  name: string;
+  key: string;
+  status: 'active' | 'revoked';
+  createdAt: string;
+  lastUsed: string;
+};
+
+export const mockApiKeys: ApiKeyRecord[] = [
+  { id: '1', name: 'Production Key', key: 'sk-****...abc123', status: 'active', createdAt: '2025-01-15', lastUsed: '2025-06-17' },
+  { id: '2', name: 'Development Key', key: 'sk-****...def456', status: 'active', createdAt: '2025-02-20', lastUsed: '2025-06-16' },
+  { id: '3', name: 'Test Key', key: 'sk-****...ghi789', status: 'revoked', createdAt: '2025-03-10', lastUsed: '2025-05-01' },
+];
+
+export type AiToolRecord = {
+  id: string;
+  name: string;
+  type: string;
+  status: 'active' | 'inactive';
+  usage: number;
+  tokens: string;
+};
+
+export const mockAiTools: AiToolRecord[] = [
+  { id: '1', name: 'Text Generator', type: 'Chat', status: 'active', usage: 8420, tokens: '2.4M' },
+  { id: '2', name: 'Image Generator', type: 'Image', status: 'active', usage: 3210, tokens: '1.1M' },
+  { id: '3', name: 'Code Assistant', type: 'Code', status: 'active', usage: 5680, tokens: '3.2M' },
+  { id: '4', name: 'Email Writer', type: 'Text', status: 'inactive', usage: 890, tokens: '0.3M' },
+];
+
+export type AiHistoryRecord = {
+  id: string;
+  user: string;
+  tool: string;
+  tokens: number;
+  duration: string;
+  createdAt: string;
+};
+
+export const mockAiHistory: AiHistoryRecord[] = [
+  { id: '1', user: 'Trần Văn Minh', tool: 'Text Generator', tokens: 1250, duration: '2.3s', createdAt: '2025-06-17 10:30' },
+  { id: '2', user: 'Nguyễn Thị Lan', tool: 'Code Assistant', tokens: 3420, duration: '5.1s', createdAt: '2025-06-17 10:15' },
+  { id: '3', user: 'Lê Hoàng An', tool: 'Text Generator', tokens: 890, duration: '1.8s', createdAt: '2025-06-17 09:45' },
+  { id: '4', user: 'Phạm Thu Hà', tool: 'Image Generator', tokens: 2100, duration: '8.2s', createdAt: '2025-06-17 09:20' },
+  { id: '5', user: 'Hoàng Đức Bình', tool: 'Text Generator', tokens: 560, duration: '1.2s', createdAt: '2025-06-17 08:50' },
+];
+
+// Additional report-related mocks (for future expansion)
+export const mockRevenueReport = {
+  monthly: 48200000,
+  yearly: 248500000,
+  arpu: 193000,
+  refundRate: 1.2,
+};
+
+export const mockPerformanceReport = {
+  uptime: '99.98',
+  responseTime: 124,
+  errorRate: 0.12,
+  apiCallsPerHour: 12400,
+};

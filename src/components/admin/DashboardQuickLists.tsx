@@ -2,10 +2,12 @@
 
 import Link from 'next/link';
 import { StatusBadge } from '@/components/admin/DataTable';
-import { mockUsers, mockOrders } from '@/lib/admin/mock-data';
+import { useUsers, useOrders } from '@/lib/admin/use-admin-data';
 import { userStatusMap, orderStatusMap } from '@/lib/admin/status-maps';
 
 export function DashboardRecentUsers() {
+  const users = useUsers();
+
   return (
     <div className="bg-white dark:bg-dark-primary rounded-2xl border border-gray-100 dark:border-gray-800 shadow-theme-xs p-5">
       <div className="flex items-center justify-between mb-4">
@@ -15,7 +17,7 @@ export function DashboardRecentUsers() {
         </Link>
       </div>
       <div className="space-y-3">
-        {mockUsers.slice(0, 5).map((user) => (
+        {users.slice(0, 5).map((user) => (
           <div key={user.id} className="flex items-center gap-3">
             <div className="size-9 rounded-full bg-primary-100 dark:bg-primary-500/20 flex items-center justify-center text-primary-600 dark:text-primary-400 text-xs font-bold shrink-0">
               {user.name.charAt(0)}
@@ -33,6 +35,8 @@ export function DashboardRecentUsers() {
 }
 
 export function DashboardRecentOrders() {
+  const orders = useOrders();
+
   return (
     <div className="bg-white dark:bg-dark-primary rounded-2xl border border-gray-100 dark:border-gray-800 shadow-theme-xs p-5">
       <div className="flex items-center justify-between mb-4">
@@ -42,7 +46,7 @@ export function DashboardRecentOrders() {
         </Link>
       </div>
       <div className="space-y-3">
-        {mockOrders.slice(0, 5).map((order) => (
+        {orders.slice(0, 5).map((order) => (
           <div key={order.id} className="flex items-center justify-between gap-3">
             <div className="min-w-0">
               <p className="text-sm font-medium text-gray-900 dark:text-white">{order.id}</p>

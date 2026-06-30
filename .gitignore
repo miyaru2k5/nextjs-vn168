@@ -45,3 +45,6 @@ next-env.d.ts
 .drizzle
 .vscode
 .idea
+
+# Generated seed data (use SEED_TO_JSON to regenerate)
+seed-data/

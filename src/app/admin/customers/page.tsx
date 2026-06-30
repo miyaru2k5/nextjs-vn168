@@ -2,7 +2,7 @@
 
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import DataTable, { StatusBadge } from '@/components/admin/DataTable';
-import { mockCustomers } from '@/lib/admin/mock-data';
+import { useCustomers } from '@/lib/admin/use-admin-data';
 import { handleRowAction } from '@/lib/admin/status-maps';
 import type { CustomerRecord } from '@/lib/admin/mock-data';
 
@@ -12,11 +12,13 @@ const customerStatusMap = {
 };
 
 export default function CustomersPage() {
+  const customers = useCustomers();
+
   return (
     <div>
       <AdminPageHeader title="Danh sách khách hàng" description="Quản lý thông tin khách hàng" />
       <DataTable<CustomerRecord>
-        data={mockCustomers}
+        data={customers}
         searchKeys={['name', 'email', 'phone']}
         columns={[
           { key: 'name', label: 'Họ tên', sortable: true },

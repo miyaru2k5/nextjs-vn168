@@ -3,18 +3,19 @@
 import { useRouter } from 'next/navigation';
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import DataTable, { StatusBadge } from '@/components/admin/DataTable';
-import { mockOrders } from '@/lib/admin/mock-data';
+import { useOrders } from '@/lib/admin/use-admin-data';
 import { orderStatusMap, handleRowAction } from '@/lib/admin/status-maps';
 import type { OrderRecord } from '@/lib/admin/mock-data';
 
 export default function OrdersPage() {
   const router = useRouter();
+  const orders = useOrders();
 
   return (
     <div>
       <AdminPageHeader title="Đơn hàng" description="Quản lý đơn hàng và giao dịch" />
       <DataTable<OrderRecord>
-        data={mockOrders}
+        data={orders}
         searchKeys={['id', 'customer', 'email', 'package']}
         columns={[
           { key: 'id', label: 'Mã đơn', sortable: true },

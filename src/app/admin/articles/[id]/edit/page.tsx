@@ -4,13 +4,14 @@ import { toast } from 'sonner';
 import { notFound, useParams } from 'next/navigation';
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import { AdminForm, AdminFormSection, AdminFormActions, InputGroup, AdminSelect, AdminTextarea } from '@/components/admin/AdminForm';
-import { mockArticles } from '@/lib/admin/mock-data';
+import { useArticles } from '@/lib/admin/use-admin-data';
 
 export default function EditArticlePage() {
   const params = useParams();
   const id = params.id as string;
-  const article = mockArticles.find((a) => a.id === id);
-  if (!article) notFound();
+  const articles = useArticles();
+  const article = articles.find((a) => a.id === id);
+  if (articles.length > 0 && !article) notFound();
 
   return (
     <div>

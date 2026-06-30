@@ -3,13 +3,8 @@
 import { toast } from 'sonner';
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import DataTable, { StatusBadge } from '@/components/admin/DataTable';
+import { useApiKeys } from '@/lib/admin/use-admin-data';
 import { handleRowAction } from '@/lib/admin/status-maps';
-
-const apiKeys = [
-  { id: '1', name: 'Production Key', key: 'sk-****...abc123', status: 'active', createdAt: '2025-01-15', lastUsed: '2025-06-17' },
-  { id: '2', name: 'Development Key', key: 'sk-****...def456', status: 'active', createdAt: '2025-02-20', lastUsed: '2025-06-16' },
-  { id: '3', name: 'Test Key', key: 'sk-****...ghi789', status: 'revoked', createdAt: '2025-03-10', lastUsed: '2025-05-01' },
-];
 
 const keyStatusMap = {
   active: { label: 'Hoạt động', className: 'bg-success-50 text-success-600 dark:bg-success-600/10' },
@@ -17,6 +12,8 @@ const keyStatusMap = {
 };
 
 export default function APIKeysPage() {
+  const apiKeys = useApiKeys();
+
   return (
     <div>
       <AdminPageHeader title="API Key" description="Quản lý API keys">

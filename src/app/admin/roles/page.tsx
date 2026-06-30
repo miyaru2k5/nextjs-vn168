@@ -2,11 +2,13 @@
 
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import DataTable from '@/components/admin/DataTable';
-import { mockRoles } from '@/lib/admin/mock-data';
+import { useRoles } from '@/lib/admin/use-admin-data';
 import { handleRowAction } from '@/lib/admin/status-maps';
 import type { RoleRecord } from '@/lib/admin/mock-data';
 
 export default function RolesPage() {
+  const roles = useRoles();
+
   return (
     <div>
       <AdminPageHeader
@@ -15,7 +17,7 @@ export default function RolesPage() {
         action={{ label: 'Thêm vai trò', href: '/admin/roles/new' }}
       />
       <DataTable<RoleRecord>
-        data={mockRoles}
+        data={roles}
         searchKeys={['name', 'description']}
         columns={[
           { key: 'name', label: 'Tên vai trò', sortable: true },

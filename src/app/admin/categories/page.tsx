@@ -2,7 +2,7 @@
 
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import DataTable, { StatusBadge } from '@/components/admin/DataTable';
-import { mockCategories } from '@/lib/admin/mock-data';
+import { useCategories } from '@/lib/admin/use-admin-data';
 import { handleRowAction } from '@/lib/admin/status-maps';
 import type { CategoryRecord } from '@/lib/admin/mock-data';
 
@@ -12,11 +12,13 @@ const categoryStatusMap = {
 };
 
 export default function CategoriesPage() {
+  const categories = useCategories();
+
   return (
     <div>
       <AdminPageHeader title="Danh mục" description="Quản lý cây danh mục nhiều cấp" action={{ label: 'Thêm danh mục', href: '/admin/categories/new' }} />
       <DataTable<CategoryRecord>
-        data={mockCategories}
+        data={categories}
         searchKeys={['name', 'slug']}
         columns={[
           {
