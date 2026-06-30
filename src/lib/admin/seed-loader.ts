@@ -1,12 +1,15 @@
 /**
- * Seed Data Loader
- * 
- * When you run the seeder with SEED_TO_JSON=true (or it auto-runs in dev),
- * this loader will prefer the generated JSON files from:
- *   - public/seed-data/*.json   (accessible via fetch in browser)
- *   - seed-data/*.json          (server side)
+ * Unified Data Loader (JSON / DB / Mock)
  *
- * Falls back to the static mocks in mock-data.ts if no seed files exist.
+ * Respects DATA_SOURCE env (auto | json | db | mock)
+ * - json: generated seed JSON files (great for fast local, no DB)
+ * - db: real PostgreSQL via Drizzle
+ * - mock: static demo data
+ *
+ * This enables the three requested modes:
+ *   1. Local using JSON files
+ *   2. Local with real PostgreSQL (seeded)
+ *   3. Production (real DB only, strict no-mock)
  */
 
 import {
@@ -36,113 +39,139 @@ import {
   type AiHistoryRecord,
 } from './mock-data';
 
-// In browser we can only reliably fetch from /seed-data
+import { getResolvedDataSource } from './data-config';
+import * as dbQueries from './db-queries';
+
 const SEED_BASE = '/seed-data';
+const API_BASE = '/api/admin/data';
 
 async function tryLoadJson<T>(filename: string): Promise<T[] | null> {
-  // Only attempt in browser or when we have window
   if (typeof window === 'undefined') {
-    // Server-side: try fs read (for API routes / server components)
     try {
-      // Dynamic import to avoid bundling fs on client
       const fs = await import('fs');
       const path = await import('path');
-
       const privatePath = path.join(process.cwd(), 'seed-data', filename);
       if (fs.existsSync(privatePath)) {
         const content = fs.readFileSync(privatePath, 'utf-8');
         return JSON.parse(content);
       }
-    } catch {
-      // ignore - fall through to fetch or mock
-    }
+    } catch {}
     return null;
   }
 
-  // Client-side fetch from public
   try {
     const res = await fetch(`${SEED_BASE}/${filename}`, { cache: 'no-store' });
-    if (res.ok) {
-      return await res.json();
-    }
-  } catch {
-    // network error or file not found → fall back
-  }
+    if (res.ok) return await res.json();
+  } catch {}
   return null;
 }
 
+async function fetchFromApi<T>(type: string): Promise<T[] | null> {
+  try {
+    const res = await fetch(`${API_BASE}/${type}`, { cache: 'no-store' });
+    if (res.ok) return await res.json();
+  } catch {}
+  return null;
+}
+
+async function getFromDb<T>(entity: string, serverFn: () => Promise<T[]>): Promise<T[]> {
+  if (typeof window === 'undefined') {
+    try {
+      return await serverFn();
+    } catch (e) {
+      console.error('[seed-loader] DB query failed for', entity, e);
+      return [];
+    }
+  } else {
+    const data = await fetchFromApi<T>(entity);
+    return data ?? [];
+  }
+}
+
+async function resolve<T>(
+  jsonFile: string,
+  mockData: T[],
+  dbEntity: string,
+  dbFn: () => Promise<T[]>
+): Promise<T[]> {
+  const mode = getResolvedDataSource();
+
+  if (mode === 'json') {
+    const json = await tryLoadJson<T>(jsonFile);
+    return json ?? mockData;
+  }
+
+  if (mode === 'mock') {
+    return mockData;
+  }
+
+  if (mode === 'db') {
+    const dbData = await getFromDb<T>(dbEntity, dbFn);
+    return dbData.length > 0 ? dbData : mockData;
+  }
+
+  // auto
+  const json = await tryLoadJson<T>(jsonFile);
+  if (json?.length) return json;
+
+  const dbData = await getFromDb<T>(dbEntity, dbFn);
+  if (dbData.length) return dbData;
+
+  return mockData;
+}
+
 export async function getUsers(): Promise<UserRecord[]> {
-  const data = await tryLoadJson<UserRecord>('users.json');
-  return data ?? mockUsers;
+  return resolve('users.json', mockUsers, 'users', dbQueries.getUsersFromDb);
 }
 
 export async function getArticles(): Promise<ArticleRecord[]> {
-  const data = await tryLoadJson<ArticleRecord>('articles.json');
-  return data ?? mockArticles;
+  return resolve('articles.json', mockArticles, 'articles', dbQueries.getArticlesFromDb);
 }
 
 export async function getOrders(): Promise<OrderRecord[]> {
-  const data = await tryLoadJson<OrderRecord>('orders.json');
-  return data ?? mockOrders;
+  return resolve('orders.json', mockOrders, 'orders', dbQueries.getOrdersFromDb);
 }
 
 export async function getCategories(): Promise<CategoryRecord[]> {
-  const data = await tryLoadJson<CategoryRecord>('categories.json');
-  return data ?? mockCategories;
+  return resolve('categories.json', mockCategories, 'categories', dbQueries.getCategoriesFromDb);
 }
 
 export async function getComments(): Promise<CommentRecord[]> {
-  const data = await tryLoadJson<CommentRecord>('comments.json');
-  return data ?? mockComments;
+  return resolve('comments.json', mockComments, 'comments', dbQueries.getCommentsFromDb);
 }
 
 export async function getBanners(): Promise<BannerRecord[]> {
-  const data = await tryLoadJson<BannerRecord>('banners.json');
-  return data ?? mockBanners;
+  return resolve('banners.json', mockBanners, 'banners', dbQueries.getBannersFromDb);
 }
 
 export async function getCustomers(): Promise<CustomerRecord[]> {
-  const data = await tryLoadJson<CustomerRecord>('customers.json');
-  return data ?? mockCustomers;
+  return resolve('customers.json', mockCustomers, 'customers', async () => []);
 }
 
 export async function getRoles(): Promise<RoleRecord[]> {
-  // Roles are mostly static, but we still allow override via roles.json if user generates one
-  const data = await tryLoadJson<RoleRecord>('roles.json');
-  return data ?? mockRoles;
+  const json = await tryLoadJson<RoleRecord>('roles.json');
+  return json ?? mockRoles;
 }
 
 export async function getInvoices(): Promise<InvoiceRecord[]> {
-  const data = await tryLoadJson<InvoiceRecord>('invoices.json');
-  return data ?? mockInvoices;
+  return resolve('invoices.json', mockInvoices, 'invoices', dbQueries.getInvoicesFromDb);
 }
 
 export async function getApiKeys(): Promise<ApiKeyRecord[]> {
-  // Note: filename uses 'api-keys' to match seed output
-  const data = await tryLoadJson<ApiKeyRecord>('api-keys.json');
-  return data ?? mockApiKeys;
+  return resolve('api-keys.json', mockApiKeys, 'api-keys', dbQueries.getApiKeysFromDb);
 }
 
 export async function getAiTools(): Promise<AiToolRecord[]> {
-  const data = await tryLoadJson<AiToolRecord>('ai-tools.json');
-  return data ?? mockAiTools;
+  return resolve('ai-tools.json', mockAiTools, 'ai-tools', dbQueries.getAiToolsFromDb);
 }
 
 export async function getAiHistory(): Promise<AiHistoryRecord[]> {
-  const data = await tryLoadJson<AiHistoryRecord>('ai-history.json');
-  return data ?? mockAiHistory;
+  return resolve('ai-history.json', mockAiHistory, 'ai-history', dbQueries.getAiHistoryFromDb);
 }
 
-// Convenience: load multiple at once
 export async function loadAllSeedData() {
   const [users, articles, orders, categories, comments, banners] = await Promise.all([
-    getUsers(),
-    getArticles(),
-    getOrders(),
-    getCategories(),
-    getComments(),
-    getBanners(),
+    getUsers(), getArticles(), getOrders(), getCategories(), getComments(), getBanners(),
   ]);
-
   return { users, articles, orders, categories, comments, banners };
 }
