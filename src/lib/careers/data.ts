@@ -1,6 +1,6 @@
 import type { JobComment, JobPost } from './types';
 
-const COMPANY_LOGO = '/images/logo-khong-nen.png';
+const COMPANY_LOGO = '/images/logo-black.png';
 
 const BASE_HIRING_PROCESS = [
   {

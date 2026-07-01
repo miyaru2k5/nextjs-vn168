@@ -27,7 +27,7 @@ export function ArticleSchema({ post }: Props) {
       name: 'AIStarterKit',
       logo: {
         '@type': 'ImageObject',
-        url: `${siteUrl}/images/logo-black.svg`,
+        url: `${siteUrl}/images/logo-black.png`,
       },
     },
     mainEntityOfPage: {

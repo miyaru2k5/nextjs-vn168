@@ -21,7 +21,7 @@ export function JobSchema({ job }: Props) {
       '@type': 'Organization',
       name: 'AIStarterKit',
       sameAs: siteUrl,
-      logo: `${siteUrl}/images/logo-khong-nen.png`,
+      logo: `${siteUrl}/images/logo-black.png`,
     },
     jobLocation: {
       '@type': 'Place',
