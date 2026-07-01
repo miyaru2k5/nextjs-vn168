@@ -32,14 +32,14 @@ export default function AdminSidebar({ collapsed, mobileOpen, onCloseMobile }: A
         >
           <Link href="/admin" className="flex items-center gap-3 min-w-0">
             <Image
-              src="/images/logo-black.svg"
+              src="/images/logo-black.png"
               alt="VN168"
               width={36}
               height={36}
               className="shrink-0 dark:hidden"
             />
             <Image
-              src="/images/logo-white.svg"
+              src="/images/logo-white.png"
               alt="VN168"
               width={36}
               height={36}

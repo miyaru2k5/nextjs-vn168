@@ -23,7 +23,7 @@ export default function Header() {
           <div className="flex items-center">
             <Link href="/" className="flex items-end gap-2">
               <Image
-                src="/images/logo-black.svg"
+                src="/images/logo-black.png"
                 className="block dark:hidden"
                 alt="Logo AiStarterKit"
                 width={180}
@@ -31,7 +31,7 @@ export default function Header() {
               />
 
               <Image
-                src="/images/logo-white.svg"
+                src="/images/logo-white.png"
                 className="hidden dark:block"
                 alt="Logo AiStarterKit"
                 width={180}
