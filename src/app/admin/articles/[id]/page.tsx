@@ -2,14 +2,15 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import { StatusBadge } from '@/components/admin/DataTable';
-import { mockArticles } from '@/lib/admin/mock-data';
+import { getArticles } from '@/lib/seed';
 import { articleStatusMap } from '@/lib/admin/status-maps';
 
 type Props = { params: Promise<{ id: string }> };
 
 export default async function ArticleDetailPage({ params }: Props) {
   const { id } = await params;
-  const article = mockArticles.find((a) => a.id === id);
+  const articles = await getArticles();
+  const article = articles.find((a) => a.id === id);
   if (!article) notFound();
 
   return (

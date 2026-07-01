@@ -1,4 +1,4 @@
-import { blogPosts } from './data';
+import { blogPosts } from '@/lib/seed';
 import type { BlogCategoryFilter, BlogPost, TocItem } from './types';
 import { BLOG_CATEGORIES } from './types';
 

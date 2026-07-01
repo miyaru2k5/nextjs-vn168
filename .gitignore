@@ -45,3 +45,9 @@ next-env.d.ts
 .drizzle
 .vscode
 .idea
+
+# Generated seed data (use SEED_TO_JSON to regenerate)
+seed-data/
+package-lock.json
+pnpm-lock.yaml
+.opencode/

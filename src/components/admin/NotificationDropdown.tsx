@@ -1,7 +1,7 @@
 'use client';
 
 import { useClickOutside } from '@/hooks/use-click-outside';
-import { mockNotifications } from '@/lib/admin/mock-data';
+import { useNotifications } from '@/lib/admin/use-admin-data';
 import { AdminBellIcon } from '@/icons/admin-icons';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -9,7 +9,8 @@ import { cn } from '@/lib/utils';
 export default function NotificationDropdown() {
   const [open, setOpen] = useState(false);
   const ref = useClickOutside<HTMLDivElement>(() => setOpen(false));
-  const unread = mockNotifications.filter((n) => !n.read).length;
+  const { data: notifications } = useNotifications();
+  const unread = notifications.filter((n) => !n.read).length;
 
   return (
     <div className="relative" ref={ref}>
@@ -34,7 +35,7 @@ export default function NotificationDropdown() {
             <span className="text-xs text-primary-600 dark:text-primary-400">{unread} chưa đọc</span>
           </div>
           <div className="max-h-80 overflow-y-auto custom-scrollbar">
-            {mockNotifications.map((n) => (
+            {notifications.map((n) => (
               <button
                 key={n.id}
                 type="button"

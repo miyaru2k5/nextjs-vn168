@@ -4,6 +4,7 @@ import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import DataTable from '@/components/admin/DataTable';
 import { handleRowAction } from '@/lib/admin/status-maps';
 
+// Simple static for packages (can be seeded later if needed)
 const packages = [
   { id: '1', name: 'Starter', price: 199000, period: 'tháng', users: 8420, features: 5 },
   { id: '2', name: 'Pro', price: 499000, period: 'tháng', users: 3240, features: 12 },

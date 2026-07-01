@@ -1,0 +1,7 @@
+# pnpm configuration for allowed native build scripts (required for esbuild, sharp, etc.)
+# Run `pnpm approve-builds` if pnpm still complains.
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
+  - unrs-resolver
+

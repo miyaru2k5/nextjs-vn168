@@ -11,7 +11,7 @@ import {
 import { ArticleSchema } from '@/components/blog/article-schema';
 import { LatestArticles } from '@/components/blog/latest-articles';
 import { RelatedArticles } from '@/components/blog/related-articles';
-import { blogPosts } from '@/lib/blog/data';
+import { blogPosts } from '@/lib/seed';
 import {
   extractTocFromContent,
   getCategoryLabel,

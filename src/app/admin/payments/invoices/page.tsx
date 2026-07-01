@@ -2,12 +2,7 @@
 
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import DataTable, { StatusBadge } from '@/components/admin/DataTable';
-
-const invoices = [
-  { id: 'INV-001', customer: 'Trần Văn Minh', amount: 499000, status: 'paid', date: '2025-06-17' },
-  { id: 'INV-002', customer: 'Nguyễn Thị Lan', amount: 199000, status: 'paid', date: '2025-06-17' },
-  { id: 'INV-003', customer: 'Lê Hoàng An', amount: 999000, status: 'pending', date: '2025-06-16' },
-];
+import { useInvoices } from '@/lib/admin/use-admin-data';
 
 const invoiceStatusMap = {
   paid: { label: 'Đã thanh toán', className: 'bg-success-50 text-success-600 dark:bg-success-600/10' },
@@ -16,6 +11,8 @@ const invoiceStatusMap = {
 };
 
 export default function InvoicesPage() {
+  const { data: invoices } = useInvoices();
+
   return (
     <div>
       <AdminPageHeader title="Hóa đơn" description="Quản lý hóa đơn thanh toán" />

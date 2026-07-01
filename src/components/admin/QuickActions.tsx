@@ -3,14 +3,15 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useClickOutside } from '@/hooks/use-click-outside';
-import { mockMessages } from '@/lib/admin/mock-data';
+import { useMessages } from '@/lib/admin/use-admin-data';
 import { AdminMessageIcon } from '@/icons/admin-icons';
 import { cn } from '@/lib/utils';
 
 export function MessageDropdown() {
   const [open, setOpen] = useState(false);
   const ref = useClickOutside<HTMLDivElement>(() => setOpen(false));
-  const unread = mockMessages.filter((m) => !m.read).length;
+  const { data: messages } = useMessages();
+  const unread = messages.filter((m) => !m.read).length;
 
   return (
     <div className="relative" ref={ref}>
@@ -34,7 +35,7 @@ export function MessageDropdown() {
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Tin nhắn</h3>
           </div>
           <div className="max-h-72 overflow-y-auto custom-scrollbar">
-            {mockMessages.map((m) => (
+            {messages.map((m) => (
               <div
                 key={m.id}
                 className={cn(

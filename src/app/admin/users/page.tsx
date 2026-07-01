@@ -3,12 +3,13 @@
 import { useRouter } from 'next/navigation';
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import DataTable, { StatusBadge } from '@/components/admin/DataTable';
-import { mockUsers } from '@/lib/admin/mock-data';
+import { useUsers } from '@/lib/admin/use-admin-data';
 import { userStatusMap, handleRowAction } from '@/lib/admin/status-maps';
-import type { UserRecord } from '@/lib/admin/mock-data';
+import type { UserRecord } from '@/lib/admin/types';
 
 export default function UsersPage() {
   const router = useRouter();
+  const { data: users } = useUsers();
 
   return (
     <div>
@@ -19,7 +20,7 @@ export default function UsersPage() {
       />
 
       <DataTable<UserRecord>
-        data={mockUsers}
+        data={users}
         searchKeys={['name', 'email', 'role']}
         columns={[
           {

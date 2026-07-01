@@ -3,18 +3,19 @@
 import { useRouter } from 'next/navigation';
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import DataTable, { StatusBadge } from '@/components/admin/DataTable';
-import { mockArticles } from '@/lib/admin/mock-data';
+import { useArticles } from '@/lib/admin/use-admin-data';
 import { articleStatusMap, handleRowAction } from '@/lib/admin/status-maps';
-import type { ArticleRecord } from '@/lib/admin/mock-data';
+import type { ArticleRecord } from '@/lib/admin/types';
 
 export default function ArticlesPage() {
   const router = useRouter();
+  const { data: articles } = useArticles();
 
   return (
     <div>
       <AdminPageHeader title="Bài viết" description="Quản lý nội dung bài viết" action={{ label: 'Thêm bài viết', href: '/admin/articles/new' }} />
       <DataTable<ArticleRecord>
-        data={mockArticles}
+        data={articles}
         searchKeys={['title', 'category', 'author']}
         columns={[
           { key: 'title', label: 'Tiêu đề', sortable: true },

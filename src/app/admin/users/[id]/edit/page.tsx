@@ -4,13 +4,15 @@ import { toast } from 'sonner';
 import { notFound, useParams } from 'next/navigation';
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import { AdminForm, AdminFormSection, AdminFormActions, InputGroup, AdminSelect } from '@/components/admin/AdminForm';
-import { mockUsers } from '@/lib/admin/mock-data';
+import { useUsers } from '@/lib/admin/use-admin-data';
 
 export default function EditUserPage() {
   const params = useParams();
   const id = params.id as string;
-  const user = mockUsers.find((u) => u.id === id);
-  if (!user) notFound();
+  const { data: users } = useUsers();
+  const user = users.find((u) => u.id === id);
+  if (users.length > 0 && !user) notFound();
+  if (!user) return null;
 
   return (
     <div>

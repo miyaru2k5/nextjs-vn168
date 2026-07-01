@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { BlogPost } from '@/lib/blog/types';
 import { BLOG_CATEGORIES } from '@/lib/blog/types';
 import { formatViews, getCategoryLabel } from '@/lib/blog/utils';
-import { POPULAR_TAGS } from '@/lib/blog/data';
+import { POPULAR_TAGS } from '@/lib/seed';
 import { BlogCard } from './blog-card';
 
 type Props = {
