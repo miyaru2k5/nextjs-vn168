@@ -678,7 +678,7 @@ export const POPULAR_TAGS = [
 // Careers Mock Data
 // ======================
 
-const COMPANY_LOGO = '/images/logo-khong-nen.png';
+const COMPANY_LOGO = '/images/black.png';
 
 const BASE_HIRING_PROCESS = [
   {

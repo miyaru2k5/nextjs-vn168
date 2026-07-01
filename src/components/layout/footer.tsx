@@ -47,7 +47,7 @@ export default function Footer() {
               <div>
                 <Link href="/" className="block mb-6">
                   <Image
-                    src="/images/logo-white.svg"
+                    src="/images/logo-white.png"
                     alt="logo"
                     width={128}
                     height={32}

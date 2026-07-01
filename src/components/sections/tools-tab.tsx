@@ -3,14 +3,15 @@
 import type React from 'react';
 import { Fragment, useState } from 'react';
 
-import {
-  CodeGeneratorIcon,
-  EmailGeneratorIcon,
-  ImageGeneratorIcon,
-  TextGeneratorIcon,
-  VideoGeneratorIcon,
-} from '@/icons/icons';
 import Image from 'next/image';
+
+import {
+  ScanFace,
+  ShieldCheck,
+  Sun,
+  WandSparkles,
+  Gem,
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 // Define the tab type
@@ -22,62 +23,74 @@ interface Tab {
   darkImage: string;
   title: string;
   description: string;
+  iconColor: string;        // Màu active
+  iconColorInactive: string; // Màu inactive
 }
 
 export default function AIToolsTabs() {
-  const [activeTab, setActiveTab] = useState('text');
+  const [activeTab, setActiveTab] = useState('scan');
 
   // Tab data
   const tabs: Tab[] = [
     {
-      id: 'text',
-      label: 'Tạo văn bản',
-      icon: <TextGeneratorIcon className="w-8 h-8" />,
+      id: 'scan',
+      label: 'Soi da',
+      icon: <ScanFace className="w-6 h-6" strokeWidth={2.5} />,
       lightImage: '/images/tab-image/tab-image-1.jpg',
       darkImage: '/images/tab-image/tab-image-1-dark.jpg',
-      title: 'Cách dễ nhất để tạo văn bản',
+      title: 'Khám & Soi Da Chuyên Sâu',
       description:
-        'Khai phá tiềm năng đổi mới. Khám phá các công cụ AI tiên tiến biến ý tưởng của bạn thành hiện thực với độ chính xác và trí tuệ vượt trội.',
+        'Phân tích chính xác tình trạng da bằng công nghệ soi da hiện đại, đánh giá mụn, sắc tố, độ ẩm và xây dựng liệu trình chăm sóc phù hợp với từng khách hàng.',
+      iconColor: 'text-sky-500 dark:text-sky-400',
+      iconColorInactive: 'text-gray-400 dark:text-gray-500',
     },
     {
-      id: 'image',
-      label: 'Tạo hình ảnh',
-      icon: <ImageGeneratorIcon className="w-8 h-8" />,
+      id: 'acne',
+      label: 'Trị mụn',
+      icon: <ShieldCheck className="w-6 h-6" strokeWidth={2.5} />,
       lightImage: '/images/tab-image/tab-image-2.jpg',
       darkImage: '/images/tab-image/tab-image-2-dark.jpg',
-      title: 'Tạo hình ảnh ấn tượng với AI',
+      title: 'Điều Trị Mụn Chuẩn Y Khoa',
       description:
-        'Khai phá tiềm năng đổi mới. Khám phá các công cụ AI tiên tiến biến ý tưởng của bạn thành hiện thực với độ chính xác và trí tuệ vượt trội.',
+        'Làm sạch sâu, loại bỏ nhân mụn, giảm viêm và kiểm soát bã nhờn bằng công nghệ hiện đại kết hợp mỹ phẩm chuyên sâu, giúp hạn chế mụn tái phát.',
+      iconColor: 'text-emerald-500 dark:text-emerald-400',
+      iconColorInactive: 'text-gray-400 dark:text-gray-500',
     },
     {
-      id: 'code',
-      label: 'Tạo mã nguồn',
-      icon: <CodeGeneratorIcon className="w-8 h-8" />,
+      id: 'whitening',
+      label: 'Làm trắng',
+      icon: <Sun className="w-6 h-6" strokeWidth={2.5} />,
       lightImage: '/images/tab-image/tab-image-3.jpg',
       darkImage: '/images/tab-image/tab-image-3-dark.jpg',
-      title: 'Tạo mã nguồn bằng mọi ngôn ngữ',
+      title: 'Phục Hồi & Làm Trắng Da',
       description:
-        'Khai phá tiềm năng đổi mới. Khám phá các công cụ AI tiên tiến biến ý tưởng của bạn thành hiện thực với độ chính xác và trí tuệ vượt trội.',
+        'Cấp ẩm, phục hồi hàng rào bảo vệ da, cải thiện thâm sau mụn và mang lại làn da sáng khỏe, đều màu với các liệu trình an toàn.',
+      iconColor: 'text-amber-500 dark:text-amber-400',
+      iconColorInactive: 'text-gray-400 dark:text-gray-500',
     },
     {
-      id: 'video',
-      label: 'Tạo video',
-      icon: <VideoGeneratorIcon className="w-8 h-8" />,
+      id: 'scar',
+      label: 'Trị sẹo',
+      icon: <WandSparkles className="w-6 h-6" strokeWidth={2.5} />,
       lightImage: '/images/tab-image/tab-image-4.jpg',
       darkImage: '/images/tab-image/tab-image-4-dark.jpg',
-      title: 'Tạo video hấp dẫn với AI',
+      title: 'Điều Trị Sẹo Chuyên Sâu',
       description:
-        'Khai phá tiềm năng đổi mới. Khám phá các công cụ AI tiên tiến biến ý tưởng của bạn thành hiện thực với độ chính xác và trí tuệ vượt trội.',
+        'Cải thiện sẹo rỗ, sẹo lõm và kích thích tăng sinh collagen bằng các công nghệ tiên tiến, giúp làn da mịn màng và săn chắc hơn.',
+      iconColor: 'text-violet-500 dark:text-violet-400',
+      iconColorInactive: 'text-gray-400 dark:text-gray-500',
     },
     {
-      id: 'email',
-      label: 'Tạo email',
-      icon: <EmailGeneratorIcon className="w-8 h-8" />,
+      id: 'beauty',
+      label: 'Thẩm mỹ',
+      icon: <Gem className="w-6 h-6" strokeWidth={2.5} />,
       lightImage: '/images/tab-image/tab-image-5.jpg',
       darkImage: '/images/tab-image/tab-image-5-dark.jpg',
-      title: 'Viết email chuyên nghiệp tức thì',
+      title: 'Trị Nám & Thẩm Mỹ Da',
       description:
-        'Khai phá tiềm năng đổi mới. Khám phá các công cụ AI tiên tiến biến ý tưởng của bạn thành hiện thực với độ chính xác và trí tuệ vượt trội.',
+        'Điều trị nám, tàn nhang, trẻ hóa làn da và duy trì vẻ đẹp lâu dài với công nghệ hiện đại cùng mỹ phẩm chính hãng cao cấp.',
+      iconColor: 'text-pink-500 dark:text-pink-400',
+      iconColorInactive: 'text-gray-400 dark:text-gray-500',
     },
   ];
 
@@ -89,11 +102,13 @@ export default function AIToolsTabs() {
       <div className="wrapper">
         <div className="max-w-2xl mx-auto mb-12 text-center">
           <h2 className="mb-3 font-bold text-center text-gray-800 dark:text-white/90 text-3xl md:text-title-lg">
-            Mọi công cụ AI bạn cần, ngay trong tầm tay.
+            Hành Trình Chăm Sóc Da Toàn Diện
           </h2>
+
           <p className="max-w-2xl mx-auto leading-6 text-gray-500 dark:text-gray-400">
-            Khai phá tiềm năng đổi mới, khám phá các công cụ AI tiên tiến
-            biến ý tưởng của bạn thành hiện thực với độ chính xác và trí tuệ vượt trội.
+            Đồng hành cùng bạn từ bước soi da chuyên sâu, điều trị mụn, phục hồi,
+            làm trắng, điều trị sẹo, trị nám đến chăm sóc thẩm mỹ, mang lại làn da
+            khỏe đẹp và rạng rỡ theo thời gian.
           </p>
         </div>
 
@@ -102,25 +117,33 @@ export default function AIToolsTabs() {
             {/* Tab Navigation */}
             <div className="overflow-x-auto custom-scrollbar mx-auto max-w-fit relative">
               <div className="flex gap-2 min-w-max rounded-full bg-gray-100 dark:bg-white/5 p-1">
-                {tabs.map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center h-12 gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200 rounded-full ${
-                      activeTab === tab.id
-                        ? 'bg-white dark:text-white/90 dark:bg-white/10 text-gray-800'
-                        : 'text-gray-500 dark:text-gray-400 bg-transparent'
-                    }`}
-                  >
-                    {tab.icon}
-                    <span className="truncate">{tab.label}</span>
-                  </button>
-                ))}
+                {tabs.map((tab) => {
+                  const isActive = activeTab === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => setActiveTab(tab.id)}
+                      className={`flex items-center h-12 gap-2 px-4 py-3 text-sm font-medium transition-all duration-200 rounded-full ${
+                        isActive
+                          ? 'bg-white dark:bg-white/10 text-gray-800 dark:text-white shadow-sm'
+                          : 'text-gray-500 dark:text-gray-400 hover:bg-white/50 dark:hover:bg-white/5'
+                      }`}
+                    >
+                      <span
+                        className={cn(
+                          isActive ? tab.iconColor : tab.iconColorInactive
+                        )}
+                      >
+                        {tab.icon}
+                      </span>
+                      <span className="truncate">{tab.label}</span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
             {/* Tab Content */}
-
             <div className="p-6 tab-img-bg overflow-hidden rounded-4xl mt-8">
               <div className="p-3 tab-img-overlay">
                 {tabs.map((tab) => (
@@ -164,7 +187,7 @@ export default function AIToolsTabs() {
                 {currentTab.description}
               </p>
               <button className="px-6 py-3 text-sm font-medium text-white transition-colors rounded-full bg-primary-500 hover:bg-primary-600">
-                Dùng thử miễn phí ngay
+                Đặt lịch tư vấn miễn phí
               </button>
             </div>
           </div>
