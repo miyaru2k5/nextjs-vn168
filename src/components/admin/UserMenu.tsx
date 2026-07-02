@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useClickOutside } from '@/hooks/use-click-outside';
 import { currentAdmin } from '@/lib/admin/navigation';
 import { AdminChevronIcon, AdminLogoutIcon } from '@/icons/admin-icons';
@@ -20,8 +21,8 @@ export default function UserMenu() {
         aria-expanded={open}
         aria-haspopup="true"
       >
-        <div className="size-9 rounded-full bg-primary-100 dark:bg-primary-500/20 flex items-center justify-center text-primary-600 dark:text-primary-400 text-sm font-bold">
-          NA
+        <div className="relative size-9 rounded-full overflow-hidden bg-gray-100 dark:bg-gray-800 shrink-0">
+          <Image src={currentAdmin.avatar} alt={currentAdmin.name} fill sizes="36px" className="object-cover" />
         </div>
         <div className="hidden lg:block text-left">
           <p className="text-sm font-medium text-gray-900 dark:text-white leading-tight">{currentAdmin.name.split(' ').slice(-2).join(' ')}</p>

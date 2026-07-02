@@ -1,4 +1,10 @@
 // Centralized static mock data in src/lib/seed/mock-data.ts
+//
+// NOTE (per project directive):
+// - This module is only for sample/test data generation.
+// - Types are taken from existing locations (@/lib/admin/types etc.).
+// - Seed does NOT own or define types.
+// - Production data processing must not depend on seed.
 
 import type {
   UserRecord,
@@ -155,14 +161,14 @@ export const recentActivities = [
 ];
 
 export const mockUsers: UserRecord[] = [
-  { id: '1', name: 'Nguyễn Thị Lan', email: 'lan.nguyen@email.com', role: 'User', status: 'active', createdAt: '2025-06-15' },
-  { id: '2', name: 'Trần Văn Minh', email: 'minh.tran@email.com', role: 'Pro', status: 'active', createdAt: '2025-06-14' },
-  { id: '3', name: 'Lê Hoàng An', email: 'an.le@email.com', role: 'User', status: 'inactive', createdAt: '2025-06-13' },
-  { id: '4', name: 'Phạm Thu Hà', email: 'ha.pham@email.com', role: 'Admin', status: 'active', createdAt: '2025-06-12' },
-  { id: '5', name: 'Hoàng Đức Bình', email: 'binh.hoang@email.com', role: 'User', status: 'locked', createdAt: '2025-06-11' },
-  { id: '6', name: 'Vũ Thị Mai', email: 'mai.vu@email.com', role: 'Pro', status: 'active', createdAt: '2025-06-10' },
-  { id: '7', name: 'Đặng Quốc Huy', email: 'huy.dang@email.com', role: 'User', status: 'active', createdAt: '2025-06-09' },
-  { id: '8', name: 'Bùi Thanh Tùng', email: 'tung.bui@email.com', role: 'User', status: 'active', createdAt: '2025-06-08' },
+  { id: '1', name: 'Nguyễn Thị Lan', email: 'lan.nguyen@email.com', role: 'User', status: 'active', createdAt: '2025-06-15', avatar: 'https://avatars.githubusercontent.com/u/1?v=4' },
+  { id: '2', name: 'Trần Văn Minh', email: 'minh.tran@email.com', role: 'Pro', status: 'active', createdAt: '2025-06-14', avatar: 'https://avatars.githubusercontent.com/u/2?v=4' },
+  { id: '3', name: 'Lê Hoàng An', email: 'an.le@email.com', role: 'User', status: 'inactive', createdAt: '2025-06-13', avatar: 'https://avatars.githubusercontent.com/u/3?v=4' },
+  { id: '4', name: 'Phạm Thu Hà', email: 'ha.pham@email.com', role: 'Admin', status: 'active', createdAt: '2025-06-12', avatar: 'https://avatars.githubusercontent.com/u/4?v=4' },
+  { id: '5', name: 'Hoàng Đức Bình', email: 'binh.hoang@email.com', role: 'User', status: 'locked', createdAt: '2025-06-11', avatar: 'https://avatars.githubusercontent.com/u/5?v=4' },
+  { id: '6', name: 'Vũ Thị Mai', email: 'mai.vu@email.com', role: 'Pro', status: 'active', createdAt: '2025-06-10', avatar: 'https://avatars.githubusercontent.com/u/6?v=4' },
+  { id: '7', name: 'Đặng Quốc Huy', email: 'huy.dang@email.com', role: 'User', status: 'active', createdAt: '2025-06-09', avatar: 'https://avatars.githubusercontent.com/u/7?v=4' },
+  { id: '8', name: 'Bùi Thanh Tùng', email: 'tung.bui@email.com', role: 'User', status: 'active', createdAt: '2025-06-08', avatar: 'https://avatars.githubusercontent.com/u/8?v=4' },
 ];
 
 export const mockArticles: ArticleRecord[] = [
@@ -678,7 +684,7 @@ export const POPULAR_TAGS = [
 // Careers Mock Data
 // ======================
 
-const COMPANY_LOGO = '/images/black.png';
+const COMPANY_LOGO = '/images/logo-black.png';
 
 const BASE_HIRING_PROCESS = [
   {

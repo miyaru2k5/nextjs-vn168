@@ -1,4 +1,6 @@
-import { blogPosts } from '@/lib/seed';
+// Import directly from mock-data to avoid pulling in the entire seed barrel
+// (which includes loader.ts with server-side dynamic imports)
+import { blogPosts } from '@/lib/seed/mock-data';
 import type { BlogCategoryFilter, BlogPost, TocItem } from './types';
 import { BLOG_CATEGORIES } from './types';
 

@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from 'next/server';
-import { getResolvedDataSource } from '@/lib/seed';
 import * as dbQueries from '@/lib/admin/db-queries';
-import * as dataLoader from '@/lib/seed/loader';
+import * as mockData from '@/lib/seed/mock-data';
+import { checkDatabaseConnection, isDatabaseAvailable } from '@/db';
 
 // Map entity name to the right getter
-type GetterFn = () => Promise<unknown[]>;
+type GetterFn = () => Promise<unknown>;
 
 const getters: Record<string, GetterFn> = {
+  // DB Queries (PostgreSQL via Drizzle)
   users: dbQueries.getUsersFromDb,
   articles: dbQueries.getArticlesFromDb,
   categories: dbQueries.getCategoriesFromDb,
@@ -17,44 +19,105 @@ const getters: Record<string, GetterFn> = {
   'api-keys': dbQueries.getApiKeysFromDb,
   'ai-tools': dbQueries.getAiToolsFromDb,
   'ai-history': dbQueries.getAiHistoryFromDb,
-};
 
-function capitalizeEntity(type: string): string {
-  // Convert kebab-case to PascalCase, e.g. "api-keys" -> "ApiKeys"
-  return type
-    .split('-')
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join('');
-}
+  // Fallbacks / Auxiliary entities not modeled in DB yet
+  customers: async () => mockData.mockCustomers,
+  roles: async () => mockData.mockRoles,
+  'revenue-report': async () => mockData.mockRevenueReport,
+  'performance-report': async () => mockData.mockPerformanceReport,
+  'traffic-report': async () => mockData.mockTrafficReport,
+  'users-report': async () => mockData.mockUsersReport,
+  notifications: async () => mockData.mockNotifications,
+  messages: async () => mockData.mockMessages,
+  
+  // Dashboard Specific Analytics
+  'dashboard-stats': async () => mockData.dashboardStats,
+  'revenue-chart': async () => mockData.revenueChartData,
+  'user-growth': async () => mockData.userGrowthData,
+  'traffic-source': async () => mockData.trafficSourceData,
+  'device-data': async () => mockData.deviceData,
+  'conversion-data': async () => mockData.conversionData,
+  'recent-activities': async () => mockData.recentActivities,
+};
 
 export async function GET(
   _req: NextRequest,
   { params }: { params: Promise<{ type: string }> }
 ) {
   const { type } = await params;
-  const mode = getResolvedDataSource();
+  const getter = getters[type];
 
-  // In production or db mode we prefer real data
-  if (mode === 'db') {
-    const getter = getters[type];
-    if (getter) {
-      const data = await getter();
-      return NextResponse.json(data);
+  if (getter) {
+    const isDbBacked = [
+      'users', 'articles', 'categories', 'orders', 'comments', 'banners', 'invoices'
+    ].includes(type);
+
+    if (isDbBacked) {
+      // Proactively run the health check (it is cached after first run)
+      await checkDatabaseConnection();
+
+      if (isDatabaseAvailable() === false) {
+        const mockFallback = getMockFallback(type);
+        if (mockFallback) {
+          return NextResponse.json(mockFallback);
+        }
+      }
     }
-  }
 
-  // Fallback to the unified loader (which respects JSON / mock)
-  const loaderFnName = `get${capitalizeEntity(type)}`;
-  type SeedLoader = Record<string, (...args: unknown[]) => Promise<unknown>>;
-  const loaderFn = (dataLoader as unknown as SeedLoader)[loaderFnName];
-  if (typeof loaderFn === 'function') {
     try {
-      const data = await loaderFn();
+      const data = await getter();
+
+      // Post-check fallback if somehow a DB query returned empty after failure
+      if (isDbBacked && (!data || (Array.isArray(data) && data.length === 0)) && isDatabaseAvailable() === false) {
+        const mockFallback = getMockFallback(type);
+        if (mockFallback) return NextResponse.json(mockFallback);
+      }
+
       return NextResponse.json(data);
-    } catch {
-      // fall through
+    } catch (err: any) {
+      console.error(`[API Route] Failed to get data for ${type}:`, err.message);
+
+      // Always try mock fallback on error for known entities
+      const mockFallback = getMockFallback(type);
+      if (mockFallback) {
+        return NextResponse.json(mockFallback);
+      }
+
+      return NextResponse.json({ error: 'Failed to retrieve data' }, { status: 500 });
     }
   }
 
-  return NextResponse.json([], { status: 404 });
+  return NextResponse.json({ error: `Unknown data type: ${type}` }, { status: 404 });
+}
+
+// Helper to map DB entity to its mock equivalent
+function getMockFallback(type: string): unknown | null {
+  switch (type) {
+    case 'users': return mockData.mockUsers;
+    case 'articles': return mockData.mockArticles;
+    case 'categories': return mockData.mockCategories;
+    case 'orders': return mockData.mockOrders;
+    case 'comments': return mockData.mockComments;
+    case 'banners': return mockData.mockBanners;
+    case 'invoices': return mockData.mockInvoices;
+    case 'customers': return mockData.mockCustomers;
+    case 'roles': return mockData.mockRoles;
+    case 'api-keys': return mockData.mockApiKeys;
+    case 'ai-tools': return mockData.mockAiTools;
+    case 'ai-history': return mockData.mockAiHistory;
+    case 'revenue-report': return mockData.mockRevenueReport;
+    case 'performance-report': return mockData.mockPerformanceReport;
+    case 'traffic-report': return mockData.mockTrafficReport;
+    case 'users-report': return mockData.mockUsersReport;
+    case 'notifications': return mockData.mockNotifications;
+    case 'messages': return mockData.mockMessages;
+    case 'dashboard-stats': return mockData.dashboardStats;
+    case 'revenue-chart': return mockData.revenueChartData;
+    case 'user-growth': return mockData.userGrowthData;
+    case 'traffic-source': return mockData.trafficSourceData;
+    case 'device-data': return mockData.deviceData;
+    case 'conversion-data': return mockData.conversionData;
+    case 'recent-activities': return mockData.recentActivities;
+    default: return null;
+  }
 }

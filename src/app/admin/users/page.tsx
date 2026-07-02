@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import DataTable, { StatusBadge } from '@/components/admin/DataTable';
 import { useUsers } from '@/lib/admin/use-admin-data';
@@ -29,9 +30,21 @@ export default function UsersPage() {
             sortable: true,
             render: (row) => (
               <div className="flex items-center gap-3">
-                <div className="size-8 rounded-full bg-primary-100 dark:bg-primary-500/20 flex items-center justify-center text-primary-600 text-xs font-bold shrink-0">
-                  {row.name.charAt(0)}
-                </div>
+                {row.avatar ? (
+                  <div className="relative size-8 rounded-full overflow-hidden bg-gray-100 dark:bg-gray-800 shrink-0">
+                    <Image
+                      src={row.avatar}
+                      alt={row.name}
+                      fill
+                      sizes="32px"
+                      className="object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div className="size-8 rounded-full bg-primary-100 dark:bg-primary-500/20 flex items-center justify-center text-primary-600 text-xs font-bold shrink-0">
+                    {row.name.charAt(0)}
+                  </div>
+                )}
                 <span className="font-medium text-gray-900 dark:text-white">{row.name}</span>
               </div>
             ),

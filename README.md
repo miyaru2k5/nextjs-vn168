@@ -146,30 +146,10 @@ Seeder tạo dữ liệu mẫu bao gồm:
 - Seed cố định để tái lập kết quả
 
 ```bash
-pnpm db:seed                              # Seed vào database
-SEED_TO_JSON=true pnpm db:seed            # Xuất ra JSON (thư mục seed-data/)
-SEED_TO_DB=false SEED_TO_JSON=true pnpm db:seed   # Chỉ tạo JSON, không ghi DB
+npm run db:seed                           # Seed database
 ```
 
-> Seeding chỉ hoạt động trong môi trường `development` với các guard tích hợp sẵn.
-
----
-
-## Chế độ nguồn dữ liệu (`DATA_SOURCE`)
-
-| Giá trị | Hành vi |
-|---|---|
-| `auto` | JSON nếu có → DB nếu có `DATABASE_URL` → mock (mặc định) |
-| `json` | Chỉ dùng file JSON trong `seed-data/` |
-| `db` | Bắt buộc PostgreSQL qua Drizzle |
-| `mock` | Chỉ dùng static mock (demo nhanh) |
-
-**Production:** bắt buộc `DATA_SOURCE=db` và `DATABASE_URL` hợp lệ.
-
-Loader được tách riêng cho client/server (tương thích Next.js 16 Turbopack):
-
-- Server: `src/lib/seed/loader.ts`
-- Client: `src/lib/seed/loader-client.ts`
+Reset database: `npm run db:push -- --force && npm run db:seed`
 
 ---
 

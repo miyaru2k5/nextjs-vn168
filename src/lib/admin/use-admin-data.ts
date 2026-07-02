@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useEffect, useState, useCallback } from 'react';
 import {
@@ -28,33 +29,6 @@ import {
   deviceData,
   conversionData,
 } from '@/lib/seed/mock-data';
-import {
-  getUsers,
-  getArticles,
-  getOrders,
-  getCategories,
-  getComments,
-  getBanners,
-  getCustomers,
-  getRoles,
-  getInvoices,
-  getApiKeys,
-  getAiTools,
-  getAiHistory,
-  getRevenueReport,
-  getPerformanceReport,
-  getTrafficReport,
-  getUsersReport,
-  getNotifications,
-  getMessages,
-  getDashboardStats,
-  getRevenueChartData,
-  getUserGrowthData,
-  getTrafficSourceData,
-  getDeviceData,
-  getConversionData,
-  getRecentActivities,
-} from '@/lib/seed/loader-client';
 
 import type {
   UserRecord,
@@ -83,6 +57,15 @@ type UseDataResult<T> = {
   error: Error | null;
   refresh: () => void;
 };
+
+// Generic Client-side API Fetcher
+async function fetchFromApi<T>(type: string): Promise<T> {
+  const res = await fetch(`/api/admin/data/${type}`, { cache: 'no-store' });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch ${type} data from server`);
+  }
+  return res.json() as Promise<T>;
+}
 
 function useData<T>(fetcher: () => Promise<T>, fallback: T): UseDataResult<T> {
   const [data, setData] = useState<T>(fallback);
@@ -122,107 +105,106 @@ function useData<T>(fetcher: () => Promise<T>, fallback: T): UseDataResult<T> {
 }
 
 /**
- * React hooks backed by the unified data-loader.
- * Prefer generated seed-data JSON → API/DB → static mock.
- *
- * Usage:
- *   const { data: users, loading, error, refresh } = useUsers();
+ * React hooks backed by PostgreSQL / Mock Database API.
+ * Always fetches from database via API routes.
  */
 
 export function useUsers(): UseDataResult<UserRecord[]> {
-  return useData(() => getUsers(), mockUsers);
+  return useData(() => fetchFromApi<UserRecord[]>('users'), mockUsers);
 }
 
 export function useArticles(): UseDataResult<ArticleRecord[]> {
-  return useData(() => getArticles(), mockArticles);
+  return useData(() => fetchFromApi<ArticleRecord[]>('articles'), mockArticles);
 }
 
 export function useOrders(): UseDataResult<OrderRecord[]> {
-  return useData(() => getOrders(), mockOrders);
+  return useData(() => fetchFromApi<OrderRecord[]>('orders'), mockOrders);
 }
 
 export function useCategories(): UseDataResult<CategoryRecord[]> {
-  return useData(() => getCategories(), mockCategories);
+  return useData(() => fetchFromApi<CategoryRecord[]>('categories'), mockCategories);
 }
 
 export function useComments(): UseDataResult<CommentRecord[]> {
-  return useData(() => getComments(), mockComments);
+  return useData(() => fetchFromApi<CommentRecord[]>('comments'), mockComments);
 }
 
 export function useBanners(): UseDataResult<BannerRecord[]> {
-  return useData(() => getBanners(), mockBanners);
+  return useData(() => fetchFromApi<BannerRecord[]>('banners'), mockBanners);
 }
 
 export function useCustomers(): UseDataResult<CustomerRecord[]> {
-  return useData(() => getCustomers(), mockCustomers);
+  return useData(() => fetchFromApi<CustomerRecord[]>('customers'), mockCustomers);
 }
 
 export function useRoles(): UseDataResult<RoleRecord[]> {
-  return useData(() => getRoles(), mockRoles);
+  return useData(() => fetchFromApi<RoleRecord[]>('roles'), mockRoles);
 }
 
 export function useInvoices(): UseDataResult<InvoiceRecord[]> {
-  return useData(() => getInvoices(), mockInvoices);
+  return useData(() => fetchFromApi<InvoiceRecord[]>('invoices'), mockInvoices);
 }
 
 export function useApiKeys(): UseDataResult<ApiKeyRecord[]> {
-  return useData(() => getApiKeys(), mockApiKeys);
+  return useData(() => fetchFromApi<ApiKeyRecord[]>('api-keys'), mockApiKeys);
 }
 
 export function useAiTools(): UseDataResult<AiToolRecord[]> {
-  return useData(() => getAiTools(), mockAiTools);
+  return useData(() => fetchFromApi<AiToolRecord[]>('ai-tools'), mockAiTools);
 }
 
 export function useAiHistory(): UseDataResult<AiHistoryRecord[]> {
-  return useData(() => getAiHistory(), mockAiHistory);
+  return useData(() => fetchFromApi<AiHistoryRecord[]>('ai-history'), mockAiHistory);
 }
 
 export function useRevenueReport(): UseDataResult<RevenueReportData> {
-  return useData(() => getRevenueReport(), mockRevenueReport);
+  return useData(() => fetchFromApi<RevenueReportData>('revenue-report'), mockRevenueReport);
 }
 
 export function usePerformanceReport(): UseDataResult<PerformanceReportData> {
-  return useData(() => getPerformanceReport(), mockPerformanceReport);
+  return useData(() => fetchFromApi<PerformanceReportData>('performance-report'), mockPerformanceReport);
 }
 
 export function useTrafficReport(): UseDataResult<TrafficReportData> {
-  return useData(() => getTrafficReport(), mockTrafficReport);
+  return useData(() => fetchFromApi<TrafficReportData>('traffic-report'), mockTrafficReport);
 }
 
 export function useUsersReport(): UseDataResult<UsersReportData> {
-  return useData(() => getUsersReport(), mockUsersReport);
+  return useData(() => fetchFromApi<UsersReportData>('users-report'), mockUsersReport);
 }
 
 export function useNotifications(): UseDataResult<NotificationItem[]> {
-  return useData(() => getNotifications(), mockNotifications);
+  return useData(() => fetchFromApi<NotificationItem[]>('notifications'), mockNotifications);
 }
 
 export function useMessages(): UseDataResult<MessageItem[]> {
-  return useData(() => getMessages(), mockMessages);
+  return useData(() => fetchFromApi<MessageItem[]>('messages'), mockMessages);
 }
 
-// Dashboard specific data — now prefers generated JSON from seeder (richer + consistent)
 export function useDashboardStats() {
-  return useData(() => getDashboardStats(), dashboardStats);
+  return useData(() => fetchFromApi<any[]>('dashboard-stats'), dashboardStats);
 }
 
 export function useRecentActivities() {
-  return useData(() => getRecentActivities(), recentActivities);
+  return useData(() => fetchFromApi<any[]>('recent-activities'), recentActivities);
 }
 
-// Chart data hooks (prefer JSON)
 export function useRevenueChartData() {
-  return useData(() => getRevenueChartData(), revenueChartData);
+  return useData(() => fetchFromApi<any[]>('revenue-chart'), revenueChartData);
 }
+
 export function useUserGrowthData() {
-  return useData(() => getUserGrowthData(), userGrowthData);
+  return useData(() => fetchFromApi<any[]>('user-growth'), userGrowthData);
 }
+
 export function useTrafficSourceData() {
-  return useData(() => getTrafficSourceData(), trafficSourceData);
+  return useData(() => fetchFromApi<any[]>('traffic-source'), trafficSourceData);
 }
+
 export function useDeviceData() {
-  return useData(() => getDeviceData(), deviceData);
+  return useData(() => fetchFromApi<any[]>('device-data'), deviceData);
 }
+
 export function useConversionData() {
-  return useData(() => getConversionData(), conversionData);
+  return useData(() => fetchFromApi<any[]>('conversion-data'), conversionData);
 }

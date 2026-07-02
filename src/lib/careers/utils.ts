@@ -1,4 +1,4 @@
-import { jobPosts } from '@/lib/seed';
+import { jobPosts } from '@/lib/seed/mock-data';
 import type { JobFilter, JobPost, JobSearchParams } from './types';
 import { JOB_DEPARTMENTS, JOB_LEVELS, JOB_TYPES } from './types';
 

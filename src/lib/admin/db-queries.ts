@@ -3,10 +3,14 @@
  * 
  * These are server-only functions.
  * Used when DATA_SOURCE = 'db' or auto resolves to db.
+ * 
+ * NOTE: No 'server-only' guard here because this file is imported dynamically
+ * from loader.ts which is used by client components. The runtime guard
+ * (typeof window === 'undefined') in loader.ts ensures this never executes client-side.
+ * The 'server-only' guard on src/db/index.ts provides the real safety net.
  */
-import 'server-only';
 
-import { db } from '@/db';
+import { db, checkDatabaseConnection, isDatabaseAvailable } from '@/db';
 import { 
   users, 
   articles, 
@@ -116,71 +120,120 @@ function mapInvoice(row: DbRow): InvoiceRecord {
 }
 
 export async function getUsersFromDb(): Promise<UserRecord[]> {
+  // Fast path: if we already know DB is unavailable, skip immediately
+  if (isDatabaseAvailable() === false) {
+    return [];
+  }
+
+  // Perform initial connection check (cached after first call)
+  const available = await checkDatabaseConnection();
+  if (!available) {
+    return [];
+  }
+
   try {
     const rows = await db.select().from(users).orderBy(desc(users.createdAt)).limit(100);
     return rows.map(mapUser);
   } catch (err) {
-    console.error('[db-queries] getUsersFromDb failed', err);
+    if (isDatabaseAvailable() !== false) {
+      console.error('[db-queries] getUsersFromDb failed', err);
+    }
     return [];
   }
 }
 
 export async function getArticlesFromDb(): Promise<ArticleRecord[]> {
+  if (isDatabaseAvailable() === false) return [];
+  const available = await checkDatabaseConnection();
+  if (!available) return [];
+
   try {
     const rows = await db.select().from(articles).orderBy(desc(articles.createdAt)).limit(100);
     return rows.map(mapArticle);
   } catch (err) {
-    console.error('[db-queries] getArticlesFromDb failed', err);
+    if (isDatabaseAvailable() !== false) {
+      console.error('[db-queries] getArticlesFromDb failed', err);
+    }
     return [];
   }
 }
 
 export async function getCategoriesFromDb(): Promise<CategoryRecord[]> {
+  if (isDatabaseAvailable() === false) return [];
+  const available = await checkDatabaseConnection();
+  if (!available) return [];
+
   try {
     const rows = await db.select().from(categories).orderBy(categories.name);
     return rows.map(mapCategory);
   } catch (err) {
-    console.error('[db-queries] getCategoriesFromDb failed', err);
+    if (isDatabaseAvailable() !== false) {
+      console.error('[db-queries] getCategoriesFromDb failed', err);
+    }
     return [];
   }
 }
 
 export async function getOrdersFromDb(): Promise<OrderRecord[]> {
+  if (isDatabaseAvailable() === false) return [];
+  const available = await checkDatabaseConnection();
+  if (!available) return [];
+
   try {
     const rows = await db.select().from(orders).orderBy(desc(orders.createdAt)).limit(100);
     return rows.map(mapOrder);
   } catch (err) {
-    console.error('[db-queries] getOrdersFromDb failed', err);
+    if (isDatabaseAvailable() !== false) {
+      console.error('[db-queries] getOrdersFromDb failed', err);
+    }
     return [];
   }
 }
 
 export async function getCommentsFromDb(): Promise<CommentRecord[]> {
+  if (isDatabaseAvailable() === false) return [];
+  const available = await checkDatabaseConnection();
+  if (!available) return [];
+
   try {
     const rows = await db.select().from(comments).orderBy(desc(comments.createdAt)).limit(100);
     return rows.map(mapComment);
   } catch (err) {
-    console.error('[db-queries] getCommentsFromDb failed', err);
+    if (isDatabaseAvailable() !== false) {
+      console.error('[db-queries] getCommentsFromDb failed', err);
+    }
     return [];
   }
 }
 
 export async function getBannersFromDb(): Promise<BannerRecord[]> {
+  if (isDatabaseAvailable() === false) return [];
+  const available = await checkDatabaseConnection();
+  if (!available) return [];
+
   try {
     const rows = await db.select().from(banners);
     return rows.map(mapBanner);
   } catch (err) {
-    console.error('[db-queries] getBannersFromDb failed', err);
+    if (isDatabaseAvailable() !== false) {
+      console.error('[db-queries] getBannersFromDb failed', err);
+    }
     return [];
   }
 }
 
 export async function getInvoicesFromDb(): Promise<InvoiceRecord[]> {
+  if (isDatabaseAvailable() === false) return [];
+  const available = await checkDatabaseConnection();
+  if (!available) return [];
+
   try {
     const rows = await db.select().from(invoices).orderBy(desc(invoices.createdAt)).limit(100);
     return rows.map(mapInvoice);
   } catch (err) {
-    console.error('[db-queries] getInvoicesFromDb failed', err);
+    if (isDatabaseAvailable() !== false) {
+      console.error('[db-queries] getInvoicesFromDb failed', err);
+    }
     return [];
   }
 }

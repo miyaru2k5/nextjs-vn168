@@ -2,14 +2,14 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import { StatusBadge } from '@/components/admin/DataTable';
-import { getArticles } from '@/lib/seed/loader';
+import { getArticlesFromDb } from '@/lib/admin/db-queries';
 import { articleStatusMap } from '@/lib/admin/status-maps';
 
 type Props = { params: Promise<{ id: string }> };
 
 export default async function ArticleDetailPage({ params }: Props) {
   const { id } = await params;
-  const articles = await getArticles();
+  const articles = await getArticlesFromDb();
   const article = articles.find((a) => a.id === id);
   if (!article) notFound();
 

@@ -1,14 +1,14 @@
 import { notFound } from 'next/navigation';
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import { StatusBadge } from '@/components/admin/DataTable';
-import { getOrders } from '@/lib/seed/loader';
+import { getOrdersFromDb } from '@/lib/admin/db-queries';
 import { orderStatusMap } from '@/lib/admin/status-maps';
 
 type Props = { params: Promise<{ id: string }> };
 
 export default async function OrderDetailPage({ params }: Props) {
   const { id } = await params;
-  const orders = await getOrders();
+  const orders = await getOrdersFromDb();
   const order = orders.find((o) => o.id === id);
   if (!order) notFound();
 

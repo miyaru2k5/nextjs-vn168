@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { JobDetailClient } from '@/components/careers/job-detail-client';
 import { JobSchema } from '@/components/careers/job-schema';
-import { jobPosts } from '@/lib/seed';
+import { jobPosts } from '@/lib/seed/mock-data';
 import { getJobBySlug, getSiteUrl } from '@/lib/careers/utils';
 
 type Props = {

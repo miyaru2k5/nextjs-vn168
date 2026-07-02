@@ -1,64 +1,115 @@
 /**
- * Centralized Data Source Configuration (now in src/lib/seed/)
- * 
- * This is one of the specific main files for all seed/mock/test data handling.
- * 
- * Supports modes:
- * - json: Use generated JSON seed files
- * - db: Use real PostgreSQL via Drizzle
- * - mock: Static mocks (fallback)
- * - auto (default): Smart selection
+ * Data Source Configuration
+ *
+ * Determines whether the app should use real DB data, mock data, or JSON seeds.
+ *
+ * Supported modes:
+ *   - 'auto'  (default): Try DB once. If unavailable → permanently use mock.
+ *   - 'db'    : Force DB (will fail hard if unavailable)
+ *   - 'mock'  : Always use in-memory mock data
+ *   - 'json'  : Prefer JSON files in /seed-data (legacy)
+ *
+ * Environment override:
+ *   DATA_SOURCE=auto|db|mock|json
  */
 
-export type DataSourceMode = 'auto' | 'json' | 'db' | 'mock';
+export type DataSourceMode = 'auto' | 'db' | 'mock' | 'json';
 
-const rawMode = (process.env.DATA_SOURCE || 'auto').toLowerCase() as DataSourceMode;
+// Module-level cache
+let resolvedMode: DataSourceMode | null = null;
+let dbHealthChecked = false;
+let dbIsAvailable = true;
 
-export const DATA_SOURCE: DataSourceMode = ['auto', 'json', 'db', 'mock'].includes(rawMode) 
-  ? rawMode 
-  : 'auto';
 
-export const isProduction = process.env.NODE_ENV === 'production';
-
-export const hasDatabaseUrl = !!process.env.DATABASE_URL;
 
 /**
- * Final resolved source after applying rules.
- * Production is strict: must be 'db'.
+ * Check env for forced mode.
  */
-export function getResolvedDataSource(): Exclude<DataSourceMode, 'auto'> {
-  if (isProduction) {
-    if (DATA_SOURCE !== 'db') {
-      const errorMsg = 
-        `CRITICAL: Production must use DATA_SOURCE=db. ` +
-        `Current DATA_SOURCE="${DATA_SOURCE}". ` +
-        `Using mock or JSON data in production is not allowed.`;
-      console.error('❌ ' + errorMsg);
-      throw new Error(errorMsg);
-    }
-    return 'db';
+function getEnvMode(): DataSourceMode | null {
+  const env = (process.env.DATA_SOURCE || process.env.NEXT_PUBLIC_DATA_SOURCE || '').toLowerCase().trim();
+  if (['auto', 'db', 'mock', 'json'].includes(env)) {
+    return env as DataSourceMode;
   }
-
-  if (DATA_SOURCE === 'json') return 'json';
-  if (DATA_SOURCE === 'mock') return 'mock';
-  if (DATA_SOURCE === 'db') return 'db';
-
-  // auto mode
-  if (typeof window !== 'undefined') {
-    return hasDatabaseUrl ? 'db' : 'json';
-  }
-
-  return hasDatabaseUrl ? 'db' : 'json';
+  return null;
 }
 
-let _resolvedSource: ReturnType<typeof getResolvedDataSource> | null = null;
+/**
+ * Async health check (only runs once).
+ * We import dynamically to avoid circular issues.
+ */
+async function performDbHealthCheck(): Promise<boolean> {
+  if (dbHealthChecked) return dbIsAvailable;
 
-export function getResolvedSource(): ReturnType<typeof getResolvedDataSource> {
-  if (!_resolvedSource) {
-    _resolvedSource = getResolvedDataSource();
-    if (process.env.NODE_ENV !== 'production') {
-      console.log(`[seed/config] DATA_SOURCE=${DATA_SOURCE} → resolved=${_resolvedSource} (prod=${isProduction}, hasDB=${hasDatabaseUrl})`);
-    }
+  try {
+    // Dynamic import to keep this module light
+    const { checkDatabaseConnection } = await import('@/lib/db/health');
+    dbIsAvailable = await checkDatabaseConnection();
+  } catch {
+    dbIsAvailable = false;
   }
-  return _resolvedSource;
+
+  dbHealthChecked = true;
+  return dbIsAvailable;
+}
+
+/**
+ * Resolve the effective data source mode.
+ * In 'auto' mode, we perform a one-time DB check and lock the decision.
+ */
+export async function getResolvedDataSource(): Promise<DataSourceMode> {
+  if (resolvedMode) {
+    return resolvedMode;
+  }
+
+  const envMode = getEnvMode();
+
+  if (envMode && envMode !== 'auto') {
+    resolvedMode = envMode;
+    console.log(`[DataSource] Forced mode from env: ${resolvedMode}`);
+    return resolvedMode;
+  }
+
+  // Default to auto behavior
+  const forceDb = envMode === 'auto' || !envMode;
+
+  if (!forceDb) {
+    resolvedMode = envMode || 'mock';
+    return resolvedMode;
+  }
+
+  // Auto mode: probe DB once
+  const available = await performDbHealthCheck();
+
+  if (available) {
+    resolvedMode = 'db';
+    console.log('[DataSource] Database available. Using DB data source.');
+  } else {
+    resolvedMode = 'mock';
+    console.log('[DataSource] Database unavailable. Permanently falling back to mock data.');
+  }
+
+  return resolvedMode;
+}
+
+/**
+ * Synchronous version (for places where async is inconvenient).
+ * Returns best guess without waiting. After first async resolution it will be accurate.
+ */
+export function getResolvedDataSourceSync(): DataSourceMode {
+  if (resolvedMode) return resolvedMode;
+
+  const envMode = getEnvMode();
+  if (envMode && envMode !== 'auto') {
+    return envMode;
+  }
+
+  // Not resolved yet — return 'auto' or 'mock' as safe default for sync contexts
+  return envMode || 'auto';
+}
+
+/**
+ * Force a mode (useful for tests or runtime override).
+ */
+export function setDataSourceMode(mode: DataSourceMode) {
+  resolvedMode = mode;
 }
