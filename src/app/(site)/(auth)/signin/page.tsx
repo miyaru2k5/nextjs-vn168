@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { SignInWithGithub, SignInWithGoogle } from '../_components/social-auth';
+import {SignInWithGoogle } from '../_components/social-auth';
 import SignInForm from './signin-form';
 
 export default function SignInPage() {
@@ -24,7 +24,6 @@ export default function SignInPage() {
             {/* Đăng nhập mạng xã hội */}
             <div className="flex flex-col sm:flex-row justify-center gap-y-3.5 gap-x-5">
               <SignInWithGoogle />
-              <SignInWithGithub />
             </div>
 
             {/* Phân cách */}
