@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getResolvedDataSource } from '@/lib/seed';
 import * as dbQueries from '@/lib/admin/db-queries';
-import * as dataLoader from '@/lib/seed';
+import * as dataLoader from '@/lib/seed/loader';
 
 // Map entity name to the right getter
 type GetterFn = () => Promise<unknown[]>;

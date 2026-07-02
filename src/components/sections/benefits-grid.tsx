@@ -44,7 +44,7 @@ export default function BenefitsGrid() {
                     alt=""
                     width={145}
                     height={95}
-                    className="absolute right-20 top-[-8%] floating-2 z-10"
+                    className="absolute right-20 top-[-15%] floating-2 z-10"
                   />
                   <Image
                     src="/images/hero/shape-right-1.png"

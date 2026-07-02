@@ -54,9 +54,7 @@ export default function Footer() {
                   />
                 </Link>
                 <p className="block text-sm text-gray-400 mb-9">
-                  Bộ khởi động AI tự lưu trữ được xây dựng với Next.js, Tailwind CSS
-                  và tích hợp OpenAI. Lý tưởng cho nhà phát triển và startup
-                  để nhanh chóng xây dựng, triển khai và mở rộng sản phẩm SaaS AI.
+                  Mang đến giải pháp chăm sóc sắc đẹp toàn diện với đội ngũ chuyên viên giàu kinh nghiệm, công nghệ làm đẹp hiện đại và quy trình đạt chuẩn. Đồng hành cùng bạn trên hành trình gìn giữ làn da khỏe đẹp và vẻ đẹp tự nhiên.
                 </p>
                 <div className="flex">
                   <a
@@ -212,22 +210,102 @@ export default function Footer() {
                       href="/"
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      Trạng thái
+                      Chăm sóc da
                     </Link>
                     <Link
                       href="/tin-tuc"
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      Tin tức
+                      Điều trị mụn
                     </Link>
                     <Link
                       href="/pricing"
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      Bảng giá
+                      Trẻ hóa da
                     </Link>
                     <Link
                       href="/pricing#faq"
+                      className="text-sm font-normal text-gray-400 transition hover:text-white"
+                    >
+                      Massage thư giãn
+                    </Link>
+                    <Link
+                      href="/contact"
+                      className="text-sm font-normal text-gray-400 transition hover:text-white"
+                    >
+                      Phun xăm thẩm mỹ
+                    </Link>
+                    <Link
+                      href="/privacy"
+                      className="text-sm font-normal text-gray-400 transition hover:text-white"
+                    >
+                      Triệt lông công nghệ cao
+                    </Link>
+                  </nav>
+                </div>
+                <div>
+                  <span className="block mb-6 text-sm text-gray-400">
+                    Về chúng tôi
+                  </span>
+                  <nav className="flex flex-col space-y-3">
+                    <Link
+                      href="/"
+                      className="text-sm font-normal text-gray-400 transition hover:text-white"
+                    >
+                      Giới thiệu
+                    </Link>
+                    <Link
+                      href="/"
+                      className="text-sm font-normal text-gray-400 transition hover:text-white"
+                    >
+                      Đội ngũ chuyên gia
+                    </Link>
+                    <Link
+                      href="/"
+                      className="text-sm font-normal text-gray-400 transition hover:text-white"
+                    >
+                      Công nghệ làm đẹp
+                    </Link>
+                    <Link
+                      href="/"
+                      className="text-sm font-normal text-gray-400 transition hover:text-white"
+                    >
+                      Khách hàng nói gì
+                    </Link>
+                    <Link
+                      href="/"
+                      className="text-sm font-normal text-gray-400 transition hover:text-white"
+                    >
+                      Tuyển dụng
+                    </Link>
+                  </nav>
+                </div>
+                <div>
+                  <span className="relative block mb-6 text-sm text-gray-400">
+                    Hỗ trợ khách hàng
+                  </span>
+                  <nav className="flex flex-col space-y-3">
+                    <Link
+                      href="/signin"
+                      className="text-sm font-normal text-gray-400 transition hover:text-white"
+                    >
+                      Đặt lịch hẹn
+                    </Link>
+                    <Link
+                      href="/signup"
+                      className="text-sm font-normal text-gray-400 transition hover:text-white"
+                    >
+                      Chính sách dịch vụ
+                    </Link>
+                    <Link
+                      href="/reset-password"
+                      className="text-sm font-normal text-gray-400 transition hover:text-white"
+                    >
+                      Chính sách bảo mật
+                    </Link>
+                    <Link
+                      href="/contact"
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
                       Câu hỏi thường gặp
@@ -236,81 +314,7 @@ export default function Footer() {
                       href="/contact"
                       className="text-sm font-normal text-gray-400 transition hover:text-white"
                     >
-                      Tài liệu hỗ trợ
-                    </Link>
-                    <Link
-                      href="/privacy"
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      Chính sách bảo mật
-                    </Link>
-                  </nav>
-                </div>
-                <div>
-                  <span className="block mb-6 text-sm text-gray-400">
-                    Tính năng
-                  </span>
-                  <nav className="flex flex-col space-y-3">
-                    <Link
-                      href="/"
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      Tải lên tệp HTML
-                    </Link>
-                    <Link
-                      href="/"
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      Lưu trữ website HTML
-                    </Link>
-                    <Link
-                      href="/"
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      Lưu trữ hình ảnh miễn phí
-                    </Link>
-                    <Link
-                      href="/"
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      Tải PDF trực tuyến
-                    </Link>
-                    <Link
-                      href="/"
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      Lưu trữ tệp Zip miễn phí
-                    </Link>
-                  </nav>
-                </div>
-                <div>
-                  <span className="relative block mb-6 text-sm text-gray-400">
-                    Tài khoản
-                  </span>
-                  <nav className="flex flex-col space-y-3">
-                    <Link
-                      href="/signin"
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      Đăng nhập
-                    </Link>
-                    <Link
-                      href="/signup"
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      Đăng ký
-                    </Link>
-                    <Link
-                      href="/reset-password"
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      Đặt lại mật khẩu
-                    </Link>
-                    <Link
-                      href="/contact"
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      Hỗ trợ
+                      Liên hệ
                     </Link>
                   </nav>
                 </div>
@@ -319,16 +323,16 @@ export default function Footer() {
             <div className="lg:col-span-3">
               <div>
                 <span className="block mb-6 text-sm text-gray-400">
-                  Kết nối với chúng tôi
+                  Nhận ưu đãi từ Spa
                 </span>
                 <p className="block mb-5 text-sm text-gray-400">
-                  Đăng ký ngay để nhận thông tin và ưu đãi độc quyền!
+                  Đăng ký để nhận các chương trình khuyến mãi, bí quyết chăm sóc da và xu hướng làm đẹp mới nhất.
                 </p>
                 <form>
                   <div className="flex flex-col items-center gap-2 w-full sm:max-w-64">
                     <input
                       type="email"
-                      placeholder="Nhập email của bạn"
+                      placeholder="Nhập địa chỉ email"
                       className="w-full h-12 p-4 text-sm text-white border border-gray-700 rounded-full placeholder:text-center placeholder:text-gray-400 placeholder:text-sm text-center placeholder:font-normal focus:outline-0"
                       required
                     />

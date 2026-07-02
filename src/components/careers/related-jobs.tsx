@@ -77,7 +77,7 @@ export function RelatedJobs({ jobs, departmentLabel }: Props) {
               <div className="relative size-10 rounded-xl overflow-hidden bg-gray-50 dark:bg-gray-800 shrink-0">
                 <Image
                   src={job.companyLogo}
-                  alt="AIStarterKit"
+                  alt="Beauty-Spa"
                   fill
                   sizes="40px"
                   className="object-contain p-1"

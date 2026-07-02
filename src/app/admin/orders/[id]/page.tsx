@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import { StatusBadge } from '@/components/admin/DataTable';
-import { getOrders } from '@/lib/seed';
+import { getOrders } from '@/lib/seed/loader';
 import { orderStatusMap } from '@/lib/admin/status-maps';
 
 type Props = { params: Promise<{ id: string }> };

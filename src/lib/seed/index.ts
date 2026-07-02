@@ -5,10 +5,11 @@
  * All logic is concentrated here.
  * 
  * Consumers should import from here:
- *   import { getUsers, getResolvedDataSource } from '@/lib/seed'
+ *   import { getResolvedDataSource } from '@/lib/seed'
+ * Server data loaders: '@/lib/seed/loader'
+ * Client data loaders: '@/lib/seed/loader-client'
  */
 
 export * from './config';
 export * from './generators';
-export * from './loader';
 export * from './mock-data';

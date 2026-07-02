@@ -18,11 +18,11 @@ const onest = Onest({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Demo AIStarterKit OSS - Bộ khởi động AI Next.js',
-    template: '%s | AIStarterKit OSS Demo',
+    default: 'Beauty-Spa - Spa & Mỹ phẩm cao cấp',
+    template: '%s | Beauty-Spa',
   },
   description:
-    'Trang demo của bộ khởi động AIStarterKit OSS. Xây dựng bằng Next.js, Tailwind CSS, Drizzle ORM và PostgreSQL.',
+    'Beauty-Spa — nền tảng spa & mỹ phẩm cao cấp với liệu trình chăm sóc da chuyên sâu, tư vấn AI và quản trị trực tuyến.',
 };
 
 export default function RootLayout({

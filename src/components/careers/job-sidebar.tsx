@@ -27,7 +27,7 @@ export function JobSidebar({ job, onApply }: Props) {
           <div className="relative size-12 rounded-xl overflow-hidden bg-gray-50 dark:bg-gray-800">
             <Image
               src={job.companyLogo}
-              alt="AIStarterKit"
+              alt="Beauty-Spa"
               fill
               sizes="48px"
               className="object-contain p-1"
@@ -35,7 +35,7 @@ export function JobSidebar({ job, onApply }: Props) {
           </div>
           <div>
             <p className="font-semibold text-gray-800 dark:text-white/90 text-sm">
-              AIStarterKit
+              Beauty-Spa
             </p>
             <p className="text-xs text-gray-400">{getDepartmentLabel(job.department)}</p>
           </div>

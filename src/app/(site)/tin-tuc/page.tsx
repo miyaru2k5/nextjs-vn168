@@ -9,9 +9,9 @@ import type { BlogCategoryFilter } from '@/lib/blog/types';
 export const metadata: Metadata = {
   title: 'Tin tức & Kiến thức',
   description:
-    'Khám phá các bài viết mới nhất về AI, công nghệ, hướng dẫn sử dụng và cập nhật sản phẩm từ AIStarterKit.',
+    'Khám phá các bài viết mới nhất về AI, công nghệ, hướng dẫn sử dụng và cập nhật sản phẩm từ Beauty-Spa.',
   openGraph: {
-    title: 'Tin tức & Kiến thức | AIStarterKit',
+    title: 'Tin tức & Kiến thức | Beauty-Spa',
     description:
       'Khám phá các bài viết mới nhất về AI, công nghệ, hướng dẫn và cập nhật sản phẩm.',
     type: 'website',

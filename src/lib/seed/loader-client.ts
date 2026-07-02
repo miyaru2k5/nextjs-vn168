@@ -1,9 +1,7 @@
-import 'server-only';
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /**
- * Server-only data loader (JSON / DB / Mock).
- * For client components, use loader-client.ts instead.
+ * Client-safe data loader (browser + client-component SSR).
+ * Uses fetch/API/mock only — never imports fs, pg, or server-only modules.
  */
 
 import {
@@ -60,28 +58,7 @@ import { getResolvedDataSource, type DataSourceMode } from './config';
 const SEED_BASE = '/seed-data';
 const API_BASE = '/api/admin/data';
 
-// ======================
-// Low-level loaders
-// ======================
-
 async function tryLoadJson<T>(filename: string): Promise<T[] | null> {
-  // Server: prefer local private seed-data (faster, no network)
-  if (typeof window === 'undefined') {
-    try {
-      const fs = await import('fs');
-      const pathModule = await import('path');
-      const privatePath = pathModule.join(process.cwd(), 'seed-data', filename);
-      if (fs.existsSync(privatePath)) {
-        const content = fs.readFileSync(privatePath, 'utf-8');
-        return JSON.parse(content);
-      }
-    } catch {
-      // ignore - will fall through
-    }
-    return null;
-  }
-
-  // Client: fetch from public/seed-data
   try {
     const res = await fetch(`${SEED_BASE}/${filename}`, { cache: 'no-store' });
     if (res.ok) return await res.json();
@@ -101,60 +78,10 @@ async function fetchFromApi<T>(type: string): Promise<T[] | null> {
   return null;
 }
 
-type DbGetter = () => Promise<unknown[]>;
-
-async function getDbFunction(entity: string): Promise<DbGetter | null> {
-  if (typeof window !== 'undefined') {
-    return null;
-  }
-
-  // Use a variable for the module specifier.
-  // This prevents the client bundler from statically including 'pg' and 'fs'
-  // when this file is imported by client components (e.g. use-admin-data.ts).
-  const dbQueriesPath = '../admin/db-queries';
-  const db = await import(dbQueriesPath);
-
-  const map: Record<string, string> = {
-    users: 'getUsersFromDb',
-    articles: 'getArticlesFromDb',
-    categories: 'getCategoriesFromDb',
-    orders: 'getOrdersFromDb',
-    comments: 'getCommentsFromDb',
-    banners: 'getBannersFromDb',
-    invoices: 'getInvoicesFromDb',
-    'api-keys': 'getApiKeysFromDb',
-    'ai-tools': 'getAiToolsFromDb',
-    'ai-history': 'getAiHistoryFromDb',
-  };
-  const fnName = map[entity];
-  if (!fnName) return null;
-  const fn = (db as Record<string, unknown>)[fnName];
-  return typeof fn === 'function' ? (fn as DbGetter) : null;
-}
-
 async function getFromDb<T>(entity: string): Promise<T[]> {
-  if (typeof window !== 'undefined') {
-    // On client: NEVER execute any DB/pg code. Always use API or JSON fallback.
-    const data = await fetchFromApi<T>(entity);
-    return data ?? [];
-  }
-
-  try {
-    const fn = await getDbFunction(entity);
-    if (fn) {
-      const data = await fn();
-      return (data as T[]) || [];
-    }
-    return [];
-  } catch (err) {
-    console.error('[data-loader] DB query failed for', entity, err);
-    return [];
-  }
+  const data = await fetchFromApi<T>(entity);
+  return data ?? [];
 }
-
-// ======================
-// Core resolve logic
-// ======================
 
 async function resolve<T>(
   jsonFile: string,
@@ -178,7 +105,6 @@ async function resolve<T>(
     return dbData && dbData.length > 0 ? dbData : mockData;
   }
 
-  // auto (default)
   const json = await tryLoadJson<T>(jsonFile);
   if (json && json.length > 0) return json;
 
@@ -190,22 +116,12 @@ async function resolve<T>(
   return mockData;
 }
 
-// ======================
-// Report helpers (object shape, not array)
-// ======================
-
 type ReportsJson = {
   revenue?: RevenueReportData;
   performance?: PerformanceReportData;
   traffic?: TrafficReportData;
   users?: UsersReportData;
 };
-
-
-
-// ======================
-// Factory for custom loader instances (e.g. with forced dataSource)
-// ======================
 
 export type DataLoaderOptions = {
   dataSource?: DataSourceMode;
@@ -275,21 +191,8 @@ function createLoader(modeOverride?: DataSourceMode): DataLoader {
   };
 
   const tryLoadReportsWithMode = async (): Promise<ReportsJson | null> => {
-    // reports always try json first, respect mock
     const m = getMode();
     if (m === 'mock') return null;
-    if (typeof window === 'undefined') {
-      try {
-        const fs = await import('fs');
-        const pathModule = await import('path');
-        const privatePath = pathModule.join(process.cwd(), 'seed-data', 'reports.json');
-        if (fs.existsSync(privatePath)) {
-          const content = fs.readFileSync(privatePath, 'utf-8');
-          return JSON.parse(content);
-        }
-      } catch {}
-      return null;
-    }
     try {
       const res = await fetch(`${SEED_BASE}/reports.json`, { cache: 'no-store' });
       if (res.ok) return await res.json() as ReportsJson;
@@ -360,15 +263,12 @@ function createLoader(modeOverride?: DataSourceMode): DataLoader {
   };
 }
 
-// Default instance (uses global DATA_SOURCE)
 export const dataLoader: DataLoader = createLoader();
 
-/** Factory to create a loader with specific options (e.g. forced dataSource for testing or special contexts) */
 export function createDataLoader(options: DataLoaderOptions = {}): DataLoader {
   return createLoader(options.dataSource);
 }
 
-// Re-export the methods from the default instance for ergonomic top-level imports
 export const {
   getUsers,
   getArticles,

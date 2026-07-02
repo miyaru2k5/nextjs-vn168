@@ -8,7 +8,7 @@ export function BlogHero() {
       </div>
       <div className="wrapper relative z-10">
         <div className="max-w-[800px] mx-auto text-center">
-          <Subheading text="Cập nhật mới nhất từ AIStarterKit" />
+          <Subheading text="Cập nhật mới nhất từ Beauty-Spa" />
           <h1 className="text-gray-700 font-bold mb-4 text-4xl sm:text-[50px] dark:text-white/90 sm:leading-[64px]">
             Tin tức & Kiến thức
           </h1>
