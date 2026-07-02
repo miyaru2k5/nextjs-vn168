@@ -1,4 +1,10 @@
 // Centralized static mock data in src/lib/seed/mock-data.ts
+//
+// NOTE (per project directive):
+// - This module is only for sample/test data generation.
+// - Types are taken from existing locations (@/lib/admin/types etc.).
+// - Seed does NOT own or define types.
+// - Production data processing must not depend on seed.
 
 import type {
   UserRecord,

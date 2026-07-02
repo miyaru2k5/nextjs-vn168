@@ -56,7 +56,6 @@ Seeder tạo dữ liệu mẫu bao gồm:
 
 ```bash
 npm run db:seed                           # Seed database
-SEED_TO_JSON=true npm run db:seed         # Xuất ra JSON (seed-data/)
 ```
 
 Reset database: `npm run db:push -- --force && npm run db:seed`

@@ -3,8 +3,12 @@
  * 
  * These are server-only functions.
  * Used when DATA_SOURCE = 'db' or auto resolves to db.
+ * 
+ * NOTE: No 'server-only' guard here because this file is imported dynamically
+ * from loader.ts which is used by client components. The runtime guard
+ * (typeof window === 'undefined') in loader.ts ensures this never executes client-side.
+ * The 'server-only' guard on src/db/index.ts provides the real safety net.
  */
-import 'server-only';
 
 import { db } from '@/db';
 import { 

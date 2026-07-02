@@ -16,7 +16,7 @@
  */
 
 import { faker } from '@faker-js/faker/locale/vi';
-import { db } from '../src/db';
+import { db } from '../src/db/script-db';
 import {
   users,
   categories,
@@ -58,10 +58,8 @@ import path from 'path';
 // ======================
 // ENV CONFIG FOR SEEDER
 // ======================
-const isDevelopment = process.env.NODE_ENV !== 'production';
-const SEED_TO_DB = process.env.SEED_TO_DB !== 'false';           // default: seed DB
-const SEED_TO_JSON = process.env.SEED_TO_JSON === 'true' ||     // explicit
-  (isDevelopment && process.env.SEED_TO_JSON !== 'false');      // auto in local/dev unless disabled
+const SEED_TO_DB = true;
+const SEED_TO_JSON = false;
 
 console.log(`🔧 Seeder config: NODE_ENV=${process.env.NODE_ENV || 'undefined'} | SEED_TO_DB=${SEED_TO_DB} | SEED_TO_JSON=${SEED_TO_JSON}`);
 

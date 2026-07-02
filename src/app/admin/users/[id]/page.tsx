@@ -2,14 +2,14 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import { StatusBadge } from '@/components/admin/DataTable';
-import { getUsers } from '@/lib/seed';
+import { getUsersFromDb } from '@/lib/admin/db-queries';
 import { userStatusMap } from '@/lib/admin/status-maps';
 
 type Props = { params: Promise<{ id: string }> };
 
 export default async function UserDetailPage({ params }: Props) {
   const { id } = await params;
-  const users = await getUsers();
+  const users = await getUsersFromDb();
   const user = users.find((u) => u.id === id);
   if (!user) notFound();
 

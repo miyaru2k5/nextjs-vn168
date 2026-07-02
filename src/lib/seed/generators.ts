@@ -3,7 +3,10 @@
  * CENTRALIZED in src/lib/seed/generators.ts (one of the specific main files)
  * 
  * All seed/mock/test data generation logic is concentrated here.
- * Original vn-data.ts is legacy bridge.
+ * 
+ * IMPORTANT: This is auxiliary logic for sample data only.
+ * Types are from existing admin types. Seed is not a centralized domain module.
+ * Production code should not depend on seed.
  */
 
 import { faker } from '@faker-js/faker/locale/vi';
