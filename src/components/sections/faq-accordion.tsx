@@ -17,33 +17,33 @@ export default function FaqAccordion() {
   const faqItems: FAQItem[] = [
     {
       id: 1,
-      question: "Tôi có nhận được các bản cập nhật miễn phí không?",
+      question: "Spa có soi da và tư vấn miễn phí không?",
       answer:
-        "Có. Bạn sẽ nhận được các bản cập nhật tính năng, cải tiến hiệu suất và các bản sửa lỗi hoàn toàn miễn phí trong suốt thời gian sử dụng gói dịch vụ của mình.",
+        "Có. Tất cả khách hàng đều được soi da và tư vấn miễn phí trước khi sử dụng dịch vụ. Chuyên viên sẽ phân tích tình trạng da, xác định nguyên nhân và xây dựng liệu trình phù hợp với từng khách hàng.",
     },
     {
       id: 2,
-      question: 'Số lượng "Dự án" được tính như thế nào?',
+      question: "Điều trị mụn hoặc nám cần bao nhiêu buổi?",
       answer:
-        'Số lượng "Dự án" là tổng số không gian làm việc riêng biệt mà bạn có thể tạo và quản lý trong tài khoản của mình. Mỗi dự án có thể có cài đặt, thành viên và tài nguyên riêng.',
+        "Số buổi điều trị phụ thuộc vào tình trạng da của từng khách hàng. Sau khi soi da, chuyên viên sẽ tư vấn lộ trình chi tiết, thời gian thực hiện và chi phí phù hợp để đạt hiệu quả tối ưu.",
     },
     {
       id: 3,
-      question: "Tôi có thể nâng cấp lên gói cao hơn không?",
+      question: "Mỹ phẩm tại spa có phải hàng chính hãng không?",
       answer:
-        "Có. Bạn có thể nâng cấp lên gói dịch vụ cao hơn bất kỳ lúc nào. Chi phí nâng cấp sẽ được tính theo phần chênh lệch còn lại của chu kỳ thanh toán hiện tại và các tính năng mới sẽ được kích hoạt ngay sau khi nâng cấp.",
+        "Tất cả mỹ phẩm được phân phối tại spa đều là sản phẩm chính hãng, có nguồn gốc xuất xứ rõ ràng và được lựa chọn từ các thương hiệu uy tín nhằm đảm bảo an toàn và hiệu quả cho làn da.",
     },
     {
       id: 4,
-      question: '“Dự án không giới hạn” có nghĩa là gì?',
+      question: "Sau khi điều trị có cần sử dụng mỹ phẩm chăm sóc tại nhà không?",
       answer:
-        "Điều này có nghĩa là bạn có thể tạo bao nhiêu dự án tùy ý mà không bị giới hạn. Điều này giúp bạn quản lý công việc và nội dung một cách hiệu quả hơn mà không phải lo về giới hạn số lượng dự án.",
+        "Có. Việc chăm sóc da tại nhà đóng vai trò quan trọng giúp duy trì hiệu quả điều trị, phục hồi làn da và hạn chế tình trạng tái phát. Chuyên viên sẽ tư vấn bộ sản phẩm phù hợp với từng loại da.",
     },
     {
       id: 5,
-      question: "Làm thế nào để thêm OpenAI API Key?",
+      question: "Làm thế nào để đặt lịch tư vấn hoặc điều trị?",
       answer:
-        'Để thêm OpenAI API Key, hãy truy cập phần Cài đặt tài khoản và chọn mục "API Key". Nhấn "Thêm API Key mới", dán khóa API OpenAI của bạn và lưu lại thay đổi. Khóa API sẽ được bảo mật và sử dụng cho tất cả các tính năng AI trong hệ thống.',
+        "Bạn có thể đặt lịch trực tiếp trên website, liên hệ qua hotline, Zalo hoặc Fanpage. Đội ngũ tư vấn sẽ xác nhận lịch hẹn và hỗ trợ lựa chọn khung giờ phù hợp nhất với bạn.",
     },
   ];
 
@@ -55,12 +55,13 @@ export default function FaqAccordion() {
     <section id="faq" className="py-14 md:py-28 dark:bg-[#171f2e]">
       <div className="wrapper">
         <div className="max-w-2xl mx-auto mb-12 text-center">
-          <h2 className="mb-3 font-bold text-center text-gray-800 text-3xl dark:text-white/90 md:text-title-lg">
-            Câu hỏi thường gặp
+          <h2 className="mb-3 font-bold text-center text-gray-800 dark:text-white/90 text-3xl md:text-title-lg">
+            Câu Hỏi Thường Gặp
           </h2>
 
-          <p className="max-w-md mx-auto leading-6 text-gray-500 dark:text-gray-400">
-            Chúng tôi đã giải đáp các câu hỏi phổ biến nhất. Nếu bạn vẫn còn thắc mắc, vui lòng liên hệ với đội ngũ hỗ trợ của chúng tôi.
+          <p className="max-w-2xl mx-auto leading-7 text-gray-500 dark:text-gray-400">
+            Giải đáp những thắc mắc phổ biến về dịch vụ chăm sóc da, điều trị mụn,
+            trị nám, thẩm mỹ và các dòng mỹ phẩm chính hãng tại spa.
           </p>
         </div>
 

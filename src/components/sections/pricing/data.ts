@@ -1,30 +1,30 @@
 export const BILLING_PERIODS = [
   {
-    label: 'Hàng tháng',
+    label: 'Dịch vụ Spa',
     key: 'monthly',
     saving: null,
   },
   {
-    label: 'Hàng năm',
+    label: 'Mỹ phẩm',
     key: 'yearly',
-    saving: '20%',
+    saving: null,
   },
 ] as const;
 
 const AMOUNTS = {
-  free: {
-    monthly: 0,
-    yearly: 0,
+  skincare: {
+    monthly: 299000,
+    yearly: 690000,
   },
-  plus: {
-    monthly: 15,
-    yearly: 144,
+  acne: {
+    monthly: 699000,
+    yearly: 990000,
   },
-  pro: {
-    monthly: 40,
-    yearly: 384,
+  whitening: {
+    monthly: 899000,
+    yearly: 1290000,
   },
-  enterprise: {
+  premium: {
     monthly: null,
     yearly: null,
   },
@@ -34,109 +34,107 @@ export type TBILLING_PLAN = (typeof BILLING_PLANS)[number];
 
 export const BILLING_PLANS = [
   {
-    name: 'Miễn phí',
+    name: 'Chăm Sóc Da',
     description:
-      'Dành cho người dùng cá nhân muốn khám phá AI với các tính năng cơ bản và giới hạn số lượng token hàng tháng.',
+      'Liệu trình chăm sóc da cơ bản giúp làm sạch sâu, cấp ẩm và phục hồi làn da khỏe mạnh.',
     pricing: {
       monthly: {
-        amount: AMOUNTS['free']['monthly'],
-        formattedPrice: '$' + AMOUNTS['free']['monthly'],
+        amount: AMOUNTS.skincare.monthly,
+        formattedPrice: '299.000đ',
         stripeId: null,
       },
       yearly: {
-        amount: AMOUNTS['free']['yearly'],
-        formattedPrice: '$' + AMOUNTS['free']['yearly'],
+        amount: AMOUNTS.skincare.yearly,
+        formattedPrice: 'Từ 690.000đ',
         stripeId: null,
       },
     },
     features: [
-      'Truy cập các mô hình AI cơ bản',
-      'Tối đa 25.000 token mỗi tháng',
-      'Giới hạn 3 dự án',
-      'Không hỗ trợ API Key',
-      'Chỉ hỗ trợ qua cộng đồng',
+      'Soi da miễn phí',
+      'Làm sạch chuyên sâu',
+      'Tẩy tế bào chết',
+      'Cấp ẩm và phục hồi',
+      'Massage thư giãn',
     ],
-    cta: 'Dùng thử miễn phí',
+    cta: 'Đặt lịch ngay',
     popular: false,
   },
   {
-    name: 'Gói Plus',
+    name: 'Điều Trị Mụn',
     description:
-      'Dành cho nhà phát triển xây dựng sản phẩm thực tế với giới hạn cao hơn và khả năng sử dụng linh hoạt hơn.',
+      'Liệu trình điều trị mụn chuẩn y khoa giúp giảm viêm, làm sạch da và hạn chế mụn tái phát.',
     pricing: {
       monthly: {
-        amount: AMOUNTS['plus']['monthly'],
-        formattedPrice: '$' + AMOUNTS['plus']['monthly'],
-        stripeId: process.env.NEXT_PUBLIC_PLUS_MONTHLY_PRICE_ID!,
+        amount: AMOUNTS.acne.monthly,
+        formattedPrice: '699.000đ',
+        stripeId: null,
       },
       yearly: {
-        amount: AMOUNTS['plus']['yearly'],
-        formattedPrice: '$' + AMOUNTS['plus']['yearly'],
-        stripeId: process.env.NEXT_PUBLIC_PLUS_YEARLY_PRICE_ID!,
+        amount: AMOUNTS.acne.yearly,
+        formattedPrice: 'Từ 990.000đ',
+        stripeId: null,
       },
     },
     features: [
-      'Bao gồm toàn bộ tính năng của gói Miễn phí',
-      'Tối đa 250.000 token mỗi tháng',
-      'Không giới hạn số lượng dự án',
-      'Sử dụng API Key OpenAI của riêng bạn',
-      'Bảng thống kê và phân tích cơ bản',
-      'Hỗ trợ qua email',
+      'Soi da & tư vấn',
+      'Lấy nhân mụn chuẩn y khoa',
+      'Điện di tinh chất',
+      'Kháng viêm, giảm thâm',
+      'Theo dõi sau điều trị',
     ],
-    cta: 'Đăng ký ngay',
+    cta: 'Đặt lịch ngay',
     popular: true,
   },
   {
-    name: 'Gói Pro',
+    name: 'Trị Nám & Làm Trắng',
     description:
-      'Dành cho đội nhóm và người dùng chuyên nghiệp cần giới hạn token lớn cùng các công cụ AI nâng cao.',
+      'Ứng dụng công nghệ hiện đại kết hợp mỹ phẩm chuyên sâu giúp cải thiện sắc tố và mang lại làn da sáng khỏe.',
     pricing: {
       monthly: {
-        amount: AMOUNTS['pro']['monthly'],
-        formattedPrice: '$' + AMOUNTS['pro']['monthly'],
-        stripeId: process.env.NEXT_PUBLIC_PRO_MONTHLY_PRICE_ID!,
+        amount: AMOUNTS.whitening.monthly,
+        formattedPrice: '899.000đ',
+        stripeId: null,
       },
       yearly: {
-        amount: AMOUNTS['pro']['yearly'],
-        formattedPrice: '$' + AMOUNTS['pro']['yearly'],
-        stripeId: process.env.NEXT_PUBLIC_PRO_YEARLY_PRICE_ID!,
+        amount: AMOUNTS.whitening.yearly,
+        formattedPrice: 'Từ 1.290.000đ',
+        stripeId: null,
       },
     },
     features: [
-      'Bao gồm toàn bộ tính năng của gói Plus',
-      'Tối đa 1 triệu token mỗi tháng',
-      'Lựa chọn mô hình AI nâng cao (GPT-4, Claude 3)',
-      'Ưu tiên hỗ trợ',
-      'Công cụ cộng tác nhóm',
-      'Xuất báo cáo sử dụng',
+      'Điều trị nám',
+      'Làm sáng da',
+      'Phục hồi chuyên sâu',
+      'Giảm thâm sau mụn',
+      'Mỹ phẩm hỗ trợ tại nhà',
     ],
-    cta: 'Đăng ký ngay',
+    cta: 'Đặt lịch ngay',
     popular: false,
   },
   {
-    name: 'Doanh nghiệp',
+    name: 'Combo Premium',
     description:
-      'Giải pháp tùy chỉnh dành cho doanh nghiệp có nhu cầu sử dụng AI quy mô lớn và yêu cầu bảo mật cao.',
+      'Gói chăm sóc toàn diện dành cho khách hàng muốn điều trị và duy trì làn da khỏe đẹp lâu dài.',
     pricing: {
       monthly: {
-        amount: AMOUNTS['enterprise']['monthly'],
-        formattedPrice: 'Liên hệ tư vấn',
+        amount: null,
+        formattedPrice: 'Liên hệ',
         stripeId: null,
       },
       yearly: {
-        amount: AMOUNTS['enterprise']['yearly'],
-        formattedPrice: 'Liên hệ tư vấn',
+        amount: null,
+        formattedPrice: 'Liên hệ',
         stripeId: null,
       },
     },
     features: [
-      'Bao gồm toàn bộ tính năng của gói Pro',
-      'Token không giới hạn',
-      'Hệ thống AI riêng biệt (tùy chọn)',
-      'Hỗ trợ cam kết SLA 24/7',
-      'Đăng nhập một lần (SSO) và nhật ký kiểm toán',
+      'Điều trị mụn',
+      'Điều trị nám',
+      'Trẻ hóa da',
+      'Chăm sóc định kỳ',
+      'Tặng mỹ phẩm chính hãng',
     ],
-    cta: 'Liên hệ kinh doanh',
+    cta: 'Liên hệ tư vấn',
     popular: false,
   },
 ];

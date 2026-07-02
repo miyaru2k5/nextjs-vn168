@@ -1,154 +1,269 @@
-import { Input } from '@/components/ui/inputs';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/inputs/textarea';
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/inputs";
+import { Textarea } from "@/components/ui/inputs/textarea";
+import { Label } from "@/components/ui/label";
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import {
+  Phone,
+  Mail,
+  Clock3,
+  MapPin,
+} from "lucide-react";
 
 export const metadata: Metadata = {
-  title: 'Liên hệ',
+  title: "Liên hệ",
 };
 
 export default function ContactPage() {
   return (
-    <section className="py-28 relative">
+    <section className="py-14 md:py-24">
       <div className="wrapper">
-        <div className="relative max-w-[800px] mx-auto">
-          <div className="contact-wrapper border p-14 relative z-30 bg-white border-gray-100 dark:bg-dark-primary dark:border-gray-800">
-            
-            {/* Tiêu đề */}
-            <div className="text-center mb-12">
-              <h3 className="text-gray-800 font-bold dark:text-white text-3xl mb-2">
-                Cần hỗ trợ? Hãy liên hệ với chúng tôi 👋
-              </h3>
-              <p className="text-gray-500 dark:text-gray-400">
-                Gửi yêu cầu hỗ trợ cho chúng tôi, đội ngũ sẽ phản hồi bạn trong thời gian sớm nhất.
+        <div className="mx-auto max-w-3xl">
+
+          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm md:p-8 lg:p-10 dark:border-gray-800 dark:bg-dark-primary">
+
+            {/* Heading */}
+
+            <div className="text-center">
+              <span className="inline-flex rounded-full bg-primary-50 px-4 py-1 text-sm font-medium text-primary-600 dark:bg-primary-500/10 dark:text-primary-400">
+                Liên hệ Spa
+              </span>
+
+              <h1 className="mt-4 text-3xl font-bold text-gray-900 dark:text-white md:text-4xl">
+                Đặt Lịch Tư Vấn Chăm Sóc Da
+              </h1>
+
+              <p className="mx-auto mt-3 max-w-2xl leading-7 text-gray-500 dark:text-gray-400">
+                Hãy để lại thông tin, đội ngũ chuyên viên sẽ liên hệ và tư vấn
+                miễn phí liệu trình chăm sóc da cùng sản phẩm phù hợp nhất dành
+                cho bạn.
               </p>
             </div>
 
-            {/* Biểu mẫu liên hệ */}
-            <form>
-              <div className="grid grid-cols-2 gap-6">
-                
-                {/* Họ */}
-                <div>
-                  <Label htmlFor="lastName">Họ</Label>
-                  <Input
-                    type="text"
-                    placeholder="Nhập họ của bạn"
-                  />
-                </div>
+            {/* Form */}
 
-                {/* Tên */}
-                <div>
-                  <Label htmlFor="firstName">Tên</Label>
-                  <Input
-                    type="text"
-                    placeholder="Nhập tên của bạn"
-                  />
-                </div>
+            <form className="mt-10 space-y-5">
 
-                {/* Email */}
-                <div className="col-span-full">
-                  <Label htmlFor="email">
-                    Địa chỉ email
-                  </Label>
-                  <Input
-                    type="email"
-                    placeholder="example@gmail.com"
-                  />
-                </div>
+              {/* Họ tên */}
 
-                {/* Nội dung */}
-                <div className="col-span-full">
-                  <Label htmlFor="message">
-                    Nội dung liên hệ
-                  </Label>
-                  <Textarea
-                    rows={6}
-                    placeholder="Nhập nội dung bạn cần hỗ trợ..."
-                  />
-                </div>
+              <div>
+                <Label htmlFor="fullName">
+                  Họ và tên <span className="text-red-500">*</span>
+                </Label>
 
-                {/* Nút gửi */}
-                <div className="col-span-full">
-                  <button
-                    className="bg-primary-500 hover:bg-primary-600 transition h-12 py-3 px-6 w-full font-medium text-white text-sm rounded-full"
-                  >
-                    Gửi yêu cầu hỗ trợ
-                  </button>
-                </div>
-
+                <Input
+                  id="fullName"
+                  placeholder="Nhập họ và tên"
+                />
               </div>
+
+              {/* Điện thoại */}
+
+              <div>
+                <Label htmlFor="phone">
+                  Số điện thoại <span className="text-red-500">*</span>
+                </Label>
+
+                <Input
+                  id="phone"
+                  type="tel"
+                  placeholder="0900 xxx xxx"
+                />
+              </div>
+
+              {/* Email */}
+
+              <div>
+                <Label htmlFor="email">
+                  Email
+                </Label>
+
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="example@gmail.com"
+                />
+              </div>
+
+              {/* Dịch vụ */}
+
+              <div>
+                <Label>Dịch vụ quan tâm</Label>
+
+                <Select>
+                  <SelectTrigger className="h-12 rounded-xl">
+                    <SelectValue placeholder="Chọn dịch vụ" />
+                  </SelectTrigger>
+
+                  <SelectContent className="rounded-xl">
+
+                    <SelectItem value="scan">
+                      Soi da miễn phí
+                    </SelectItem>
+
+                    <SelectItem value="acne">
+                      Điều trị mụn
+                    </SelectItem>
+
+                    <SelectItem value="scar">
+                      Điều trị sẹo
+                    </SelectItem>
+
+                    <SelectItem value="melasma">
+                      Điều trị nám
+                    </SelectItem>
+
+                    <SelectItem value="white">
+                      Làm trắng da
+                    </SelectItem>
+
+                    <SelectItem value="care">
+                      Chăm sóc da
+                    </SelectItem>
+
+                    <SelectItem value="young">
+                      Trẻ hóa da
+                    </SelectItem>
+
+                    <SelectItem value="product">
+                      Mỹ phẩm
+                    </SelectItem>
+
+                    <SelectItem value="other">
+                      Khác
+                    </SelectItem>
+
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Tiêu đề */}
+
+              <div>
+                <Label htmlFor="subject">
+                  Tiêu đề
+                </Label>
+
+                <Input
+                  id="subject"
+                  placeholder="Ví dụ: Tư vấn điều trị mụn"
+                />
+              </div>
+
+              {/* Nội dung */}
+
+              <div>
+                <Label htmlFor="message">
+                  Nội dung
+                </Label>
+
+                <Textarea
+                  id="message"
+                  rows={8}
+                  className="rounded-2xl"
+                  placeholder="Vui lòng mô tả tình trạng da hoặc nhu cầu của bạn..."
+                />
+              </div>
+
+              {/* Button */}
+
+              <Button
+                type="submit"
+                className="h-12 w-full rounded-xl text-base font-semibold"
+              >
+                Đặt lịch tư vấn miễn phí
+              </Button>
+
             </form>
 
+            {/* Contact */}
+
+            <div className="mt-10 grid gap-5 border-t border-gray-200 pt-8 md:grid-cols-2 dark:border-gray-800">
+
+              <div className="flex items-start gap-4">
+                <div className="rounded-xl bg-primary-50 p-3 text-primary-600 dark:bg-primary-500/10">
+                  <Phone size={20} />
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">
+                    Hotline
+                  </h3>
+
+                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    0900 000 000
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="rounded-xl bg-primary-50 p-3 text-primary-600 dark:bg-primary-500/10">
+                  <Mail size={20} />
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">
+                    Email
+                  </h3>
+
+                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    contact@yourspa.vn
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="rounded-xl bg-primary-50 p-3 text-primary-600 dark:bg-primary-500/10">
+                  <Clock3 size={20} />
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">
+                    Giờ làm việc
+                  </h3>
+
+                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    08:00 - 20:00
+                    <br />
+                    Thứ 2 - Chủ nhật
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="rounded-xl bg-primary-50 p-3 text-primary-600 dark:bg-primary-500/10">
+                  <MapPin size={20} />
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">
+                    Địa chỉ
+                  </h3>
+
+                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    123 Nguyễn Văn A, Quận 1,
+                    <br />
+                    TP. Hồ Chí Minh
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
           </div>
+
         </div>
       </div>
-
-      {/* Hiệu ứng nền */}
-      <span className="absolute -bottom-32 left-1/2 -translate-x-1/2 z-0">
-        <svg
-          width="930"
-          height="760"
-          viewBox="0 0 930 760"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <g opacity="0.3" filter="url(#filter0_f_9248_10254)">
-            <circle cx="380.335" cy="380.335" r="179.665" fill="#FF58D5" />
-          </g>
-
-          <g opacity="0.7" filter="url(#filter1_f_9248_10254)">
-            <circle cx="549.665" cy="380.335" r="179.665" fill="#4E6EFF" />
-          </g>
-
-          <defs>
-            <filter
-              id="filter0_f_9248_10254"
-              x="0.669922"
-              y="0.6698"
-              width="759.33"
-              height="759.33"
-              filterUnits="userSpaceOnUse"
-              colorInterpolationFilters="sRGB"
-            >
-              <feFlood floodOpacity="0" result="BackgroundImageFix" />
-              <feBlend
-                mode="normal"
-                in="SourceGraphic"
-                in2="BackgroundImageFix"
-                result="shape"
-              />
-              <feGaussianBlur
-                stdDeviation="100"
-                result="effect1_foregroundBlur_9248_10254"
-              />
-            </filter>
-
-            <filter
-              id="filter1_f_9248_10254"
-              x="170"
-              y="0.6698"
-              width="759.33"
-              height="759.33"
-              filterUnits="userSpaceOnUse"
-              colorInterpolationFilters="sRGB"
-            >
-              <feFlood floodOpacity="0" result="BackgroundImageFix" />
-              <feBlend
-                mode="normal"
-                in="SourceGraphic"
-                in2="BackgroundImageFix"
-                result="shape"
-              />
-              <feGaussianBlur
-                stdDeviation="100"
-                result="effect1_foregroundBlur_9248_10254"
-              />
-            </filter>
-          </defs>
-        </svg>
-      </span>
-
     </section>
   );
 }

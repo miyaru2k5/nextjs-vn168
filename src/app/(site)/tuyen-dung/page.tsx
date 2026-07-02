@@ -9,9 +9,9 @@ import type { JobFilter, JobSearchParams } from '@/lib/careers/types';
 export const metadata: Metadata = {
   title: 'Tuyển dụng',
   description:
-    'Khám phá các vị trí tuyển dụng tại AIStarterKit — cơ hội nghề nghiệp trong lĩnh vực AI, công nghệ và sản phẩm số.',
+    'Khám phá các vị trí tuyển dụng tại Beauty-Spa — cơ hội nghề nghiệp trong lĩnh vực AI, công nghệ và sản phẩm số.',
   openGraph: {
-    title: 'Tuyển dụng | AIStarterKit',
+    title: 'Tuyển dụng | Beauty-Spa',
     description:
       'Khám phá các vị trí tuyển dụng phù hợp và đồng hành phát triển cùng chúng tôi.',
     type: 'website',

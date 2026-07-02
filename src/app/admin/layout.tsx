@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import AdminLayout from '@/components/admin/AdminLayout';
 
 export const metadata: Metadata = {
-  title: 'Admin | VN168',
-  description: 'Trang quản trị VN168',
+  title: 'Admin | Beauty-Spa',
+  description: 'Trang quản trị Beauty-Spa',
 };
 
 export default function AdminRootLayout({ children }: { children: React.ReactNode }) {

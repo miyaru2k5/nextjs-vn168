@@ -174,7 +174,7 @@ export const mockUsers: UserRecord[] = [
 export const mockArticles: ArticleRecord[] = [
   { id: '1', title: 'Hướng dẫn sử dụng AI Text Generator', category: 'Hướng dẫn', author: 'Admin', status: 'published', views: 2840, createdAt: '2025-06-15' },
   { id: '2', title: '10 mẹo viết content hiệu quả với AI', category: 'Marketing', author: 'Nguyễn Lan', status: 'published', views: 1920, createdAt: '2025-06-14' },
-  { id: '3', title: 'So sánh các gói dịch vụ VN168', category: 'Sản phẩm', author: 'Admin', status: 'draft', views: 0, createdAt: '2025-06-13' },
+  { id: '3', title: 'So sánh các gói dịch vụ Beauty-Spa', category: 'Sản phẩm', author: 'Admin', status: 'draft', views: 0, createdAt: '2025-06-13' },
   { id: '4', title: 'Cập nhật tính năng mới tháng 6', category: 'Tin tức', author: 'Trần Minh', status: 'scheduled', views: 0, createdAt: '2025-06-12' },
   { id: '5', title: 'Bảo mật dữ liệu người dùng', category: 'Bảo mật', author: 'Admin', status: 'published', views: 980, createdAt: '2025-06-11' },
 ];
@@ -316,7 +316,7 @@ export const mockUsersReport: UsersReportData = {
 
 const AUTHORS = {
   admin: {
-    name: 'Admin AIStarterKit',
+    name: 'Admin Beauty-Spa',
     avatar: 'https://avatars.githubusercontent.com/u/1?v=4',
     role: 'Quản trị viên',
   },
@@ -386,7 +386,7 @@ const SAMPLE_CONTENT = `
 <tr><td>ChatGPT</td><td>Đa năng, cộng đồng lớn</td><td>Content, Coding</td></tr>
 <tr><td>Claude</td><td>Phân tích sâu, an toàn</td><td>Research, Writing</td></tr>
 <tr><td>Midjourney</td><td>Tạo hình ảnh chất lượng cao</td><td>Design, Marketing</td></tr>
-<tr><td>AIStarterKit</td><td>Tự host, tùy biến cao</td><td>Startup, SaaS</td></tr>
+<tr><td>Beauty-Spa</td><td>Tự host, tùy biến cao</td><td>Startup, SaaS</td></tr>
 </tbody>
 </table>
 
@@ -522,7 +522,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: '7',
     slug: 'ai-trong-marketing-so-sanh',
-    title: 'So sánh các gói dịch vụ VN168',
+    title: 'So sánh các gói dịch vụ Beauty-Spa',
     excerpt:
       'Phân tích chi tiết các gói Starter, Pro và Enterprise — giúp bạn chọn giải pháp phù hợp nhất với nhu cầu và ngân sách của doanh nghiệp.',
     content: SAMPLE_CONTENT,
@@ -611,8 +611,8 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: '12',
-    slug: 'roadmap-ai-starter-kit-2025',
-    title: 'Roadmap VN168 H2 2025',
+    slug: 'roadmap-beauty-spa-2025',
+    title: 'Roadmap Beauty-Spa H2 2025',
     excerpt:
       'Lộ trình phát triển sản phẩm nửa cuối năm 2025: Image Generator, Video AI, API marketplace và tích hợp enterprise SSO.',
     content: SAMPLE_CONTENT,
@@ -641,7 +641,7 @@ export const blogComments: BlogComment[] = [
       {
         id: 'c1-r1',
         postId: '1',
-        author: { name: 'Admin AIStarterKit', avatar: AUTHORS.admin.avatar },
+        author: { name: 'Admin Beauty-Spa', avatar: AUTHORS.admin.avatar },
         content: 'Cảm ơn bạn! Rất vui khi bài viết hữu ích với bạn. Chúc bạn thành công!',
         createdAt: '2025-06-16T11:00:00',
         likes: 5,
@@ -958,7 +958,7 @@ export const jobPosts: JobPost[] = [
       'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=500&fit=crop',
     skills: ['SEO', 'Google Ads', 'Content Marketing', 'Analytics'],
     description:
-      'Digital Marketing Specialist chịu trách nhiệm tăng trưởng user acquisition và brand awareness cho nền tảng AIStarterKit thông qua các kênh digital.',
+      'Digital Marketing Specialist chịu trách nhiệm tăng trưởng user acquisition và brand awareness cho nền tảng Beauty-Spa thông qua các kênh digital.',
     responsibilities: [
       'Lập kế hoạch và thực hiện chiến dịch SEO, SEM',
       'Quản lý social media và content calendar',
@@ -1222,7 +1222,7 @@ export const jobComments: JobComment[] = [
         id: 'jc-1-r1',
         jobId: 'job-1',
         author: {
-          name: 'HR AIStarterKit',
+          name: 'HR Beauty-Spa',
           avatar: 'https://avatars.githubusercontent.com/u/1?v=4',
         },
         content:

@@ -51,3 +51,5 @@ seed-data/
 package-lock.json
 pnpm-lock.yaml
 .opencode/
+aidlc-docs/
+terminals/

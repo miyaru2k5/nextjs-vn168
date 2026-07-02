@@ -24,7 +24,7 @@ export function ArticleSchema({ post }: Props) {
     },
     publisher: {
       '@type': 'Organization',
-      name: 'AIStarterKit',
+      name: 'Beauty-Spa',
       logo: {
         '@type': 'ImageObject',
         url: `${siteUrl}/images/logo-black.png`,

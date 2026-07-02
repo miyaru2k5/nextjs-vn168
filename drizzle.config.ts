@@ -5,7 +5,7 @@ export default {
   out: './drizzle',
   dialect: 'postgresql',
   dbCredentials: {
-    url: process.env.DATABASE_URL || 'postgresql://user:password@localhost:5432/vn168',
+    url: process.env.DATABASE_URL || 'postgresql://user:password@localhost:5432/beauty_spa',
   },
   verbose: true,
   strict: true,

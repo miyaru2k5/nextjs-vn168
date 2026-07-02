@@ -33,7 +33,7 @@ export function CareersCard({ job, variant = 'default', className, onApply }: Pr
         <div className="relative size-12 shrink-0 rounded-xl overflow-hidden bg-gray-50 dark:bg-gray-800">
           <Image
             src={job.companyLogo}
-            alt="AIStarterKit"
+            alt="Beauty-Spa"
             fill
             sizes="48px"
             className="object-contain p-1"
@@ -65,7 +65,7 @@ export function CareersCard({ job, variant = 'default', className, onApply }: Pr
           <div className="relative size-10 rounded-xl overflow-hidden bg-gray-50 dark:bg-gray-800 shrink-0">
             <Image
               src={job.companyLogo}
-              alt="AIStarterKit"
+              alt="Beauty-Spa"
               fill
               sizes="40px"
               className="object-contain p-1"
@@ -109,7 +109,7 @@ export function CareersCard({ job, variant = 'default', className, onApply }: Pr
         <div className="relative size-14 rounded-xl overflow-hidden bg-gray-50 dark:bg-gray-800 shrink-0 border border-gray-100 dark:border-gray-700">
           <Image
             src={job.companyLogo}
-            alt="AIStarterKit"
+            alt="Beauty-Spa"
             fill
             sizes="56px"
             className="object-contain p-1.5"

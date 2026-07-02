@@ -2,39 +2,39 @@ import * as icons from "@/assets/homepage/core-features";
 
 export const CORE_FEATURES = [
   {
-    title: "Tạo nội dung liền mạch với AI",
+    title: "Phân tích da chuyên sâu bằng công nghệ",
     description:
-      "Để dịch vụ AI của chúng tôi đơn giản hóa quy trình tạo nội dung. Bắt đầu sử dụng AI ngay hôm nay!",
+      "Ứng dụng công nghệ soi da hiện đại giúp đánh giá chính xác tình trạng da và xây dựng liệu trình chăm sóc phù hợp cho từng khách hàng.",
     iconUrl: icons.pencil,
   },
   {
-    title: "Ý tưởng của bạn, sức mạnh từ công nghệ của chúng tôi",
+    title: "Liệu trình cá nhân hóa cho từng làn da",
     description:
-      "Khám phá cách AI biến ý tưởng của bạn thành nội dung hấp dẫn với dịch vụ chất lượng cao.",
+      "Mỗi khách hàng đều được thiết kế phác đồ điều trị và chăm sóc riêng nhằm mang lại hiệu quả tối ưu, an toàn và bền vững.",
     iconUrl: icons.bulb,
   },
   {
-    title: "Viết thông minh bằng AI mạnh mẽ",
+    title: "Công nghệ làm đẹp hiện đại",
     description:
-      "Dễ dàng truy cập nội dung do AI tạo cho blog, website và nhiều hơn nữa với dịch vụ tiện lợi, chất lượng cao.",
+      "Kết hợp các thiết bị thẩm mỹ tiên tiến cùng mỹ phẩm chính hãng giúp cải thiện mụn, nám, sẹo và trẻ hóa làn da hiệu quả.",
     iconUrl: icons.robot,
   },
   {
-    title: "AI giúp cuộc sống dễ dàng hơn",
+    title: "Đội ngũ chuyên gia tận tâm",
     description:
-      "Trải nghiệm tạo nội dung không cần nỗ lực với dịch vụ AI của chúng tôi. Viết ít hơn, hoàn thành nhiều hơn.",
+      "Được trực tiếp tư vấn và theo dõi bởi đội ngũ chuyên viên giàu kinh nghiệm, đồng hành cùng bạn trong suốt quá trình chăm sóc da.",
     iconUrl: icons.chat,
   },
   {
-    title: "Nội dung cao cấp do AI tạo",
+    title: "Mỹ phẩm cao cấp, an toàn cho làn da",
     description:
-      "Nhận nội dung được chế tác chuyên nghiệp trong thời gian ngắn với dịch vụ AI. Nơi chất lượng gặp gỡ tốc độ.",
+      "Sử dụng các dòng mỹ phẩm chất lượng cao, nguồn gốc rõ ràng, phù hợp với từng loại da, giúp nuôi dưỡng làn da khỏe đẹp từ bên trong.",
     iconUrl: icons.crown,
   },
   {
-    title: "Trợ lý viết siêu nhanh với AI",
+    title: "Hiệu quả bền vững, chăm sóc toàn diện",
     description:
-      "Đồng hành cùng AI để tạo nội dung kết nối với khán giả của bạn. Hãy thử ngay.",
+      "Không chỉ điều trị các vấn đề về da, chúng tôi còn xây dựng quy trình chăm sóc lâu dài giúp duy trì vẻ đẹp tự nhiên và sự tự tin cho bạn.",
     iconUrl: icons.lightningBolt,
   },
 ];

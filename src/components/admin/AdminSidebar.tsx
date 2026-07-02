@@ -33,14 +33,14 @@ export default function AdminSidebar({ collapsed, mobileOpen, onCloseMobile }: A
           <Link href="/admin" className="flex items-center gap-3 min-w-0">
             <Image
               src="/images/logo-black.png"
-              alt="VN168"
+              alt="Beauty-Spa"
               width={36}
               height={36}
               className="shrink-0 dark:hidden"
             />
             <Image
               src="/images/logo-white.png"
-              alt="VN168"
+              alt="Beauty-Spa"
               width={36}
               height={36}
               className="shrink-0 hidden dark:block"
@@ -49,7 +49,7 @@ export default function AdminSidebar({ collapsed, mobileOpen, onCloseMobile }: A
             {!collapsed && (
               <div className="min-w-0">
                 <p className="text-sm font-bold text-gray-900 dark:text-white truncate">
-                  VN168
+                  Beauty-Spa
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   Admin Panel

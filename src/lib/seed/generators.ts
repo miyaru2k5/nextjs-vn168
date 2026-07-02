@@ -49,7 +49,7 @@ export const ARTICLE_TITLES = [
   'Xây dựng chatbot hỗ trợ khách hàng bằng AI',
   'Tối ưu prompt engineering cho người Việt',
   'Xu hướng AI Agent và ứng dụng thực tế',
-  'Cập nhật tính năng mới trên VN168',
+  'Cập nhật tính năng mới trên Beauty-Spa',
   'Hướng dẫn tạo hình ảnh với AI cho marketer',
   'AI trong SEO: Tương lai của tìm kiếm',
   'Quản lý token và chi phí khi dùng LLM',
