@@ -79,8 +79,8 @@ export default function AdminSidebar({ collapsed, mobileOpen, onCloseMobile }: A
         <div className={cn('border-t border-gray-100 dark:border-gray-800 p-3 shrink-0', collapsed && 'px-2')}>
           {!collapsed ? (
             <div className="flex items-center gap-3 p-2 rounded-xl bg-gray-50 dark:bg-white/5 mb-2">
-              <div className="size-9 rounded-full bg-primary-100 dark:bg-primary-500/20 flex items-center justify-center text-primary-600 dark:text-primary-400 text-sm font-bold shrink-0">
-                NA
+              <div className="relative size-9 rounded-full overflow-hidden bg-gray-100 dark:bg-gray-800 shrink-0">
+                <Image src={currentAdmin.avatar} alt={currentAdmin.name} fill sizes="36px" className="object-cover" />
               </div>
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{currentAdmin.name}</p>
@@ -89,8 +89,8 @@ export default function AdminSidebar({ collapsed, mobileOpen, onCloseMobile }: A
             </div>
           ) : (
             <div className="flex justify-center mb-2">
-              <div className="size-9 rounded-full bg-primary-100 dark:bg-primary-500/20 flex items-center justify-center text-primary-600 dark:text-primary-400 text-sm font-bold">
-                NA
+              <div className="relative size-9 rounded-full overflow-hidden bg-gray-100 dark:bg-gray-800 shrink-0">
+                <Image src={currentAdmin.avatar} alt={currentAdmin.name} fill sizes="36px" className="object-cover" />
               </div>
             </div>
           )}

@@ -157,7 +157,7 @@ export const currentAdmin: AdminUser = {
   name: 'Nguyễn Văn Admin',
   email: 'admin@aistarterkit.com',
   role: 'Super Admin',
-  avatar: '/images/user/user-01.jpg',
+  avatar: '/images/logo-black.png',
 };
 
 export type IconName = NavItem['icon'];
