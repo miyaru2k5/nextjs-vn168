@@ -6,13 +6,13 @@ export function CoreFeatures() {
     <section className="py-30 bg-gray-50 dark:bg-white/1 px-5">
       <div className="max-w-[72rem] mx-auto">
         <div className="mb-12 text-center">
-          <h2 className="mb-3 font-bold text-gray-800 text-3xl dark:text-white/90 md:text-title-lg max-w-xl mx-auto">
-            Tính năng cốt lõi của công cụ
+          <h2 className="max-w-xl mx-auto mb-3 text-3xl font-bold text-gray-800 dark:text-white/90 md:text-title-lg">
+            Công Nghệ Làm Đẹp Hiện Đại – Hiệu Quả Bền Vững
           </h2>
 
           <p className="max-w-xl mx-auto leading-6 text-gray-500 dark:text-gray-400">
-            Khai phá tiềm năng đổi mới. Khám phá các công cụ AI tiên tiến
-            biến ý tưởng của bạn thành hiện thực với độ chính xác và trí tuệ vượt trội.
+            Ứng dụng công nghệ thẩm mỹ tiên tiến cùng mỹ phẩm chất lượng cao giúp cải thiện
+            các vấn đề về mụn, nám, sẹo, lão hóa và mang lại làn da sáng khỏe theo thời gian.
           </p>
         </div>
 

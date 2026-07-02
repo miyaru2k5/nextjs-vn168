@@ -11,14 +11,15 @@ export default function HeroSection() {
         <div className="wrapper">
           <div className="max-w-[800px] mx-auto">
             <div className="text-center pb-16">
-              <Subheading text="Bộ công cụ AI mạnh mẽ nhất tại một nơi" />
+              <Subheading text="Spa & Mỹ phẩm cao cấp" />
 
               <h1 className="text-gray-700 mx-auto font-bold mb-4 text-4xl sm:text-[50px] dark:text-white/90 sm:leading-[64px] max-w-[700px]">
-                Biến ý tưởng thành hiện thực với công cụ AI thông minh
+                Nâng tầm vẻ đẹp tự nhiên với liệu trình chăm sóc da chuyên sâu
               </h1>
+
               <p className="max-w-[537px] text-center mx-auto dark:text-gray-400 text-gray-500 text-base">
-                Khai phá sức mạnh trí tuệ nhân tạo để tối ưu quy trình làm việc,
-                tăng năng suất và đạt được thành công vượt trội.
+                Đồng hành cùng hàng nghìn khách hàng trên hành trình điều trị mụn, nám, phục hồi,
+                trẻ hóa làn da và lựa chọn mỹ phẩm chính hãng phù hợp với từng loại da.
               </p>
 
               <div className="mt-9 flex sm:flex-row flex-col gap-3 relative z-30 items-center justify-center">
@@ -26,7 +27,7 @@ export default function HeroSection() {
                   href="/text-generator"
                   className="bg-primary-500 transition h-12 inline-flex items-center justify-center hover:bg-primary-600 px-6 py-3 rounded-full text-white text-sm"
                 >
-                  Khám phá ứng dụng
+                  Khám phá AI Beauty
                 </Link>
 
                 <IntroVideo />
@@ -43,7 +44,7 @@ export default function HeroSection() {
                 height={552}
               />
               <Image
-                src="/images/hero/hero-img-dark.png"
+                src="/images/hero/hero-img-dark.jpg"
                 alt=""
                 className="w-full rounded-2xl hidden dark:block"
                 width={966}
@@ -115,28 +116,28 @@ export default function HeroSection() {
 
         <div className="max-[1100px]:hidden">
           <Image
-            src="/images/hero/shape-left-1.svg"
+            src="/images/hero/shape-left-1.png"
             className="absolute top-14 left-16 floating-1"
             alt=""
             width={170}
             height={44}
           />
           <Image
-            src="/images/hero/shape-left-2.svg"
+            src="/images/hero/shape-left-2.png"
             className="absolute left-[145px] top-[298px] floating-2 max-[1240px]:left-[80px]"
             alt=""
             width={181}
             height={44}
           />
           <Image
-            src="/images/hero/shape-right-1.svg"
+            src="/images/hero/shape-right-1.png"
             className="absolute right-16 top-[108px] floating-3"
             alt=""
             width={176}
             height={44}
           />
           <Image
-            src="/images/hero/shape-right-2.svg"
+            src="/images/hero/shape-right-2.png"
             className="absolute top-[316px] right-[200px] floating-4 max-[1240px]:right-[80px] max-[1350px]:right-[150px] max-[1500px]:right-[200px]"
             alt=""
             width={179}

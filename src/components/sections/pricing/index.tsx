@@ -18,14 +18,13 @@ export default function PricingSection() {
     <section className="py-14 md:py-30 bg-gray-50 dark:bg-[#171f2e] dark:bg-linear-180 dark:from-white/3 dark:from-[45.56%] dark:to-white/0">
       <div className="wrapper">
         <div className="max-w-2xl mx-auto mb-12 text-center">
-          <h2 className="mb-3 font-bold text-center text-gray-800 text-3xl dark:text-white/90 md:text-title-lg">
-            Bắt đầu hành trình sáng tạo nội dung cùng AI
+          <h2 className="mb-3 font-bold text-center text-gray-800 dark:text-white/90 text-3xl md:text-title-lg">
+            Bảng Giá Dịch Vụ Chăm Sóc Da
           </h2>
 
-          <p className="max-w-xl mx-auto leading-6 text-gray-500 dark:text-gray-400">
-            Kết hợp cùng trí tuệ nhân tạo để tạo ra những nội dung chất lượng,
-            phù hợp với khách hàng mục tiêu, tăng khả năng tiếp cận và mang lại
-            hiệu quả trên mọi nền tảng.
+          <p className="max-w-2xl mx-auto leading-7 text-gray-500 dark:text-gray-400">
+            Lựa chọn liệu trình phù hợp với nhu cầu của bạn. Mỗi khách hàng đều được
+            soi da và tư vấn miễn phí trước khi xây dựng phác đồ điều trị cá nhân hóa.
           </p>
         </div>
 
