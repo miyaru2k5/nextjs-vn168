@@ -37,14 +37,14 @@ export function JobHeader({ job, shareUrl, onApply }: Props) {
           <div className="relative size-14 rounded-xl overflow-hidden bg-white shadow-lg">
             <Image
               src={job.companyLogo}
-              alt="AIStarterKit"
+              alt="Beauty-Spa"
               fill
               sizes="56px"
               className="object-contain p-2"
             />
           </div>
           <div>
-            <p className="text-white font-semibold">AIStarterKit</p>
+            <p className="text-white font-semibold">Beauty-Spa</p>
             <p className="text-white/80 text-sm">{getDepartmentLabel(job.department)}</p>
           </div>
         </div>

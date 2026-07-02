@@ -1,5 +1,5 @@
 /**
- * Random Data Seeder for VN168 (Next.js + Drizzle + PostgreSQL)
+ * Random Data Seeder for Beauty-Spa (Next.js + Drizzle + PostgreSQL)
  * 
  * Follows random-data-seeder skill guidelines:
  * - Idempotent (safe to run multiple times)
@@ -157,12 +157,12 @@ function generateUsersData() {
 
   // Pin demo users (same as DB seed)
   data[0].name = 'Nguyễn Thị Lan';
-  data[0].email = 'lan.nguyen@vn168.vn';
+  data[0].email = 'lan.nguyen@beauty-spa.vn';
   data[0].role = 'Admin';
   data[0].status = 'active';
 
   data[1].name = 'Trần Văn Minh';
-  data[1].email = 'minh.tran@vn168.vn';
+  data[1].email = 'minh.tran@beauty-spa.vn';
   data[1].role = 'Pro';
   data[1].status = 'active';
 
@@ -170,7 +170,7 @@ function generateUsersData() {
 }
 
 function generateArticlesData(cats: any[]) {
-  const authors = ['Admin AIStarterKit', 'Nguyễn Thị Lan', 'Trần Văn Minh', 'Phạm Thu Hà', 'Lê Hoàng An'];
+  const authors = ['Admin Beauty-Spa', 'Nguyễn Thị Lan', 'Trần Văn Minh', 'Phạm Thu Hà', 'Lê Hoàng An'];
 
   return Array.from({ length: NUM_ARTICLES }).map((_, i) => {
     const cat = pickRandom(cats);
@@ -679,12 +679,12 @@ async function seedUsers() {
 
   // Ensure at least one admin + known demo users
   data[0].name = 'Nguyễn Thị Lan';
-  data[0].email = 'lan.nguyen@vn168.vn';
+  data[0].email = 'lan.nguyen@beauty-spa.vn';
   data[0].role = 'Admin';
   data[0].status = 'active';
 
   data[1].name = 'Trần Văn Minh';
-  data[1].email = 'minh.tran@vn168.vn';
+  data[1].email = 'minh.tran@beauty-spa.vn';
   data[1].role = 'Pro';
   data[1].status = 'active';
 
@@ -702,7 +702,7 @@ async function seedArticles() {
     return;
   }
 
-  const authors = ['Admin AIStarterKit', 'Nguyễn Thị Lan', 'Trần Văn Minh', 'Phạm Thu Hà', 'Lê Hoàng An'];
+  const authors = ['Admin Beauty-Spa', 'Nguyễn Thị Lan', 'Trần Văn Minh', 'Phạm Thu Hà', 'Lê Hoàng An'];
 
   const data = Array.from({ length: NUM_ARTICLES }).map((_, i) => {
     const cat = pickRandom(allCategories);
@@ -934,7 +934,7 @@ export async function seedAll() {
 }
 
 async function main() {
-  console.log('🌱 Starting VN168 Random Data Seeder...');
+  console.log('🌱 Starting Beauty-Spa Random Data Seeder...');
   console.log('   Locale: vi | Reproducible seed: 20260630');
 
   try {

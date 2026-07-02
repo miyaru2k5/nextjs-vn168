@@ -41,7 +41,7 @@ export default function GeneratorHeader({
                     className="block dark:hidden"
                     width={180}
                     height={30}
-                    alt="Logo AiStarterKit"
+                    alt="Logo Beauty-Spa"
                   />
 
                   <Image
@@ -49,7 +49,7 @@ export default function GeneratorHeader({
                     className="hidden dark:block"
                     width={180}
                     height={30}
-                    alt="Logo AiStarterKit"
+                    alt="Logo Beauty-Spa"
                   />
                 </Link>
               </div>

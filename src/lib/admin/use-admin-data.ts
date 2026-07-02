@@ -27,6 +27,8 @@ import {
   trafficSourceData,
   deviceData,
   conversionData,
+} from '@/lib/seed/mock-data';
+import {
   getUsers,
   getArticles,
   getOrders,
@@ -52,7 +54,7 @@ import {
   getDeviceData,
   getConversionData,
   getRecentActivities,
-} from '@/lib/seed';
+} from '@/lib/seed/loader-client';
 
 import type {
   UserRecord,

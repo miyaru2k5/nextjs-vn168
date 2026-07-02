@@ -1,0 +1,88 @@
+---
+pid: 3936
+cwd: "D:\Nextjs\nextjs-vn168"
+command: "Set-Location D:\\Nextjs\\nextjs-vn168; npm run build"
+started_at: 2026-07-02T07:06:39.395Z
+running_for_ms: 2215012  
+---
+
+> ai-starter-kit-oss@1.0.0 build
+> next build
+
+▲ Next.js 16.2.9 (Turbopack)
+
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 2 errors:
+./src/db/index.ts:1:1
+You're importing a module that depends on "server-only". This API is only available in Server Components in the App Router, but you are using it in the Pages Router.
+    Learn more: https://nextjs.org/docs/app/building-your-application/rendering/server-components
+> 1 | import 'server-only';
+    | ^^^^^^^^^^^^^^^^^^^^^
+  2 |
+  3 | import { drizzle } from 'drizzle-orm/node-postgres';
+  4 | import { Pool } from 'pg';
+
+Ecmascript file had an error
+
+Import traces:
+  App Route:
+    ./src/db/index.ts
+    ./src/lib/admin/db-queries.ts
+    ./src/app/api/admin/data/[type]/route.ts
+
+  Server Component:
+    ./src/db/index.ts
+    ./src/lib/admin/db-queries.ts
+    ./src/lib/seed/loader.ts
+    ./src/app/admin/users/[id]/page.tsx
+
+  Client Component SSR:
+    ./src/db/index.ts [Client Component SSR]
+    ./src/lib/admin/db-queries.ts [Client Component SSR]
+    ./src/lib/seed/loader.ts [Client Component SSR]
+    ./src/lib/admin/use-admin-data.ts [Client Component SSR]
+    ./src/components/admin/NotificationDropdown.tsx [Client Component SSR]
+    ./src/components/admin/AdminHeader.tsx [Client Component SSR]
+    ./src/components/admin/AdminLayout.tsx [Client Component SSR]
+    ./src/components/admin/AdminLayout.tsx [Server Component]
+    ./src/app/admin/layout.tsx [Server Component]
+
+
+./src/lib/admin/db-queries.ts:7:1
+You're importing a module that depends on "server-only". This API is only available in Server Components in the App Router, but you are using it in the Pages Router.
+    Learn more: https://nextjs.org/docs/app/building-your-application/rendering/server-components
+   5 |  * Used when DATA_SOURCE = 'db' or auto resolves to db.
+   6 |  */
+>  7 | import 'server-only';
+     | ^^^^^^^^^^^^^^^^^^^^^
+   8 |
+   9 | import { db } from '@/db';
+  10 | import {
+
+Ecmascript file had an error
+
+Import traces:
+  App Route:
+    ./src/lib/admin/db-queries.ts
+    ./src/app/api/admin/data/[type]/route.ts
+
+  Server Component:
+    ./src/lib/admin/db-queries.ts
+    ./src/lib/seed/loader.ts
+    ./src/app/admin/users/[id]/page.tsx
+
+  Client Component SSR:
+    ./src/lib/admin/db-queries.ts [Client Component SSR]
+    ./src/lib/seed/loader.ts [Client Component SSR]
+    ./src/lib/admin/use-admin-data.ts [Client Component SSR]
+    ./src/components/admin/NotificationDropdown.tsx [Client Component SSR]
+    ./src/components/admin/AdminHeader.tsx [Client Component SSR]
+    ./src/components/admin/AdminLayout.tsx [Client Component SSR]
+    ./src/components/admin/AdminLayout.tsx [Server Component]
+    ./src/app/admin/layout.tsx [Server Component]
+
+
+    at <unknown> (./src/db/index.ts:1:1)
+    at <unknown> (./src/lib/admin/db-queries.ts:7:1)

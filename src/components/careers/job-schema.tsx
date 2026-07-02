@@ -19,7 +19,7 @@ export function JobSchema({ job }: Props) {
     employmentType: mapEmploymentType(job.jobType),
     hiringOrganization: {
       '@type': 'Organization',
-      name: 'AIStarterKit',
+      name: 'Beauty-Spa',
       sameAs: siteUrl,
       logo: `${siteUrl}/images/logo-black.png`,
     },
@@ -49,7 +49,7 @@ export function JobSchema({ job }: Props) {
     url,
     identifier: {
       '@type': 'PropertyValue',
-      name: 'AIStarterKit',
+      name: 'Beauty-Spa',
       value: job.id,
     },
     directApply: true,

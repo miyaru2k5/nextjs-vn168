@@ -25,7 +25,7 @@ export default function Header() {
               <Image
                 src="/images/logo-black.png"
                 className="block dark:hidden"
-                alt="Logo AiStarterKit"
+                alt="Logo Beauty-Spa"
                 width={180}
                 height={30}
               />
@@ -33,7 +33,7 @@ export default function Header() {
               <Image
                 src="/images/logo-white.png"
                 className="hidden dark:block"
-                alt="Logo AiStarterKit"
+                alt="Logo Beauty-Spa"
                 width={180}
                 height={30}
               />
