@@ -53,7 +53,10 @@ import type {
   MessageItem,
 } from '../admin/types';
 
-import { getResolvedDataSource, type DataSourceMode } from './config';
+import { getResolvedDataSource, getResolvedDataSourceSync, type DataSourceMode } from './config';
+
+// Re-export for backward compatibility and to make the type available when importing from this module
+export type { DataSourceMode };
 
 const SEED_BASE = '/seed-data';
 const API_BASE = '/api/admin/data';
@@ -89,7 +92,7 @@ async function resolve<T>(
   dbEntity?: string,
   modeOverride?: DataSourceMode
 ): Promise<T[]> {
-  const mode = modeOverride || getResolvedDataSource();
+  const mode = modeOverride || (await getResolvedDataSource());
 
   if (mode === 'json') {
     const json = await tryLoadJson<T>(jsonFile);
@@ -167,31 +170,31 @@ function createLoader(modeOverride?: DataSourceMode): DataLoader {
   const resolveWithMode = <T>(jsonFile: string, mockData: T[], dbEntity?: string) =>
     resolve(jsonFile, mockData, dbEntity, modeOverride);
 
-  const getMode = () => modeOverride || getResolvedDataSource();
+  const getMode = async () => modeOverride || (await getResolvedDataSource());
 
   const getRolesWithMode = async (): Promise<RoleRecord[]> => {
-    const m = getMode();
+    const m = await getMode();
     if (m === 'mock') return mockRoles;
     const json = await tryLoadJson<RoleRecord>('roles.json');
     return json ?? mockRoles;
   };
 
   const getNotificationsWithMode = async (): Promise<NotificationItem[]> => {
-    const m = getMode();
+    const m = await getMode();
     if (m === 'mock') return mockNotifications;
     const json = await tryLoadJson<NotificationItem>('notifications.json');
     return json && json.length > 0 ? json : mockNotifications;
   };
 
   const getMessagesWithMode = async (): Promise<MessageItem[]> => {
-    const m = getMode();
+    const m = await getMode();
     if (m === 'mock') return mockMessages;
     const json = await tryLoadJson<MessageItem>('messages.json');
     return json && json.length > 0 ? json : mockMessages;
   };
 
   const tryLoadReportsWithMode = async (): Promise<ReportsJson | null> => {
-    const m = getMode();
+    const m = await getMode();
     if (m === 'mock') return null;
     try {
       const res = await fetch(`${SEED_BASE}/reports.json`, { cache: 'no-store' });
@@ -201,7 +204,7 @@ function createLoader(modeOverride?: DataSourceMode): DataLoader {
   };
 
   const getDashboardWithMode = async (file: string, fallback: any[]) => {
-    const m = getMode();
+    const m = await getMode();
     if (m === 'mock') return fallback;
     const json = await tryLoadJson<any>(file);
     return json && json.length > 0 ? json : fallback;

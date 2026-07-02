@@ -18,3 +18,6 @@ const pool = new Pool({
 export const db = drizzle(pool, { schema });
 
 export type DB = typeof db;
+
+// Re-export health checks
+export { checkDatabaseConnection, isDatabaseAvailable, resetDatabaseHealth } from '@/lib/db/health';

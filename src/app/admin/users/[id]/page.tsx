@@ -4,12 +4,19 @@ import AdminPageHeader from '@/components/admin/AdminPageHeader';
 import { StatusBadge } from '@/components/admin/DataTable';
 import { getUsersFromDb } from '@/lib/admin/db-queries';
 import { userStatusMap } from '@/lib/admin/status-maps';
+import { mockUsers } from '@/lib/seed/mock-data';
 
 type Props = { params: Promise<{ id: string }> };
 
 export default async function UserDetailPage({ params }: Props) {
   const { id } = await params;
-  const users = await getUsersFromDb();
+  let users = await getUsersFromDb();
+
+  // Graceful fallback to mock data when DB is unavailable
+  if (!users || users.length === 0) {
+    users = mockUsers;
+  }
+
   const user = users.find((u) => u.id === id);
   if (!user) notFound();
 

@@ -33,6 +33,15 @@ export async function ensureDevSeed() {
   console.log(`🌱 Ensuring dev database seed data...`);
 
   try {
+    // Use centralized health check (cached)
+    const { checkDatabaseConnection } = await import('@/db');
+    const isAvailable = await checkDatabaseConnection();
+
+    if (!isAvailable) {
+      console.warn('[ensure] Database not available. Skipping DB seed check.');
+      return;
+    }
+
     const { db } = await import('@/db');
     const { users } = await import('@/db/schema');
     
@@ -49,15 +58,8 @@ export async function ensureDevSeed() {
       console.log('  ✓ Database already contains data. Skipping seed.');
     }
   } catch (err: any) {
-    console.warn('⚠️ Database empty check failed (it might not be initialized or migrated yet). Running seed script directly...', err.message);
-    try {
-      execSync('npx tsx scripts/seed.ts', {
-        stdio: 'inherit',
-        env: { ...process.env, SEED_TO_DB: 'true' },
-      });
-    } catch (seedErr: any) {
-      console.error('❌ Failed to run seed script:', seedErr.message);
-    }
+    console.warn('⚠️ Database empty check failed (it might not be initialized or migrated yet).', err.message);
+    // Do NOT run seed script blindly if DB is known bad
   }
 
   console.log('✅ Dev seed ensure completed.');
